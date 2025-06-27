@@ -1,10 +1,16 @@
-import React,{ useState, useEffect} from 'react';
+import React,{ useState, useEffect, useRef} from 'react';
 import Loader from './Loader';
 import './home.css';
 import './Loader.css';
 
 const Home = ({ productos, categorias, isLoading}) => {
   const [ productosSeleccionados, setProductosSeleccionados] = useState([])
+
+  const miRefScroll = useRef(null);
+
+  const manejarScrollArriba = () => {
+    miRefScroll.current?.scrollIntoView({behavior:'smooth'})
+  }
 
   const categoriaSelect = (cat) => {
     
@@ -16,7 +22,7 @@ const Home = ({ productos, categorias, isLoading}) => {
 
   return (
     <div className="container-home">
-      <header>
+      <header ref={miRefScroll}>
         <img src="./logo.png" alt="Imagen logo " /> e-shop
       </header>
       <nav>
@@ -118,14 +124,13 @@ const Home = ({ productos, categorias, isLoading}) => {
                   </div>
                 </div>
               </div>
-
             ))
           :
           <h4  style={{color: 'grey', textAlign:'center'}}>No hay productos para mostrar</h4>
         }
       </main>
       <footer><p>Dino Studio WD</p></footer>
-      <button className="btn-flecha-arriba">
+      <button className="btn-flecha-arriba" onClick={manejarScrollArriba}>
         <svg xmlns="http://www.w3.org/2000/svg" 
         height="40px" 
         viewBox="0 -960 960 960" 
