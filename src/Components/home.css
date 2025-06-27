@@ -34,7 +34,6 @@ nav {
   gap: 10px;
   margin-top: .5rem;
   margin-bottom: .5rem;
-
   overflow-x: auto;
   padding: 0 1rem; /* espacio lateral opcional */
   -webkit-overflow-scrolling: touch; /* mejora el scroll en iOS */
@@ -48,7 +47,6 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   scroll-snap-align: start; /* opcional: ayuda al scroll "magnético" */
 }
 
@@ -100,10 +98,10 @@ nav {
 }
 main {
   flex-grow: 1;
-  
 }
 .card-producto {
   width: 100%;
+  
   border: 1px solid #e6e6e6;
   border-radius: 8px;
   overflow: hidden;
@@ -170,3 +168,76 @@ footer {
   background-color: grey;
   color: white;
 }
+
+@media screen and (min-width: 1024px) {
+  main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 10px;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+
+  .card-producto {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100px; /* 🔽 altura reducida */
+    margin: 0;
+    border-radius: 6px;
+  }
+
+  .img-container {
+    width: 35%;
+    height: 100%;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .info-container {
+    width: 65%;
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .titulo {
+    font-size: 13px;
+    margin: 0;
+  }
+
+  .descripcion {
+    font-size: 11px;
+    color: #777;
+    line-height: 1.1;
+    max-height: 2.2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .precio {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .nav-btn {
+    gap: 6px;
+  }
+
+  .btn-nav-productos {
+    width: 26px;
+    height: 26px;
+  }
+}
+
