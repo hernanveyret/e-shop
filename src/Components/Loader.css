@@ -13,7 +13,7 @@
 .lds-ring {
   width: 60px;
   height: 60px;
-  border: 6px solid #00ff2a;         /* Color del aro */
+  border: 6px solid #32CD32;         /* Color del aro */
   border-top-color: transparent;     /* Hace que se vea el giro */
   border-radius: 50%;
   animation: spin 1s linear infinite;
