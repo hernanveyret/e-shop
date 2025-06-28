@@ -1,0 +1,12 @@
+.container-carrito {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.container-carrito img {
+  width: 50%;
+  margin-top: 1rem;
+
+}
