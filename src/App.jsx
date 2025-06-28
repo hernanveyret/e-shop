@@ -108,8 +108,11 @@ useEffect(() => {
           <p>Lunes a Lunes 8 a 22h</p>
         </section>
         <section className="footer-programador-info">
-          <p>Dino Studio WD</p>
-          <img src="./img/logo-dino-studio.webp" alt="Logo programador" />
+          <div>
+          <p>Dino Studio</p>
+          <p>Web Development</p>
+          </div>
+          <img src="./img/dino.png" alt="Logo programador" />
         </section>
         </footer>
       <button className="btn-flecha-arriba" onClick={manejarScrollArriba}>
