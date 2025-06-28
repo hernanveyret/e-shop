@@ -1,7 +1,7 @@
 .container-home {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  width: 100%;
 }
 header {
   display: flex;
@@ -20,8 +20,7 @@ nav {
   justify-content: center;
   align-items: center;
   width: 100%;
-  gap: 10px;
-  
+  gap: 10px;  
   border-radius: 0 0 .8rem .8rem;
   position:sticky;
   top: 0;
@@ -35,19 +34,19 @@ nav {
   margin-top: .5rem;
   margin-bottom: .5rem;
   overflow-x: auto;
-  padding: 0 1rem; /* espacio lateral opcional */
-  -webkit-overflow-scrolling: touch; /* mejora el scroll en iOS */
-  scroll-snap-type: x mandatory; /* opcional: hace que se alineen al hacer scroll */
+  padding: 0 1rem; 
+  -webkit-overflow-scrolling: touch; 
+  scroll-snap-type: x mandatory; 
 }
 
 .container-cat {
-  flex: 0 0 auto; /* que no se achiquen ni crezcan, que mantenga su tamaño */
+  flex: 0 0 auto; 
   width: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  scroll-snap-align: start; /* opcional: ayuda al scroll "magnético" */
+  scroll-snap-align: start; 
 }
 
 .container-img-cat {
@@ -164,10 +163,6 @@ main {
   justify-content: center;
   gap: 10px;
 }
-footer {
-  background-color: grey;
-  color: white;
-}
 
 .btn-flecha-arriba {
   background-color: #FF6F91;
@@ -196,17 +191,22 @@ footer {
   object-fit: contain;
 }
 @media screen and (min-width: 1024px) {
+
+  .container-productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .2rem;
+  }
+  
   main {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 10px;
-    padding: 1rem;
-    box-sizing: border-box;
+    flex-grow: 1;
   }
 
   .card-producto {
     display: flex;
     flex-direction: row;
+    width: 30%;
     height: 90px;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -237,7 +237,7 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden; /* 👈 evita que crezca */
+    overflow: hidden; 
   }
 
   .titulo {
