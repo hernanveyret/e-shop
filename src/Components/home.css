@@ -80,7 +80,11 @@ nav {
   cursor: pointer;
 }
 .btn-menu {
-  width: 32px;
+  width: 25px;
+  margin: 5px;
+}
+.btn-menu img {
+  width: 100%;
 }
 .btn:hover {
   filter: drop-shadow(2px 2px 5px black);
