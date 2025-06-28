@@ -52,8 +52,8 @@ useEffect(() => {
         <button 
           className="btn btn-menu"
           onClick={() => { 
-          setIsCarrito((prev) => !prev);
-          setIsHome((prev) => !prev);
+          setIsCarrito(false);
+          setIsHome(true);
         }}
           >
           <svg xmlns="http://www.w3.org/2000/svg" 
@@ -68,8 +68,8 @@ useEffect(() => {
         <button 
          className="btn btn-menu"
          onClick={() => { 
-          setIsHome((prev) => !prev);
-          setIsCarrito((prev) => !prev);
+          setIsHome(false);
+          setIsCarrito(true);
          }}
          >
           <svg xmlns="http://www.w3.org/2000/svg" 
