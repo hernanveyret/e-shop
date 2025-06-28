@@ -10,3 +10,11 @@
   margin-top: 1rem;
 
 }
+
+@media screen and (min-width: 1024px) {
+  .container-carrito img {
+  width: 20%;
+  margin-top: 1rem;
+
+}
+}
