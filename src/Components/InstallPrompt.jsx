@@ -57,7 +57,7 @@ const styles = {
     top: '50px',
     left: '20px',
     right: '20px',
-    backgroundColor: '#7c4279',
+    backgroundColor: '#32CD32',
     color: 'white',
     padding: '10px 15px',    
     borderRadius: '10px',
@@ -66,7 +66,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     fontFamily: 'sans-serif',
-    boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
+    boxShadow: '2px 2px 10px rgba(0,0,0,0.2)',
     minHeight: '50px',       
   },
   text: {
@@ -80,8 +80,8 @@ const styles = {
     gap: '10px',
   },
   button: {
-    backgroundColor: 'white',
-    color: '#32CD32',
+    backgroundColor: '#F0F0F0',
+    color: 'black',
     border: 'none',
     padding: '8px 14px',     
     borderRadius: '5px',
