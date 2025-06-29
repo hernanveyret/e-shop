@@ -59,7 +59,7 @@ const styles = {
     right: '20px',
     backgroundColor: '#b5bac9',
     color: 'white',
-    padding: '20px 15px',
+    padding: '10px 15px',    
     borderRadius: '10px',
     zIndex: 9999,
     display: 'flex',
@@ -67,12 +67,13 @@ const styles = {
     alignItems: 'center',
     fontFamily: 'sans-serif',
     boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
-    height: '50px'
+    minHeight: '50px',       
   },
   text: {
     margin: 0,
-    fontSize: '15px',
+    fontSize: '16px',
     fontWeight: 'bold',
+    lineHeight: '50px',      
   },
   buttons: {
     display: 'flex',
@@ -82,12 +83,14 @@ const styles = {
     backgroundColor: 'white',
     color: '#32CD32',
     border: 'none',
-    padding: '5px 10px',
+    padding: '8px 14px',     
     borderRadius: '5px',
     fontWeight: 'bold',
     cursor: 'pointer',
+    height: '34px',          
   }
 };
+
 
 export default InstallPrompt;
 
