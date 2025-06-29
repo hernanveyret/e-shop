@@ -57,7 +57,7 @@ const styles = {
     top: '50px',
     left: '20px',
     right: '20px',
-    backgroundColor: '#b5bac9',
+    backgroundColor: '#7c4279',
     color: 'white',
     padding: '10px 15px',    
     borderRadius: '10px',
