@@ -2,6 +2,7 @@ import React,{ useState, useEffect, useRef} from 'react';
 import { getData, getDataCategorias } from './firebase/auth.js'
 import './App.css'
 
+import InstallPrompt from './Components/InstallPrompt.jsx';
 import Home from './Components/Home.jsx';
 import Carrito from './Components/Carrito.jsx';
 
@@ -43,6 +44,7 @@ useEffect(() => {
   
   return (
     <div className="container-app">
+      <InstallPrompt /> { /* Pregunta para instalar la app*/}
       <header ref={miRefScroll}>
         <img src="./logo.png" alt="Imagen logo " /> e-shop
       </header>
