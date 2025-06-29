@@ -59,7 +59,7 @@ const styles = {
     right: '20px',
     backgroundColor: '#b5bac9',
     color: 'white',
-    padding: '10px 15px',
+    padding: '20px 15px',
     borderRadius: '10px',
     zIndex: 9999,
     display: 'flex',
