@@ -59,17 +59,6 @@ useEffect(() => {
     console.log('favoritos: ',favoritos)
     localStorage.setItem('e-shop-favoritos',JSON.stringify(favoritos)); 
   },[favoritos])
-
-  // Verifica si hay productos en favoritos, cambia el valor por defecto para mostrar la estrella en pantalla
-favoritos.forEach(e => {
-  productos.forEach(a => {
-    if(e.id === a.id){
-      a.favorito = e.favorito
-    }
-  })  
-})
-
-
   
   return (
     <div className="container-app">

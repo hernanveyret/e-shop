@@ -1,126 +1,154 @@
-import React,{ useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect } from 'react';
 import Loader from './Loader';
 import './home.css';
 import './Loader.css';
 
-const Home = ({ productos, 
-                categorias, 
-                isLoading, 
-                setIsHome, 
-                setIsCarrito, 
-                addFavorito, 
-                setFavoritos, 
-                favoritos, 
-                productosSeleccionados, 
-                setProductosSeleccionados }) => {
-  
- useEffect(() => {
-  if (productos.length > 0) {
-    setProductosSeleccionados(productos);  }
-}, [productos]);
+const Home = ({
+  productos,
+  categorias,
+  isLoading,
+  setIsHome,
+  setIsCarrito,
+  addFavorito,
+  setFavoritos,
+  favoritos,
+  productosSeleccionados,
+  setProductosSeleccionados
+}) => {
+  const [categoriaActual, setCategoriaActual] = useState('Todo');
 
+  // Cuando se cargan productos y la categoría es Todo
+  useEffect(() => {
+    if (categoriaActual === 'Todo') {
+      setProductosSeleccionados(productos);
+    }
+  }, [productos, categoriaActual]);
+
+  // Cuando cambian los favoritos y estás en Favoritos
+  useEffect(() => {
+    if (categoriaActual === 'Favoritos') {
+      setProductosSeleccionados(favoritos);
+    }
+  }, [favoritos, categoriaActual]);
 
   const categoriaSelect = (cat) => {
-    if(cat === 'Favoritos') {      
-      setProductosSeleccionados(favoritos)
-    }else if ( cat === 'Todo' ) { 
-      setProductosSeleccionados(productos)
-    }else{
-      //const categoria = e.target.value
-    const filtro = productos.filter(p => p.categoria.toLowerCase() === cat.toLowerCase())
-    console.log(filtro)
-    setProductosSeleccionados(filtro)
-    }    
-  }
-  
+    setCategoriaActual(cat);
+
+    if (cat === 'Favoritos') {
+      setProductosSeleccionados(favoritos);
+    } else if (cat === 'Todo') {
+      setProductosSeleccionados(productos);
+    } else {
+      const filtro = productos.filter(
+        (p) => p.categoria.toLowerCase() === cat.toLowerCase()
+      );
+      setProductosSeleccionados(filtro);
+    }
+  };
+
   return (
-    <div className="container-home">      
+    <div className="container-home">
       <section className="container-categorias">
-        <button 
-        onClick={() => { setProductosSeleccionados(productos)} }
-        className="container-cat btn" >
+        <button
+          onClick={() => categoriaSelect('Todo')}
+          className="container-cat btn"
+        >
           <div className="container-img-cat">
             <img src="/logo.png" alt="Imagen" />
           </div>
           <p className="name-categoria">Todo</p>
         </button>
-        <button className="container-cat btn" onClick={() => { categoriaSelect('Favoritos')} } >
+
+        <button
+          className="container-cat btn"
+          onClick={() => categoriaSelect('Favoritos')}
+        >
           <div className="container-img-cat">
             <img src="/logo.png" alt="Imagen" />
           </div>
           <p className="name-categoria">Favoritos</p>
-        </button>     
-        { 
-          categorias &&
-            categorias.map(cat => (
-              <button className="container-cat btn" key={cat.id} >
-                <div className="container-img-cat" onClick={() => { categoriaSelect(cat.categoria)}}>
-                  <img src="/logo.png" alt="Imagen" />
-                </div>
-                <p className="name-categoria">{cat.categoria}</p>
-              </button>
-            ))
-        }
-      </section>
-      <section className="container-productos">
-        { isLoading && <Loader /> }
-       
-        { 
-          productosSeleccionados.length > 0 ? 
-            productosSeleccionados.map(pro => (
-              <div className="card-producto" key={pro.id}>
-                <div className="img-container">
-                  <img src={pro.urlImg} alt={pro.titulo} />
-                </div>
-                <div className="info-container">
-                  <p className="titulo">{pro.titulo}</p>
-                  <p className="descripcion">{pro.descripcion}</p>
-                  <p className="precio">$ {pro.precio}</p>
-                </div>
-                  <div className="nav-btn">
-                  <button className="btn-nav-productos"
-                    type="button"
-                    
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" 
-                    height="24px"
-                    viewBox="0 -960 960 960" 
-                    width="24px" 
-                    fill="black">
-                      <path d="M466-466H252v-28h214v-214h28v214h214v28H494v214h-28v-214Z"/>
-                    </svg>
-                  </button>
-                  <button className="btn-nav-productos"
-                    type="button"
-                    onClick={() => { addFavorito(pro.id) } }
-                  >
-                    {
-                      favoritos.find(f => f.id === pro.id) ? 
-                        <svg xmlns="http://www.w3.org/2000/svg" 
-                          height="24px" viewBox="0 -960 960 960" 
-                          width="24px" fill="#EA3323">
-                          <path d="m480-190-22-20q-97-89-160.5-152t-100-110.5Q161-520 146.5-558T132-634q0-71 48.5-119.5T300-802q53 0 99 28.5t81 83.5q35-55 81-83.5t99-28.5q71 0 119.5 48.5T828-634q0 38-14.5 76t-51 85.5Q726-425 663-362T502-210l-22 20Z"/>
-                        </svg>
-                      :
-                        <svg xmlns="http://www.w3.org/2000/svg" 
-                          height="24px" viewBox="0 -960 960 960" 
-                          width="24px" 
-                          fill="black">
-                            <path d="m480-190-22-20q-97-89-160.5-152t-100-110.5Q161-520 146.5-558T132-634q0-71 48.5-119.5T300-802q53 0 99 28.5t81 83.5q35-55 81-83.5t99-28.5q71 0 119.5 48.5T828-634q0 38-14.5 76t-51 85.5Q726-425 663-362T502-210l-22 20Zm0-38q96-87 158-149t98-107.5q36-45.5 50-80.5t14-69q0-60-40-100t-100-40q-48 0-88.5 27.5T494-660h-28q-38-60-78-87t-88-27q-59 0-99.5 40T160-634q0 34 14 69t50 80.5q36 45.5 98 107T480-228Zm0-273Z"/>
-                        </svg>  
-                    }
-                  </button>
-                  </div>                
+        </button>
+
+        {categorias &&
+          categorias.map((cat) => (
+            <button className="container-cat btn" key={cat.id}>
+              <div
+                className="container-img-cat"
+                onClick={() => categoriaSelect(cat.categoria)}
+              >
+                <img src="/logo.png" alt="Imagen" />
               </div>
-            ))
-         
-          :
-          <h4  style={{color: 'grey', textAlign:'center'}}>No hay productos para mostrar</h4>
-        }
+              <p className="name-categoria">{cat.categoria}</p>
+            </button>
+          ))}
       </section>
-      
+
+      <section className="container-productos">
+        {isLoading && <Loader />}
+
+        {productosSeleccionados.length > 0 ? (
+          productosSeleccionados.map((pro) => (
+            <div className="card-producto" key={pro.id}>
+              <div className="img-container">
+                <img src={pro.urlImg} alt={pro.titulo} />
+              </div>
+              <div className="info-container">
+                <p className="titulo">{pro.titulo}</p>
+                <p className="descripcion">{pro.descripcion}</p>
+                <p className="precio">$ {pro.precio}</p>
+              </div>
+              <div className="nav-btn">
+                <button className="btn-nav-productos" type="button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="black"
+                  >
+                    <path d="M466-466H252v-28h214v-214h28v214h214v28H494v214h-28v-214Z" />
+                  </svg>
+                </button>
+
+                <button
+                  className="btn-nav-productos"
+                  type="button"
+                  onClick={() => addFavorito(pro.id)}
+                >
+                  {favoritos.find((f) => f.id === pro.id) ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24px"
+                      viewBox="0 -960 960 960"
+                      width="24px"
+                      fill="#EA3323"
+                    >
+                      <path d="m480-190-22-20q-97-89-160.5-152t-100-110.5Q161-520 146.5-558T132-634q0-71 48.5-119.5T300-802q53 0 99 28.5t81 83.5q35-55 81-83.5t99-28.5q71 0 119.5 48.5T828-634q0 38-14.5 76t-51 85.5Q726-425 663-362T502-210l-22 20Z" />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24px"
+                      viewBox="0 -960 960 960"
+                      width="24px"
+                      fill="black"
+                    >
+                      <path d="m480-190-22-20q-97-89-160.5-152t-100-110.5Q161-520 146.5-558T132-634q0-71 48.5-119.5T300-802q53 0 99 28.5t81 83.5q35-55 81-83.5t99-28.5q71 0 119.5 48.5T828-634q0 38-14.5 76t-51 85.5Q726-425 663-362T502-210l-22 20Zm0-38q96-87 158-149t98-107.5q36-45.5 50-80.5t14-69q0-60-40-100t-100-40q-48 0-88.5 27.5T494-660h-28q-38-60-78-87t-88-27q-59 0-99.5 40T160-634q0 34 14 69t50 80.5q36 45.5 98 107T480-228Zm0-273Z" />
+                    </svg>
+                  )}
+                </button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <h4 style={{ color: 'grey', textAlign: 'center' }}>
+            No hay productos para mostrar
+          </h4>
+        )}
+      </section>
     </div>
-  )
+  );
 };
+
 export default Home;
 
