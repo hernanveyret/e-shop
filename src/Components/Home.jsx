@@ -3,31 +3,32 @@ import Loader from './Loader';
 import './home.css';
 import './Loader.css';
 
-const Home = ({ productos, categorias, isLoading, setIsHome, setIsCarrito }) => {
+const Home = ({ productos, categorias, isLoading, setIsHome, setIsCarrito, addFavorito, setFavoritos, favoritos }) => {
   const [ productosSeleccionados, setProductosSeleccionados] = useState([])  
 
   const categoriaSelect = (cat) => {
-    
+    if(cat === 'Favoritos') {
+      setProductosSeleccionados(favoritos);
+      return
+    }
     //const categoria = e.target.value
     const filtro = productos.filter(p => p.categoria.toLowerCase() === cat.toLowerCase())
     console.log(filtro)
     setProductosSeleccionados(filtro)
   }
 
-  const algo = () => {
-    console.log('click')
-  }
-
   return (
     <div className="container-home">      
       <section className="container-categorias">
-        <button className="container-cat btn" >
+        <button 
+        onClick={() => { setProductosSeleccionados([])} }
+        className="container-cat btn" >
           <div className="container-img-cat">
             <img src="/logo.png" alt="Imagen" />
           </div>
           <p className="name-categoria">Todo</p>
         </button>
-        <button className="container-cat btn" >
+        <button className="container-cat btn" onClick={() => { categoriaSelect('Favoritos')}} >
           <div className="container-img-cat">
             <img src="/logo.png" alt="Imagen" />
           </div>
@@ -62,7 +63,7 @@ const Home = ({ productos, categorias, isLoading, setIsHome, setIsCarrito }) => 
                   <div className="nav-btn">
                   <button className="btn-nav-productos"
                     type="button"
-                    onClick={algo}
+                    
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" 
                     height="24px"
@@ -74,7 +75,7 @@ const Home = ({ productos, categorias, isLoading, setIsHome, setIsCarrito }) => 
                   </button>
                   <button className="btn-nav-productos"
                     type="button"
-                    onClick={algo}
+                    onClick={() => { addFavorito(pro.id) } }
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" 
                     height="24px" viewBox="0 -960 960 960" 
@@ -101,7 +102,7 @@ const Home = ({ productos, categorias, isLoading, setIsHome, setIsCarrito }) => 
                   <div className="nav-btn">
                   <button className="btn-nav-productos"
                     type="button"
-                    onClick={algo}
+                    
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" 
                     height="24px"
@@ -113,7 +114,7 @@ const Home = ({ productos, categorias, isLoading, setIsHome, setIsCarrito }) => 
                     </button>
                   <button className="btn-nav-productos"
                     type="button"
-                    onClick={algo}
+                    onClick={() => { addFavorito(pro.id) } }
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" 
                     height="24px" viewBox="0 -960 960 960" 

@@ -9,6 +9,7 @@ import Carrito from './Components/Carrito.jsx';
 function App() {
   const [ productos, setProductos ] = useState([]);
   const [ categorias, setCategorias ] = useState([])
+  const [ favoritos, setFavoritos ] = useState([])
 
   const [ isLoading, setIsLoading ] = useState(true);
   const [ isHome, setIsHome ] = useState(true);
@@ -34,19 +35,46 @@ useEffect(() => {
 }, [productos, categorias]);
 
   useEffect(() => {
-    console.log('productos: ', productos)
-    console.log('Categorias: ', categorias)    
+    //console.log('productos: ', productos)
+    //console.log('Categorias: ', categorias)    
   })
 
   const manejarScrollArriba = () => {
     miRefScroll.current?.scrollIntoView({behavior:'smooth'})
   }
+
+  const addFavorito = (e) => {
+    //console.log('id productos favorito: ',e)
+    const checkFavorito = favoritos.find(check => check.id === e);
+    if (!checkFavorito) {
+      const filter = productos.find(fav => fav.id === e)
+      //console.log(filter)
+      setFavoritos([...favoritos, filter]);
+    }else {
+      console.log('producto ya agregado');
+      const filterCopy = favoritos.filter(fav => fav.id !== e)
+      //console.log('los que quedaros: ',filterCopy)
+      setFavoritos(filterCopy)
+    }
+  }
+
+  useEffect(() => {
+    console.log('favoritos: ',favoritos)
+  },[favoritos])
   
   return (
     <div className="container-app">
       <InstallPrompt /> { /* Pregunta para instalar la app*/}
       <header ref={miRefScroll}>
         <img src="./logo.png" alt="Imagen logo " /> e-shop
+        <div className="btn-menu-header">
+          <svg xmlns="http://www.w3.org/2000/svg" 
+          height="24px" 
+          viewBox="0 -960 960 960"
+          width="24px" 
+          fill="#000000"><path d="M160-269.23v-40h640v40H160ZM160-460v-40h640v40H160Zm0-190.77v-40h640v40H160Z"/>
+          </svg>
+        </div>
       </header>
 
       <nav>
@@ -108,6 +136,9 @@ useEffect(() => {
           isLoading={isLoading}
           setIsHome={setIsHome}
           setIsCarrito={setIsCarrito}
+          addFavorito={addFavorito}
+          setFavoritos={setFavoritos}
+          favoritos={favoritos}
       />
       }
       {

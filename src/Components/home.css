@@ -11,6 +11,7 @@ header {
   background-color: #32CD32;
   padding: .2rem;
   color: black;
+  position: relative;
 }
 header img {
   width: 1.5rem;
@@ -79,6 +80,10 @@ nav {
   background: transparent;
   cursor: pointer;
 }
+.btn-menu-header {
+  position: absolute;
+  right: 1rem;
+}
 .btn-menu {
   width: 25px;
   margin: 5px;
@@ -86,9 +91,7 @@ nav {
 .btn-menu img {
   width: 100%;
 }
-.btn:hover {
-  filter: drop-shadow(2px 2px 5px black);
-}
+
 
 .btn-nav-productos {
   width: 30px;
@@ -111,8 +114,7 @@ main {
   transition: box-shadow 0.2s ease;
   cursor: pointer;
   display: flex;
-  margin-bottom: 5px;
-  
+  margin-bottom: 5px;  
 }
 
 .card-producto:hover {
