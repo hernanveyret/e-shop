@@ -7,9 +7,14 @@ import Home from './Components/Home.jsx';
 import Carrito from './Components/Carrito.jsx';
 
 function App() {
+
+  const favoritosLocal = localStorage.getItem('e-shop-favoritos');
+  
+
   const [ productos, setProductos ] = useState([]);
   const [ categorias, setCategorias ] = useState([])
-  const [ favoritos, setFavoritos ] = useState([])
+  const [ favoritos, setFavoritos ] = useState(favoritosLocal ? JSON.parse(favoritosLocal) : [])
+  const [ productosSeleccionados, setProductosSeleccionados] = useState([])
 
   const [ isLoading, setIsLoading ] = useState(true);
   const [ isHome, setIsHome ] = useState(true);
@@ -34,33 +39,37 @@ useEffect(() => {
   }
 }, [productos, categorias]);
 
-  useEffect(() => {
-    //console.log('productos: ', productos)
-    //console.log('Categorias: ', categorias)    
-  })
-
   const manejarScrollArriba = () => {
     miRefScroll.current?.scrollIntoView({behavior:'smooth'})
   }
 
   const addFavorito = (e) => {
-    //console.log('id productos favorito: ',e)
     const checkFavorito = favoritos.find(check => check.id === e);
     if (!checkFavorito) {
       const filter = productos.find(fav => fav.id === e)
-      //console.log(filter)
       setFavoritos([...favoritos, filter]);
     }else {
-      console.log('producto ya agregado');
+      // si ya esta el producto en favoritos lo elimina
       const filterCopy = favoritos.filter(fav => fav.id !== e)
-      //console.log('los que quedaros: ',filterCopy)
       setFavoritos(filterCopy)
     }
   }
 
   useEffect(() => {
     console.log('favoritos: ',favoritos)
+    localStorage.setItem('e-shop-favoritos',JSON.stringify(favoritos)); 
   },[favoritos])
+
+  // Verifica si hay productos en favoritos, cambia el valor por defecto para mostrar la estrella en pantalla
+favoritos.forEach(e => {
+  productos.forEach(a => {
+    if(e.id === a.id){
+      a.favorito = e.favorito
+    }
+  })  
+})
+
+
   
   return (
     <div className="container-app">
@@ -139,6 +148,8 @@ useEffect(() => {
           addFavorito={addFavorito}
           setFavoritos={setFavoritos}
           favoritos={favoritos}
+          productosSeleccionados={productosSeleccionados}
+          setProductosSeleccionados={setProductosSeleccionados}
       />
       }
       {
