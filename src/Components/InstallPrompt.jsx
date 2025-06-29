@@ -57,7 +57,7 @@ const styles = {
     top: '50px',
     left: '20px',
     right: '20px',
-    backgroundColor: 'grey',
+    backgroundColor: '#b5bac9',
     color: 'white',
     padding: '10px 15px',
     borderRadius: '10px',
@@ -67,6 +67,7 @@ const styles = {
     alignItems: 'center',
     fontFamily: 'sans-serif',
     boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
+    height: '50px'
   },
   text: {
     margin: 0,
