@@ -9,7 +9,7 @@ import Carrito from './Components/Carrito.jsx';
 function App() {
 
   const favoritosLocal = localStorage.getItem('e-shop-favoritos');
-  
+  const [ verProducto, setVerProducto ] = useState([])  
 
   const [ productos, setProductos ] = useState([]);
   const [ categorias, setCategorias ] = useState([])
@@ -21,6 +21,23 @@ function App() {
   const [ isCarrito, setIsCarrito ] = useState(false);
 
   const miRefScroll = useRef(null);
+
+useEffect(() => {
+  const path = window.location.pathname;
+  const id = path.slice(1);
+  
+  if (!id || productos.length === 0) return;
+
+  const filter = productos.find(p => p.id === id);
+  if (filter) {
+    setVerProducto(filter);
+  }
+}, [productos]); // 👈 ahora sí: cuando se cargan los productos, se ejecuta
+
+
+  useEffect(() => {
+    console.log(verProducto)
+  },[verProducto])
 
   useEffect(() => {    
   const unsubscribeProductos = getData(setProductos);
