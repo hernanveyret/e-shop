@@ -5,6 +5,7 @@ import './App.css'
 import InstallPrompt from './Components/InstallPrompt.jsx';
 import Home from './Components/Home.jsx';
 import Carrito from './Components/Carrito.jsx';
+import VerProducto from './Components/VerProducto.jsx';
 
 function App() {
 
@@ -19,25 +20,20 @@ function App() {
   const [ isLoading, setIsLoading ] = useState(true);
   const [ isHome, setIsHome ] = useState(true);
   const [ isCarrito, setIsCarrito ] = useState(false);
+  const [ isVerProducto, setIsVerProducto ] = useState(false)
 
   const miRefScroll = useRef(null);
 
 useEffect(() => {
   const path = window.location.pathname;
-  const id = path.slice(1);
-  
+  const id = path.slice(1);  
   if (!id || productos.length === 0) return;
-
   const filter = productos.find(p => p.id === id);
   if (filter) {
     setVerProducto(filter);
+    setIsVerProducto(true)
   }
 }, [productos]); // 👈 ahora sí: cuando se cargan los productos, se ejecuta
-
-
-  useEffect(() => {
-    console.log(verProducto)
-  },[verProducto])
 
   useEffect(() => {    
   const unsubscribeProductos = getData(setProductos);
@@ -84,9 +80,26 @@ useEffect(() => {
       .catch(() => alert("No se pudo copiar"));
   };
   
+   const sacarOferta = (precio, porcentaje) => {
+    if(precio && porcentaje ){
+      const precioOff = precio * porcentaje / 100;
+      return (precio - precioOff).toFixed(2);
+    }
+  };
+
   return (
     <div className="container-app">
       <InstallPrompt /> { /* Pregunta para instalar la app*/}
+      {
+        isVerProducto &&
+          <VerProducto 
+            verProducto={verProducto}
+            setIsVerProducto={setIsVerProducto}
+            favoritos={favoritos}
+            addFavorito={addFavorito}
+            sacarOferta={sacarOferta}
+          />
+      }
       <header ref={miRefScroll}>
         <img src="./logo.png" alt="Imagen logo " /> e-shop
         <div className="btn-menu-header">
@@ -99,7 +112,7 @@ useEffect(() => {
         </div>
       </header>
 
-      <nav>
+      <nav className="nav">
         {/* Boton Home*/}
         {
           isHome ? 
@@ -123,8 +136,6 @@ useEffect(() => {
             < img src="./img/shopOff.webp" alt="Icono shop" />
           </button>
         }
-        
-
         {/* Boton Carrito*/}
        {
           isCarrito ? 

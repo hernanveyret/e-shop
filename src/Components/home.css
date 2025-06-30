@@ -16,7 +16,7 @@ header {
 header img {
   width: 1.5rem;
 }
-nav {
+.nav {
   display: flex;
   justify-content: center;
   align-items: center;
