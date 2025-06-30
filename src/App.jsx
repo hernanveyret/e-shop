@@ -56,7 +56,6 @@ useEffect(() => {
   }
 
   useEffect(() => {
-    console.log('favoritos: ',favoritos)
     localStorage.setItem('e-shop-favoritos',JSON.stringify(favoritos)); 
   },[favoritos])
   
