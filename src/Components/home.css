@@ -27,6 +27,7 @@ header img {
   top: 0;
   background-color: white;
   box-shadow: 1px 1px 4px grey;
+  z-index:10000;
 }
 
 .container-categorias {
