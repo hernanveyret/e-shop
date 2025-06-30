@@ -14,7 +14,8 @@ const Home = ({
   favoritos,
   productosSeleccionados,
   setProductosSeleccionados,
-  handleCompartir
+  handleCompartir,
+  sacarOferta
 }) => {
   const [categoriaActual, setCategoriaActual] = useState('Todo');
 
@@ -106,7 +107,22 @@ const Home = ({
               <div className="info-container">
                 <p className="titulo">{pro.titulo}</p>
                 <p className="descripcion">{pro.descripcion}</p>
-                <p className="precio">$ {pro.precio}</p>
+                {
+            pro.oferta ? 
+            <div className="info-precios">
+            <span style={{display:'flex', gap:'10px'}}><p style={{color:'grey', textDecoration:'line-through'}}>$ {pro.precio}</p><p style={{color: 'red', fontSize:'14px'}}>{pro.porcentajeOff}% OFF</p></span>
+
+            { pro.precio && pro.porcentajeOff && (
+            <p style={{fontSize:'18px', fontWeight:'bold'}}>
+              ${sacarOferta(pro.precio, pro.porcentajeOff)}
+            </p>
+            )}
+          </div>
+            :
+            <div className="info-precios">
+            <p style={{fontSize:'20px', fontWeight:'bold'}}>$ {pro.precio}</p>
+            </div>
+          }
               </div>
               <div className="nav-btn">
                 <button className="btn-nav-productos" type="button">
