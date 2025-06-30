@@ -15,7 +15,10 @@ const Home = ({
   productosSeleccionados,
   setProductosSeleccionados,
   handleCompartir,
-  sacarOferta
+  sacarOferta,
+  verProducto,
+  setVerProducto,
+  setIsVerProducto
 }) => {
   const [categoriaActual, setCategoriaActual] = useState('Todo');
 
@@ -90,7 +93,13 @@ const Home = ({
 
         {productosSeleccionados.length > 0 ? (
           productosSeleccionados.map((pro) => (
-            <div className="card-producto" key={pro.id}>
+            <div className="card-producto" key={pro.id}
+             onClick={() => { 
+              setVerProducto(() => {
+                return productos.find(p => p.id === pro.id);                
+              });
+              setIsVerProducto(true)
+              }}>
               <div className="img-container">
                 <img src={pro.urlImg} alt={pro.titulo} />
                 <button className="btn-compartir"

@@ -176,6 +176,9 @@ useEffect(() => {
           setProductosSeleccionados={setProductosSeleccionados}
           handleCompartir={handleCompartir}
           sacarOferta={sacarOferta}
+          verProducto={verProducto}
+          setVerProducto={setVerProducto}
+          setIsVerProducto={setIsVerProducto}
       />
       }
       {
