@@ -93,13 +93,7 @@ const Home = ({
 
         {productosSeleccionados.length > 0 ? (
           productosSeleccionados.map((pro) => (
-            <div className="card-producto" key={pro.id}
-             onClick={() => { 
-              setVerProducto(() => {
-                return productos.find(p => p.id === pro.id);                
-              });
-              setIsVerProducto(true)
-              }}>
+            <div className="card-producto" key={pro.id}>
               <div className="img-container">
                 <img src={pro.urlImg} alt={pro.titulo} />
                 <button className="btn-compartir"
@@ -113,7 +107,14 @@ const Home = ({
                   </svg>
                 </button>
               </div>
-              <div className="info-container">
+              <div className="info-container"
+                onClick={() => { 
+                  setVerProducto(() => {
+                    return productos.find(p => p.id === pro.id);                
+                  });
+                  setIsVerProducto(true)
+                }}
+              >
                 <p className="titulo">{pro.titulo}</p>
                 <p className="descripcion">{pro.descripcion}</p>
                 {
