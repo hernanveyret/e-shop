@@ -129,7 +129,7 @@ main {
   align-items: center;
   background-color: #f5f5f5;
   overflow: hidden;
-  
+  position: relative;
 }
 
 .img-container img {
@@ -171,6 +171,14 @@ main {
   justify-content: center;
   align-items: center;
   gap: 10px;
+}
+
+.btn-compartir {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  border: 1px solid rgb(133, 130, 130);
+  
 }
 
 .btn-flecha-arriba {

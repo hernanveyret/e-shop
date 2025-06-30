@@ -75,6 +75,14 @@ useEffect(() => {
   useEffect(() => {
     localStorage.setItem('e-shop-favoritos',JSON.stringify(favoritos)); 
   },[favoritos])
+
+  //Compartir id del producto en la url
+  const handleCompartir = (producto) => {
+    const url = `${window.location.origin}/${producto}`;
+    navigator.clipboard.writeText(url)
+      .then(() => console.log("¡URL copiada!"))
+      .catch(() => alert("No se pudo copiar"));
+  };
   
   return (
     <div className="container-app">
@@ -155,6 +163,7 @@ useEffect(() => {
           favoritos={favoritos}
           productosSeleccionados={productosSeleccionados}
           setProductosSeleccionados={setProductosSeleccionados}
+          handleCompartir={handleCompartir}
       />
       }
       {
