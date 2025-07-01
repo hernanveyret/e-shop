@@ -59,7 +59,7 @@ const Home = ({
           className="container-cat btn"
         >
           <div className="container-img-cat">
-            <img src="/logo.png" alt="Imagen" />
+            <img src="./img/todo.webp" alt="Imagen" />
           </div>
           <p className="name-categoria">Todo</p>
         </button>
@@ -69,7 +69,7 @@ const Home = ({
           onClick={() => categoriaSelect('Favoritos')}
         >
           <div className="container-img-cat">
-            <img src="/logo.png" alt="Imagen" />
+            <img src="./img/favoritos.webp" alt="Imagen" />
           </div>
           <p className="name-categoria">Favoritos</p>
         </button>
@@ -81,7 +81,7 @@ const Home = ({
                 className="container-img-cat"
                 onClick={() => categoriaSelect(cat.categoria)}
               >
-                <img src="/logo.png" alt="Imagen" />
+                <img src={cat.urlImg} alt="Imagen" />
               </div>
               <p className="name-categoria">{cat.categoria}</p>
             </button>
