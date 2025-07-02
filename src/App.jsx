@@ -6,8 +6,24 @@ import InstallPrompt from './Components/InstallPrompt.jsx';
 import Home from './Components/Home.jsx';
 import Carrito from './Components/Carrito.jsx';
 import VerProducto from './Components/VerProducto.jsx';
+import SharedConfirm from './Components/SharedConfirm.jsx';
 
 function App() {
+
+/*
+ const sharedApp = () => {
+    navigator.clipboard.writeText('https://turnos-de-farmacias-sn.vercel.app/') // copia el texto en el portapapeles del dispositivo
+    .then(() => {
+      setShared(true)
+      setTimeout(() => {
+       setShared(false)
+      }, 3000);
+    })
+    .catch(()=> {
+      console.log('Error al compiar el link al portapapeles')
+    })
+  }
+*/
 
   const favoritosLocal = localStorage.getItem('e-shop-favoritos');
   const [ verProducto, setVerProducto ] = useState([])  
@@ -20,7 +36,8 @@ function App() {
   const [ isLoading, setIsLoading ] = useState(true);
   const [ isHome, setIsHome ] = useState(true);
   const [ isCarrito, setIsCarrito ] = useState(false);
-  const [ isVerProducto, setIsVerProducto ] = useState(false)
+  const [ isVerProducto, setIsVerProducto ] = useState(false);
+  const [ isSharedConfirm, setIsSharedConfirm ] = useState(false)
 
   const miRefScroll = useRef(null);
 
@@ -33,7 +50,7 @@ useEffect(() => {
     setVerProducto(filter);
     setIsVerProducto(true)
   }
-}, [productos]); // 👈 ahora sí: cuando se cargan los productos, se ejecuta
+}, [productos]); //  cuando se cargan los productos, se ejecuta
 
   useEffect(() => {    
   const unsubscribeProductos = getData(setProductos);
@@ -76,7 +93,12 @@ useEffect(() => {
   const handleCompartir = (producto) => {
     const url = `${window.location.origin}/${producto}`;
     navigator.clipboard.writeText(url)
-      .then(() => console.log("¡URL copiada!"))
+      .then(() => {
+        setIsSharedConfirm(true)
+        setTimeout(() => {
+       setIsSharedConfirm(false)
+      }, 3000);
+      })
       .catch(() => alert("No se pudo copiar"));
   };
   
@@ -89,6 +111,7 @@ useEffect(() => {
 
   return (
     <div className="container-app">
+      { isSharedConfirm && <SharedConfirm />  }
       <InstallPrompt /> { /* Pregunta para instalar la app*/}
       {
         isVerProducto &&

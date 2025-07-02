@@ -1,0 +1,42 @@
+.container-shared {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.493);
+  position: fixed;
+  top:0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index:1010;
+}
+
+.container-shared-text {
+  width: 80%;
+  height: auto;
+  padding: 1rem;
+  background-color: #32CD32;
+  box-shadow: 3px 3px 5px black;
+  border-radius: .75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and ( min-width: 37em) {
+  .container-shared-text {
+    width: 20%;
+  }
+}
+
+@media screen and ( min-width: 500px) {
+  .container-shared-text {
+    width: 50%;
+  }
+}
+
+@media screen and ( min-width: 1000px) {
+  .container-shared-text {
+    width: 30%;
+  }
+}
