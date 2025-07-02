@@ -32,6 +32,7 @@ function App() {
   const [ categorias, setCategorias ] = useState([])
   const [ favoritos, setFavoritos ] = useState(favoritosLocal ? JSON.parse(favoritosLocal) : [])
   const [ productosSeleccionados, setProductosSeleccionados] = useState([])
+  const [ productosEnCarrito, setProductosEnCarrito ] = useState([])
 
   const [ isLoading, setIsLoading ] = useState(true);
   const [ isHome, setIsHome ] = useState(true);
@@ -109,6 +110,18 @@ useEffect(() => {
     }
   };
 
+  const agregarProductoAlCarrito = (id) => {
+    const isProductInCart = productosEnCarrito.some(pro => pro.id === id);
+    if(isProductInCart){
+      console.log('producto ya incluido')
+    }else{
+      const filter = productos.find(pro => pro.id === id);
+    console.log('filter: ', filter);
+    setProductosEnCarrito([...productosEnCarrito, filter])
+    }
+    
+  }
+
   return (
     <div className="container-app">
       { isSharedConfirm && <SharedConfirm />  }
@@ -182,6 +195,7 @@ useEffect(() => {
             < img src="./img/carritoOf.webp" alt="Icono shop" />
           </button>
         }
+        <p>{productosEnCarrito.length}</p>
       </nav>
        <main>
         {
@@ -202,6 +216,7 @@ useEffect(() => {
           verProducto={verProducto}
           setVerProducto={setVerProducto}
           setIsVerProducto={setIsVerProducto}
+          agregarProductoAlCarrito={agregarProductoAlCarrito}
       />
       }
       {
@@ -209,6 +224,7 @@ useEffect(() => {
           <Carrito 
           setIsHome={setIsHome}
           setIsCarrito={setIsCarrito}
+          productosEnCarrito={productosEnCarrito}
           />
       }
        </main>  

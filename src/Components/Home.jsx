@@ -18,7 +18,8 @@ const Home = ({
   sacarOferta,
   verProducto,
   setVerProducto,
-  setIsVerProducto
+  setIsVerProducto,
+  agregarProductoAlCarrito
 }) => {
   const [categoriaActual, setCategoriaActual] = useState('Todo');
 
@@ -135,7 +136,11 @@ const Home = ({
           }
               </div>
               <div className="nav-btn">
-                <button className="btn-nav-productos" type="button">
+                <button 
+                  className="btn-nav-productos" 
+                  type="button"
+                  onClick={() => { agregarProductoAlCarrito(pro.id)}}
+                  >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     height="24px"

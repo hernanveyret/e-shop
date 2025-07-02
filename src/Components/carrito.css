@@ -1,20 +1,139 @@
+/* Contenedor principal */
 .container-carrito {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
   width: 100%;
+  box-sizing: border-box;
+}
+
+/* Columna izquierda con productos */
+.carrito-izquierda {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
+  gap: 1rem;
+  width: 100%;
 }
-.container-carrito img {
-  width: 50%;
+
+/* Contenedor individual de producto */
+.contenedor-productos-carrito {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* Card del producto */
+.card-carrito {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 90%;
+  max-width: 600px;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 0 auto 1rem auto;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Imagen del producto */
+.img-carrito img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Info del producto */
+.info-carrito {
+  margin-left: 1rem;
+}
+
+.info-carrito .titulo {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.info-carrito .precio {
+  color: #2d6a4f;
+  margin-top: 0.5rem;
+  font-weight: bold;
+}
+
+/* Resumen de importe */
+.contenedor-importe {
+  flex: 0 1 300px;
+  background: #e9ecef;
+  padding: 1.5rem;
+  border-radius: 10px;
+  height: fit-content;
+  align-self: flex-start;
+  max-width: 300px;
+}
+
+.contenedor-importe h3 {
+  margin-bottom: 1rem;
+}
+
+.contenedor-importe p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+/* Botón de pagar */
+.btn-pagar {
   margin-top: 1rem;
-
+  width: 100%;
+  padding: 0.8rem;
+  background: #2d6a4f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-@media screen and (min-width: 1024px) {
-  .container-carrito img {
-  width: 20%;
-  margin-top: 1rem;
+.btn-pagar:hover {
+  background: #1b4332;
+}
 
+/* Imagen si está vacío */
+.carrito-vacio {
+  max-width: 300px;
+  margin: auto;
 }
+
+/* 📱 Responsive: Mobile */
+@media (max-width: 768px) {
+  .container-carrito {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .carrito-izquierda,
+  .contenedor-importe {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+
+  .card-carrito {
+    width: 100% !important;
+    max-width: none;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0 0 1rem 0;
+  }
+
+  .contenedor-importe {
+    margin-top: 2rem;
+  }
 }
+
