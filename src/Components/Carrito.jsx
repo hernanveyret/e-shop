@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './carrito.css';
 
-const Carrito = ({ setIsCarrito, setIsHome, productosEnCarrito, setProductosEnCarrito }) => {
+const Carrito = ({ setIsCarrito, setIsHome, productosEnCarrito, setProductosEnCarrito, costoEnvio }) => {
   const [ cantTotal, setCantTotal ] = useState(0)
 
   console.log(typeof productosEnCarrito)
@@ -95,7 +95,7 @@ const Carrito = ({ setIsCarrito, setIsHome, productosEnCarrito, setProductosEnCa
           <aside className="contenedor-importe">
             <h3>Resumen de compra</h3>
             <p><strong>Subtotal:</strong> ${subtotal.toLocaleString()}</p>
-            <p><strong>Envío:</strong> ${envio.toLocaleString()}</p>
+            <p><strong>Envío:</strong> ${costoEnvio.envio.envio.toLocaleString()}</p>
             <p>Total Pro: {cantTotal}</p>
             <p><strong>Total:</strong> ${total.toLocaleString()}</p>
             <button

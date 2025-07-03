@@ -19,7 +19,8 @@ const Home = ({
   verProducto,
   setVerProducto,
   setIsVerProducto,
-  agregarProductoAlCarrito
+  agregarProductoAlCarrito,
+  costoEnvio
 }) => {
   const [categoriaActual, setCategoriaActual] = useState('Todo');
 
@@ -118,6 +119,7 @@ const Home = ({
               >
                 <p className="titulo">{pro.titulo}</p>
                 <p className="descripcion">{pro.descripcion}</p>
+                <p style={{fontSize:'14px'}}>Envio: ${costoEnvio.envio.envio.toLocaleString()}</p>
                 {
             pro.oferta ? 
             <div className="info-precios">

@@ -1,5 +1,5 @@
 import React,{ useState, useEffect, useRef} from 'react';
-import { getData, getDataCategorias } from './firebase/auth.js'
+import { getData, getDataCategorias, getEnvio } from './firebase/auth.js'
 import './App.css'
 
 import InstallPrompt from './Components/InstallPrompt.jsx';
@@ -30,6 +30,7 @@ function App() {
 
   const [ productos, setProductos ] = useState([]);
   const [ categorias, setCategorias ] = useState([])
+  const [ costoEnvio, setCostoEnvio ] = useState(0)
   const [ favoritos, setFavoritos ] = useState(favoritosLocal ? JSON.parse(favoritosLocal) : [])
   const [ productosSeleccionados, setProductosSeleccionados] = useState([])
   const [ productosEnCarrito, setProductosEnCarrito ] = useState([])
@@ -53,13 +54,19 @@ useEffect(() => {
   }
 }, [productos]); //  cuando se cargan los productos, se ejecuta
 
+  useEffect(() => {
+    costoEnvio && console.log(costoEnvio.envio.envio)
+  },[costoEnvio])
+
   useEffect(() => {    
   const unsubscribeProductos = getData(setProductos);
   const unsubscribeCategorias = getDataCategorias(setCategorias);
+  const unsubscribeEnvio = getEnvio(setCostoEnvio);
     
   return () => {
     if (unsubscribeProductos) unsubscribeProductos();
     if (unsubscribeCategorias) unsubscribeCategorias();
+    if (unsubscribeEnvio ) unsubscribeEnvio();
   };
 }, []);
 
@@ -216,6 +223,7 @@ useEffect(() => {
           setVerProducto={setVerProducto}
           setIsVerProducto={setIsVerProducto}
           agregarProductoAlCarrito={agregarProductoAlCarrito}
+          costoEnvio={costoEnvio}
       />
       }
       {
@@ -225,6 +233,7 @@ useEffect(() => {
           setIsCarrito={setIsCarrito}
           productosEnCarrito={productosEnCarrito}
           setProductosEnCarrito={setProductosEnCarrito}
+          costoEnvio={costoEnvio}
           />
       }
        </main>  
