@@ -118,8 +118,7 @@ useEffect(() => {
       const filter = productos.find(pro => pro.id === id);
     console.log('filter: ', filter);
     setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1}])
-    }
-    
+    }    
   }
 
   return (
@@ -225,6 +224,7 @@ useEffect(() => {
           setIsHome={setIsHome}
           setIsCarrito={setIsCarrito}
           productosEnCarrito={productosEnCarrito}
+          setProductosEnCarrito={setProductosEnCarrito}
           />
       }
        </main>  

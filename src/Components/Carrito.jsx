@@ -1,13 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './carrito.css';
 
-const Carrito = ({ setIsCarrito, setIsHome, productosEnCarrito }) => {
+const Carrito = ({ setIsCarrito, setIsHome, productosEnCarrito, setProductosEnCarrito }) => {
+  const [ cantTotal, setCantTotal ] = useState(0)
+
+  console.log(typeof productosEnCarrito)
+  console.log(Array.isArray(productosEnCarrito) // ✅ esto da true si es un array
+)
+
+  
+  const sumarProdctos = () => {
+    const totalProductos = productosEnCarrito.reduce((acumulador, current) => acumulador + current.cant,0);
+    setCantTotal(totalProductos)
+  }
+
+  useEffect(() => {
+    sumarProdctos()
+  },[productosEnCarrito]);
+
   useEffect(() => {
     console.log(productosEnCarrito);
   }, [productosEnCarrito]);
 
-  const subtotal = productosEnCarrito.reduce((acc, prod) => acc + prod.precio, 0);
-  const envio = subtotal > 10000 ? 0 : 1500; // ejemplo: envío gratis si pasa $10.000
+  const subtotal = productosEnCarrito.reduce((acc, prod) => Number(acc) + Number(prod.precio), 0);
+  const envio = subtotal > 50000 ? 0 : 1500; // ejemplo: envío gratis si pasa $10.000
   const total = subtotal + envio;
 
   return (
@@ -41,7 +57,7 @@ const Carrito = ({ setIsCarrito, setIsHome, productosEnCarrito }) => {
                       </button>
                       <p>{pro.cant}</p>
                         { 
-                          productosEnCarrito.length === 1 ?
+                          pro.cant === 1 ?
                            // boton tacho de basura
                             <button
                               className="btn-carrito"
@@ -57,6 +73,7 @@ const Carrito = ({ setIsCarrito, setIsHome, productosEnCarrito }) => {
                             // boton restar cantidad de producto unitario
                           <button
                             className="btn-carrito"
+                            
                           >
                             <svg xmlns="http://www.w3.org/2000/svg" 
                               height="24px" 
@@ -79,19 +96,20 @@ const Carrito = ({ setIsCarrito, setIsHome, productosEnCarrito }) => {
             <h3>Resumen de compra</h3>
             <p><strong>Subtotal:</strong> ${subtotal.toLocaleString()}</p>
             <p><strong>Envío:</strong> ${envio.toLocaleString()}</p>
-            <p>Total Pro: {productosEnCarrito.length}</p>
+            <p>Total Pro: {cantTotal}</p>
             <p><strong>Total:</strong> ${total.toLocaleString()}</p>
             <button
-                              className="btn-vaciar-carrito"
-                            >
-                              VACIAR CARRITO
-                              <svg xmlns="http://www.w3.org/2000/svg" 
-                                height="24px" 
-                                viewBox="0 -960 960 960" width="24px" 
-                                fill="white">
-                                <path d="M312-172q-25 0-42.5-17.5T252-232v-488h-40v-28h148v-28h240v28h148v28h-40v488q0 26-17 43t-43 17H312Zm368-548H280v488q0 14 9 23t23 9h336q12 0 22-10t10-22v-488ZM402-280h28v-360h-28v360Zm128 0h28v-360h-28v360ZM280-720v520-520Z"/>
-                              </svg>
-                            </button>
+             className="btn-vaciar-carrito"
+             onClick={() => {setProductosEnCarrito([]) }}
+           >
+             VACIAR CARRITO
+             <svg xmlns="http://www.w3.org/2000/svg" 
+               height="24px" 
+               viewBox="0 -960 960 960" width="24px" 
+               fill="white">
+               <path d="M312-172q-25 0-42.5-17.5T252-232v-488h-40v-28h148v-28h240v28h148v28h-40v488q0 26-17 43t-43 17H312Zm368-548H280v488q0 14 9 23t23 9h336q12 0 22-10t10-22v-488ZM402-280h28v-360h-28v360Zm128 0h28v-360h-28v360ZM280-720v520-520Z"/>
+             </svg>
+           </button>
             <button className="btn-pagar">PAGAR</button>
           </aside>
         </>
