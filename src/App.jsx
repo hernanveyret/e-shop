@@ -117,7 +117,7 @@ useEffect(() => {
     }else{
       const filter = productos.find(pro => pro.id === id);
     console.log('filter: ', filter);
-    setProductosEnCarrito([...productosEnCarrito, filter])
+    setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1}])
     }
     
   }

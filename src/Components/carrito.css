@@ -90,7 +90,7 @@
   margin-top: 1rem;
   width: 100%;
   padding: 0.8rem;
-  background: #2d6a4f;
+  background: #4CC7D1;
   color: white;
   border: none;
   border-radius: 8px;
@@ -100,9 +100,51 @@
 }
 
 .btn-pagar:hover {
-  background: #1b4332;
+  background:  #0d94a0;;
 }
 
+.btn-vaciar-carrito {
+  margin-top: 1rem;
+  width: 100%;
+  padding: .5rem 0;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  font-size: 14px;
+}
+.btn-vaciar-carrito:hover {
+  background-color: grey;
+}
+.btn-nav {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-carrito {
+  width: 30px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(216, 215, 215);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  cursor: pointer;
+}
+.btn-carrito:hover {
+  background-color: rgb(173, 171, 171);
+  
+}
 /* Imagen si está vacío */
 .carrito-vacio {
   max-width: 300px;
