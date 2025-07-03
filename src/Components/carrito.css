@@ -67,13 +67,16 @@
 
 /* Resumen de importe */
 .contenedor-importe {
-  flex: 0 1 300px;
+  flex: 0 1 300px;  
+  flex-direction: column;
+  
   background: #e9ecef;
   padding: 1.5rem;
   border-radius: 10px;
   height: fit-content;
   align-self: flex-start;
   max-width: 300px;
+  
 }
 
 .contenedor-importe h3 {
@@ -151,31 +154,39 @@
   margin: auto;
 }
 
-/* 📱 Responsive: Mobile */
 @media (max-width: 768px) {
-  .container-carrito {
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
+  .contenedor-importe {
+    width: 90%;
+    max-width: 300px;
+    padding: 1.5rem;
+    border-radius: 10px;
+    background: #e9ecef;
+    margin-top: 2rem;
   }
 
-  .carrito-izquierda,
-  .contenedor-importe {
+  .btn-vaciar-carrito,
+  .btn-pagar {
     width: 100%;
-    max-width: none;
-    padding: 0;
+    max-width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+
+  .btn-vaciar-carrito {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .carrito-izquierda {
+    align-items: center;
   }
 
   .card-carrito {
-    width: 100% !important;
-    max-width: none;
     flex-direction: row;
+    width: 95%;
     justify-content: flex-start;
-    margin: 0 0 1rem 0;
-  }
-
-  .contenedor-importe {
-    margin-top: 2rem;
   }
 }
 

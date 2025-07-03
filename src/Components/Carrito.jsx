@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './carrito.css';
 
-const Carrito = ({ setIsCarrito, setIsHome, productosEnCarrito, setProductosEnCarrito, costoEnvio }) => {
+const Carrito = ({ setIsCarrito,
+   setIsHome,
+    productosEnCarrito,
+    setProductosEnCarrito,
+     costoEnvio }) => {
   const [ cantTotal, setCantTotal ] = useState(0)
 
   console.log(typeof productosEnCarrito)
@@ -23,7 +27,7 @@ const Carrito = ({ setIsCarrito, setIsHome, productosEnCarrito, setProductosEnCa
   }, [productosEnCarrito]);
 
   const subtotal = productosEnCarrito.reduce((acc, prod) => Number(acc) + Number(prod.precio), 0);
-  const envio = subtotal > 50000 ? 0 : 1500; // ejemplo: envío gratis si pasa $10.000
+  const envio = subtotal > 50000 ? 0 : Number(costoEnvio.envio.envio); // ejemplo: envío gratis si pasa $10.000
   const total = subtotal + envio;
 
   return (
@@ -42,8 +46,7 @@ const Carrito = ({ setIsCarrito, setIsHome, productosEnCarrito, setProductosEnCa
                       <p className="titulo">{pro.titulo}</p>
                       <p className="precio">${pro.precio}</p>
                     </div>
-                    <div className="btn-nav">
-                      
+                    <div className="btn-nav">                      
                       { /* boto +*/}
                       <button 
                       className="btn-carrito"
