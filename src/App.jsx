@@ -34,6 +34,7 @@ function App() {
   const [ favoritos, setFavoritos ] = useState(favoritosLocal ? JSON.parse(favoritosLocal) : [])
   const [ productosSeleccionados, setProductosSeleccionados] = useState([])
   const [ productosEnCarrito, setProductosEnCarrito ] = useState([])
+  const [ cantTotal, setCantTotal ] = useState(0)
 
   const [ isLoading, setIsLoading ] = useState(true);
   const [ isHome, setIsHome ] = useState(true);
@@ -54,9 +55,6 @@ useEffect(() => {
   }
 }, [productos]); //  cuando se cargan los productos, se ejecuta
 
-  useEffect(() => {
-    costoEnvio && console.log(costoEnvio.envio.envio)
-  },[costoEnvio])
 
   useEffect(() => {    
   const unsubscribeProductos = getData(setProductos);
@@ -94,8 +92,14 @@ useEffect(() => {
   }
 
   useEffect(() => {
-    localStorage.setItem('e-shop-favoritos',JSON.stringify(favoritos)); 
+    localStorage.setItem('e-shop-favoritos',JSON.stringify(favoritos));
   },[favoritos])
+
+  useEffect(() => {
+  const totalProductos = productosEnCarrito.reduce((acc, current) => acc + current.cant, 0);
+  setCantTotal(totalProductos);
+}, [productosEnCarrito]);
+
 
   //Compartir id del producto en la url
   const handleCompartir = (producto) => {
@@ -123,7 +127,7 @@ useEffect(() => {
       console.log('producto ya incluido')
     }else{
       const filter = productos.find(pro => pro.id === id);
-    console.log('filter: ', filter);
+    //console.log('filter: ', filter);
     setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1}])
     }    
   }
@@ -201,7 +205,7 @@ useEffect(() => {
             < img src="./img/carritoOf.webp" alt="Icono shop" />
           </button>
         }
-        <p>{productosEnCarrito.length}</p>
+        <p>{cantTotal}</p>
       </nav>
        <main>
         {
@@ -234,6 +238,8 @@ useEffect(() => {
           productosEnCarrito={productosEnCarrito}
           setProductosEnCarrito={setProductosEnCarrito}
           costoEnvio={costoEnvio}
+          cantTotal={cantTotal}
+          setCantTotal={setCantTotal}
           />
       }
        </main>  
