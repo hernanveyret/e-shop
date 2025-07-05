@@ -24,7 +24,7 @@ const calcularPrecio = (precioUnitario, precio, porcentajeDescuento, operacion) 
     if(porcentajeDescuento){
     const precioConDescuento = sacarOferta(precio, porcentajeDescuento);
     console.log(precioConDescuento)
-    return Number(precioConDescuento) + Number(precioUnitario)
+    return Number(precioConDescuento) - Number(precioUnitario)
     }else{
       return Number(precio) - Number(precioUnitario)
     }
