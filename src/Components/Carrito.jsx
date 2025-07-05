@@ -7,8 +7,30 @@ const Carrito = ({ setIsCarrito,
                     setProductosEnCarrito,
                      costoEnvio,
                     setCantTotal,
-                    cantTotal
+                    cantTotal,
+                    sacarOferta
                     }) => {
+
+const calcularPrecio = (precioUnitario, precio, porcentajeDescuento, operacion) => {
+  if(operacion === 'suma'){
+    if(porcentajeDescuento){
+    const precioConDescuento = sacarOferta(precio, porcentajeDescuento);
+    console.log(precioConDescuento)
+    return Number(precioConDescuento) + Number(precioUnitario)
+    }else{
+      return Number(precio) + Number(precioUnitario)
+    }
+  }else{
+    if(porcentajeDescuento){
+    const precioConDescuento = sacarOferta(precio, porcentajeDescuento);
+    console.log(precioConDescuento)
+    return Number(precioConDescuento) + Number(precioUnitario)
+    }else{
+      return Number(precio) - Number(precioUnitario)
+    }
+  }
+  
+}
    
   // Suma la cantidad de productos unitarios en el carrito de compras.
  const sumarProductoUnitario = (id) => {
@@ -16,7 +38,8 @@ const Carrito = ({ setIsCarrito,
     if( e.id === id ) {
       return {
         ...e,
-        cant: e.cant + 1
+        cant: e.cant + 1,
+        precio: calcularPrecio(e.precioUnitario, e.precio, e.porcentajeOff, 'suma')
       }
     }
     return e;
@@ -30,7 +53,8 @@ const Carrito = ({ setIsCarrito,
     if( e.id === id ) {
       return {
         ...e,
-        cant: e.cant - 1
+        cant: e.cant - 1,
+        precio: calcularPrecio(e.precioUnitario, e.precio, e.porcentajeOff, 'resta')
       }
     }
     return e;

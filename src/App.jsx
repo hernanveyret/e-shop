@@ -240,6 +240,7 @@ useEffect(() => {
           costoEnvio={costoEnvio}
           cantTotal={cantTotal}
           setCantTotal={setCantTotal}
+          sacarOferta={sacarOferta}
           />
       }
        </main>  
