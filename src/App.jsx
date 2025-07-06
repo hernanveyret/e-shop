@@ -7,6 +7,8 @@ import Home from './Components/Home.jsx';
 import Carrito from './Components/Carrito.jsx';
 import VerProducto from './Components/VerProducto.jsx';
 import SharedConfirm from './Components/SharedConfirm.jsx';
+import BannerAddProducto from './Components/BannerAddProducto.jsx';
+
 
 function App() {
 
@@ -41,7 +43,15 @@ function App() {
   const [ isCarrito, setIsCarrito ] = useState(false);
   const [ isVerProducto, setIsVerProducto ] = useState(false);
   const [ isSharedConfirm, setIsSharedConfirm ] = useState(false)
+  const [onClose, setOnClose] = useState(false);
+  const [ on, setOn ] = useState(false)
 
+
+  useEffect(() => {
+    console.log(setOnClose)
+    console.log(onClose)
+
+  }, [setOnClose, onClose])
   const miRefScroll = useRef(null);
 
 useEffect(() => {
@@ -123,11 +133,18 @@ useEffect(() => {
       const filter = productos.find(pro => pro.id === id);
     //console.log('filter: ', filter);
     setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1}])
+    setOnClose(true)
     }    
   }
 
   return (
     <div className="container-app">
+
+     
+      { onClose && <BannerAddProducto 
+                      setOnClose={setOnClose}
+                    />
+                    }
       { isSharedConfirm && <SharedConfirm />  }
       <InstallPrompt /> { /* Pregunta para instalar la app*/}
       {
@@ -220,6 +237,7 @@ useEffect(() => {
           setIsVerProducto={setIsVerProducto}
           agregarProductoAlCarrito={agregarProductoAlCarrito}
           costoEnvio={costoEnvio}
+
       />
       }
       {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Loader from './Loader';
 import './home.css';
 import './Loader.css';
+import BannerAddProducto from './BannerAddProducto';
 
 const Home = ({
   productos,
@@ -74,7 +75,7 @@ const Home = ({
           </div>
           <p className="name-categoria">Favoritos</p>
         </button>
-
+        
         {categorias &&
           categorias.map((cat) => (
             <button className="container-cat btn" key={cat.id}>
