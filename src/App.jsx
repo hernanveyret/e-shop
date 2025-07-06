@@ -154,6 +154,7 @@ useEffect(() => {
             setIsVerProducto={setIsVerProducto}
             favoritos={favoritos}
             addFavorito={addFavorito}
+            agregarProductoAlCarrito={agregarProductoAlCarrito}
           />
       }
       <header ref={miRefScroll}>

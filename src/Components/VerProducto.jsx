@@ -5,7 +5,8 @@ const VerProducto = ({verProducto,
                       setIsVerProducto, 
                       favoritos, 
                       addFavorito,
-                      sacarOferta}) => {  
+                      agregarProductoAlCarrito
+                      }) => {  
   
   return (
     <div className="container-ver-producto">      
@@ -32,11 +33,11 @@ const VerProducto = ({verProducto,
           {
             verProducto.oferta ? 
             <div className="info-precios">
-            <span style={{display:'flex', gap:'10px'}}><p style={{color:'grey', textDecoration:'line-through'}}>$ {verProducto.precio}</p><p style={{color: 'red'}}>{verProducto.porcentajeOff}% OFF</p></span>
+            <span style={{display:'flex', gap:'10px'}}><p style={{color:'grey', textDecoration:'line-through'}}>$ {verProducto.precioUnitario}</p><p style={{color: 'red'}}>{verProducto.porcentajeOff}% OFF</p></span>
 
             { verProducto.precio && verProducto.porcentajeOff && (
             <p style={{fontSize:'20px', fontWeight:'bold'}}>
-              $ {sacarOferta(verProducto.precio, verProducto.porcentajeOff)}
+              $ {verProducto.precio}
             </p>
             )}
           </div>
@@ -47,7 +48,9 @@ const VerProducto = ({verProducto,
           }
            </div>
       <nav className="btn-ver-producto">
-        <button className="btn-nav-productos">
+        <button className="btn-nav-productos"
+          onClick={() => {agregarProductoAlCarrito(verProducto.id)}}
+        >
           <svg xmlns="http://www.w3.org/2000/svg" 
             height="24px"
             viewBox="0 -960 960 960" 
