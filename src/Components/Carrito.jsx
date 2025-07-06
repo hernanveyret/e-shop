@@ -8,29 +8,7 @@ const Carrito = ({ setIsCarrito,
                      costoEnvio,
                     setCantTotal,
                     cantTotal,
-                    sacarOferta
                     }) => {
-
-const calcularPrecio = (precioUnitario, precio, porcentajeDescuento, operacion) => {
-  if(operacion === 'suma'){
-    if(porcentajeDescuento){
-    const precioConDescuento = sacarOferta(precio, porcentajeDescuento);
-    console.log(precioConDescuento)
-    return Number(precioConDescuento) + Number(precioUnitario)
-    }else{
-      return Number(precio) + Number(precioUnitario)
-    }
-  }else{
-    if(porcentajeDescuento){
-    const precioConDescuento = sacarOferta(precio, porcentajeDescuento);
-    console.log(precioConDescuento)
-    return Number(precioConDescuento) - Number(precioUnitario)
-    }else{
-      return Number(precio) - Number(precioUnitario)
-    }
-  }
-  
-}
    
   // Suma la cantidad de productos unitarios en el carrito de compras.
  const sumarProductoUnitario = (id) => {
@@ -39,7 +17,7 @@ const calcularPrecio = (precioUnitario, precio, porcentajeDescuento, operacion) 
       return {
         ...e,
         cant: e.cant + 1,
-        precio: calcularPrecio(e.precioUnitario, e.precio, e.porcentajeOff, 'suma')
+        total: e.total + e.precio
       }
     }
     return e;
@@ -54,7 +32,7 @@ const calcularPrecio = (precioUnitario, precio, porcentajeDescuento, operacion) 
       return {
         ...e,
         cant: e.cant - 1,
-        precio: calcularPrecio(e.precioUnitario, e.precio, e.porcentajeOff, 'resta')
+        total: e.total - e.precio
       }
     }
     return e;
@@ -67,8 +45,8 @@ const calcularPrecio = (precioUnitario, precio, porcentajeDescuento, operacion) 
   setProductosEnCarrito(filter)
  }
 
-  const subtotal = productosEnCarrito.reduce((acc, prod) => Number(acc) + Number(prod.precio), 0);
-  const envio = subtotal > 50000 ? 0 : Number(costoEnvio.envio.envio); // ejemplo: envío gratis si pasa $10.000
+  const subtotal = productosEnCarrito.reduce((acc, prod) => Number(acc) + Number(prod.total), 0);
+  const envio = subtotal > 50000 ? 0 : Number(costoEnvio.envio.envio); // ejemplo: envío gratis si pasa $50.000
   const total = subtotal + envio;
 
   return (
@@ -85,7 +63,8 @@ const calcularPrecio = (precioUnitario, precio, porcentajeDescuento, operacion) 
                   <div className="info-carrito">
                     <div>
                       <p className="titulo">{pro.titulo}</p>
-                      <p className="precio">${pro.precio}</p>
+                      {pro.porcentajeOff && <p style={{color:'red', fontSize:'14px'}}>{pro.porcentajeOff}% OFF</p>}
+                      {pro.porcentajeOff ? <span><p style={{color:'gray', textDecoration:'line-through'}}>{pro.precioUnitario}</p><p className="precio">${pro.total}</p> </span>: <p className="precio">${pro.total}</p> }
                     </div>
                     <div className="btn-nav">                      
                       { /* boto +*/}

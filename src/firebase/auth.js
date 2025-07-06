@@ -10,8 +10,11 @@ export const getData = (callback) => {
     const unsubscribe = onSnapshot(collection(db,'productos'), snapshot => {
       const usuarios = snapshot.docs.map(doc => ({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
+        precio: doc.data().precioUnitario - (doc.data().precioUnitario * doc.data().porcentajeOff / 100),
+        total: doc.data().precioUnitario - (doc.data().precioUnitario * doc.data().porcentajeOff / 100)
     }))
+    
     callback(usuarios);
   })
   return unsubscribe;

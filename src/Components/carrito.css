@@ -15,7 +15,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
   width: 100%;
 }
 
@@ -33,12 +32,18 @@
   justify-content: flex-start;
   width: 90%;
   max-width: 600px;
-  background: #f9f9f9;
   padding: 1rem;
-  border-radius: 10px;
   margin: 0 auto 1rem auto;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
   box-sizing: border-box;
+}
+
+.card-carrito:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }
 
 /* Imagen del producto */
@@ -47,48 +52,97 @@
   height: 90px;
   object-fit: cover;
   border-radius: 10px;
+  border: 1px solid #ddd;
 }
 
 /* Info del producto */
 .info-carrito {
   margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .info-carrito .titulo {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1.1rem;
+  margin-bottom: 0.3rem;
 }
 
 .info-carrito .precio {
   color: #2d6a4f;
   margin-top: 0.5rem;
   font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* Controles de cantidad */
+.btn-nav {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 0.5rem;
+}
+
+.btn-carrito {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-carrito:hover {
+  background-color: #d6d6d6;
 }
 
 /* Resumen de importe */
 .contenedor-importe {
-  flex: 0 1 300px;  
+  flex: 0 1 300px;
+  display: flex;
   flex-direction: column;
-  
-  background: #e9ecef;
-  padding: 1.5rem;
-  border-radius: 10px;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   height: fit-content;
   align-self: flex-start;
   max-width: 300px;
-  
+  transition: box-shadow 0.3s ease;
+}
+
+.contenedor-importe:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .contenedor-importe h3 {
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
 }
 
 .contenedor-importe p {
   margin: 0.5rem 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  color: #333;
 }
 
-/* Botón de pagar */
+.contenedor-importe p strong {
+  color: #000;
+}
+
+/* Botones */
 .btn-pagar {
   margin-top: 1rem;
   width: 100%;
@@ -99,17 +153,18 @@
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .btn-pagar:hover {
-  background:  #0d94a0;;
+  background: #0d94a0;
+  transform: scale(1.02);
 }
 
 .btn-vaciar-carrito {
   margin-top: 1rem;
   width: 100%;
-  padding: .5rem 0;
+  padding: 0.6rem 0;
   background: black;
   color: white;
   border: none;
@@ -119,48 +174,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   font-size: 14px;
 }
+
 .btn-vaciar-carrito:hover {
   background-color: grey;
 }
-.btn-nav {
-  width: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
 
-.btn-carrito {
-  width: 30px;
-  border-radius: 50%;
-  border: none;
-  background-color: rgb(216, 215, 215);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2px;
-  cursor: pointer;
-}
-.btn-carrito:hover {
-  background-color: rgb(173, 171, 171);
-  
-}
 /* Imagen si está vacío */
 .carrito-vacio {
   max-width: 300px;
   margin: auto;
+  display: block;
 }
 
+/* Versión móvil */
 @media (max-width: 768px) {
   .contenedor-importe {
     width: 90%;
     max-width: 300px;
     padding: 1.5rem;
     border-radius: 10px;
-    background: #e9ecef;
+    background: #ffffff;
     margin-top: 2rem;
   }
 
@@ -177,7 +213,7 @@
     display: flex;
     justify-content: center;
     gap: 1rem;
-    padding: .5rem !important;
+    padding: 0.6rem !important;
   }
 
   .carrito-izquierda {

@@ -72,6 +72,7 @@ useEffect(() => {
   // Cuando ambas listas se cargan, sale del loading
   if (productos.length > 1 && categorias.length > 1 ) {
     setIsLoading(false);
+    console.log(productos)
   }
 }, [productos, categorias]);
 
@@ -114,13 +115,6 @@ useEffect(() => {
       .catch(() => alert("No se pudo copiar"));
   };
   
-   const sacarOferta = (precio, porcentaje) => {
-    if(precio && porcentaje ){
-      const precioOff = precio * porcentaje / 100;
-      return (precio - precioOff).toFixed(2);
-    }
-  };
-
   const agregarProductoAlCarrito = (id) => {
     const isProductInCart = productosEnCarrito.some(pro => pro.id === id);
     if(isProductInCart){
@@ -143,7 +137,6 @@ useEffect(() => {
             setIsVerProducto={setIsVerProducto}
             favoritos={favoritos}
             addFavorito={addFavorito}
-            sacarOferta={sacarOferta}
           />
       }
       <header ref={miRefScroll}>
@@ -222,7 +215,6 @@ useEffect(() => {
           productosSeleccionados={productosSeleccionados}
           setProductosSeleccionados={setProductosSeleccionados}
           handleCompartir={handleCompartir}
-          sacarOferta={sacarOferta}
           verProducto={verProducto}
           setVerProducto={setVerProducto}
           setIsVerProducto={setIsVerProducto}
@@ -240,7 +232,6 @@ useEffect(() => {
           costoEnvio={costoEnvio}
           cantTotal={cantTotal}
           setCantTotal={setCantTotal}
-          sacarOferta={sacarOferta}
           />
       }
        </main>  
