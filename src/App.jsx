@@ -28,6 +28,7 @@ function App() {
 */
 
   const favoritosLocal = localStorage.getItem('e-shop-favoritos');
+  const productosCarritoLocal = localStorage.getItem('e-shop-carrito')
   const [ verProducto, setVerProducto ] = useState([])  
 
   const [ productos, setProductos ] = useState([]);
@@ -35,7 +36,7 @@ function App() {
   const [ costoEnvio, setCostoEnvio ] = useState(0)
   const [ favoritos, setFavoritos ] = useState(favoritosLocal ? JSON.parse(favoritosLocal) : [])
   const [ productosSeleccionados, setProductosSeleccionados] = useState([])
-  const [ productosEnCarrito, setProductosEnCarrito ] = useState([])
+  const [ productosEnCarrito, setProductosEnCarrito ] = useState(productosCarritoLocal ? JSON.parse(productosCarritoLocal) : [])
   const [ cantTotal, setCantTotal ] = useState(0)
 
   const [ isLoading, setIsLoading ] = useState(true);
@@ -46,12 +47,6 @@ function App() {
   const [onClose, setOnClose] = useState(false);
   const [ on, setOn ] = useState(false)
 
-
-  useEffect(() => {
-    console.log(setOnClose)
-    console.log(onClose)
-
-  }, [setOnClose, onClose])
   const miRefScroll = useRef(null);
 
 useEffect(() => {
@@ -82,7 +77,7 @@ useEffect(() => {
   // Cuando ambas listas se cargan, sale del loading
   if (productos.length > 1 && categorias.length > 1 ) {
     setIsLoading(false);
-    console.log(productos)
+   //console.log(productos)
   }
 }, [productos, categorias]);
 
@@ -105,6 +100,10 @@ useEffect(() => {
   useEffect(() => {
     localStorage.setItem('e-shop-favoritos',JSON.stringify(favoritos));
   },[favoritos])
+
+  useEffect(() => {
+    localStorage.setItem('e-shop-carrito', JSON.stringify(productosEnCarrito))
+  },[productosEnCarrito])
 
   useEffect(() => {
   const totalProductos = productosEnCarrito.reduce((acc, current) => acc + current.cant, 0);
