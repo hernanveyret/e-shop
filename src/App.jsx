@@ -8,25 +8,12 @@ import Carrito from './Components/Carrito.jsx';
 import VerProducto from './Components/VerProducto.jsx';
 import SharedConfirm from './Components/SharedConfirm.jsx';
 import BannerAddProducto from './Components/BannerAddProducto.jsx';
+import BannerProductoAgregado from './Components/BannerProductoAgregado.jsx'
 import Menu from './Components/Menu.jsx';
+import LinkCopiado from './LinkCopiado.jsx';
 
 
 function App() {
-
-/*
- const sharedApp = () => {
-    navigator.clipboard.writeText('https://turnos-de-farmacias-sn.vercel.app/') // copia el texto en el portapapeles del dispositivo
-    .then(() => {
-      setShared(true)
-      setTimeout(() => {
-       setShared(false)
-      }, 3000);
-    })
-    .catch(()=> {
-      console.log('Error al compiar el link al portapapeles')
-    })
-  }
-*/
 
   const favoritosLocal = localStorage.getItem('e-shop-favoritos');
   const productosCarritoLocal = localStorage.getItem('e-shop-carrito')
@@ -44,12 +31,28 @@ function App() {
   const [ isHome, setIsHome ] = useState(true);
   const [ isCarrito, setIsCarrito ] = useState(false);
   const [ isVerProducto, setIsVerProducto ] = useState(false);
-  const [ isSharedConfirm, setIsSharedConfirm ] = useState(false)
+  const [ isSharedConfirm, setIsSharedConfirm ] = useState(false);
   const [ onClose, setOnClose] = useState(false);
-  const [openMenu, setOpenMenu] = useState(false);
+  const [ onRepetido, setOnRepetido ] = useState(false);
+  const [ openMenu, setOpenMenu] = useState(false);
+  const [ sharedLink, setSharedLink ] = useState(false);
   const [ on, setOn ] = useState(false)
 
   const miRefScroll = useRef(null);
+
+   const sharedApp = () => {
+    navigator.clipboard.writeText('https://s-shop-eight.vercel.app/') // copia el texto en el portapapeles del dispositivo
+    .then(() => {
+      setSharedLink(true)
+      setTimeout(() => {
+       setSharedLink(false)
+      }, 3000);
+    })
+    .catch(()=> {
+      console.log('Error al compiar el link al portapapeles')
+    })
+  }
+
 
 useEffect(() => {
   const path = window.location.pathname;
@@ -129,7 +132,7 @@ useEffect(() => {
   const agregarProductoAlCarrito = (id) => {
     const isProductInCart = productosEnCarrito.some(pro => pro.id === id);
     if(isProductInCart){
-      console.log('producto ya incluido')
+      setOnRepetido(true);
     }else{
       const filter = productos.find(pro => pro.id === id);
     //console.log('filter: ', filter);
@@ -140,11 +143,21 @@ useEffect(() => {
 
   return (
     <div className="container-app">
-
+      { 
+        sharedLink && 
+          <LinkCopiado />
+      }
       { openMenu && <Menu 
         openMenu={openMenu}
         setOpenMenu={setOpenMenu}
-      /> }
+        sharedApp={sharedApp}
+      /> 
+      }
+      { onRepetido &&
+        <BannerProductoAgregado 
+          setOnRepetido={setOnRepetido}
+        />
+      }
       { onClose && <BannerAddProducto 
                       setOnClose={setOnClose}
                     />

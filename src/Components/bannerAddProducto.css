@@ -62,7 +62,7 @@
     opacity: 1;
   }
   100% {
-    left: -80px;    /* Termina a la izquierda */
+    left: -10px;    /* Termina a la izquierda */
     opacity: 1;
   }
 }
