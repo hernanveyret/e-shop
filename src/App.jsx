@@ -213,6 +213,7 @@ useEffect(() => {
           </button>
         }
         {/* Boton Carrito*/}
+        <div className="btn-carrito-cant">
        {
           isCarrito ? 
             <button 
@@ -236,6 +237,7 @@ useEffect(() => {
           </button>
         }
         <p>{cantTotal}</p>
+        </div>
       </nav>
        <main>
         {

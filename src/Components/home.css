@@ -93,6 +93,24 @@ header img {
   width: 100%;
 }
 
+.btn-carrito-cant {
+  display: flex;
+  position: relative;
+}
+
+.btn-carrito-cant p {
+  color: white;
+  background-color: red;
+  font-size: 12px;
+  position: absolute;
+  top: 9px;
+  right: 5px;
+  padding: 2px 5px;
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+  font-weight: bold;
+  line-height: 1;
+}
 
 .btn-nav-productos {
   width: 30px;
