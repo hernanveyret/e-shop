@@ -8,7 +8,7 @@
   z-index: 9998;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .card {
@@ -62,4 +62,37 @@
   justify-content: space-between;
   align-items: flex-end;
   width:  100%;
+}
+
+@media screen and (min-width: 1024px) {
+  .card {
+   border: 1px solid beige;
+   background-color: white;
+   box-shadow: 1px 1px 10px 2px grey;
+   border-radius: 20px;
+   width: 40%;
+   max-height: auto;
+   margin: 10px;
+   overflow: hidden;
+   position: relative;
+}
+   .imagen {
+    width: 100%;
+    height: 60vh;
+    overflow: hidden;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  .imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+
+  .info {
+    padding: 1rem;
+  }
 }

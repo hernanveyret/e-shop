@@ -28,7 +28,7 @@ const VerProducto = ({verProducto,
           <img src={verProducto.urlImg} alt={verProducto.titulo} />
         </div>
         <div className="info">
-          <p>{verProducto.titulo}</p>
+          <p style={{fontWeight:'bold'}}>{verProducto.titulo}</p>
           <p>{verProducto.descripcion}</p>
           {
             verProducto.oferta ? 
