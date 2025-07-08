@@ -8,6 +8,7 @@ import Carrito from './Components/Carrito.jsx';
 import VerProducto from './Components/VerProducto.jsx';
 import SharedConfirm from './Components/SharedConfirm.jsx';
 import BannerAddProducto from './Components/BannerAddProducto.jsx';
+import Menu from './Components/Menu.jsx';
 
 
 function App() {
@@ -44,7 +45,8 @@ function App() {
   const [ isCarrito, setIsCarrito ] = useState(false);
   const [ isVerProducto, setIsVerProducto ] = useState(false);
   const [ isSharedConfirm, setIsSharedConfirm ] = useState(false)
-  const [onClose, setOnClose] = useState(false);
+  const [ onClose, setOnClose] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
   const [ on, setOn ] = useState(false)
 
   const miRefScroll = useRef(null);
@@ -139,7 +141,10 @@ useEffect(() => {
   return (
     <div className="container-app">
 
-     
+      { openMenu && <Menu 
+        openMenu={openMenu}
+        setOpenMenu={setOpenMenu}
+      /> }
       { onClose && <BannerAddProducto 
                       setOnClose={setOnClose}
                     />
@@ -158,7 +163,9 @@ useEffect(() => {
       }
       <header ref={miRefScroll}>
         <img src="./logo.png" alt="Imagen logo " /> e-shop
-        <div className="btn-menu-header">
+        <div className="btn-menu-header"
+          onClick={() => { setOpenMenu(!openMenu)}}
+        >
           <svg xmlns="http://www.w3.org/2000/svg" 
           height="24px" 
           viewBox="0 -960 960 960"
