@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './BannerProductoAgregado.css';
+import './bannerProductoAgregado.css';
 
 const BannerProductoAgregado = ({ setOnRepetido }) => {
   useEffect(() => {
