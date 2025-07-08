@@ -10,7 +10,9 @@
   align-items: center;
   z-index: 9999;
 }
-
+.mostrtar{
+  color: red;
+}
 .card-modal{
   background: #ffffff;
   border-radius: 20px;
