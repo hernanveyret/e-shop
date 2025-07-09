@@ -151,7 +151,7 @@ useEffect(() => {
   const handleEnviarWhatsApp = () => {  
   //const mensaje = crearMensajeWhatsApp(carrito, nombre, direccion, telefono);
   const mensaje = 'Hola, quiero hacer una consulta!'
-  const numeroVendedor = "1134025499"; // con código país, sin +
+  const numeroVendedor = "541134025499"; // con código país, sin +
   const url = `https://wa.me/${numeroVendedor}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank");
 };
