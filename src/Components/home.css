@@ -134,6 +134,7 @@ main {
   cursor: pointer;
   display: flex;
   margin-bottom: 5px;  
+  /*background-color: #d1ebd1;*/
 }
 
 .card-producto:hover {
