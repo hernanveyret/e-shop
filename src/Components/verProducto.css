@@ -5,10 +5,10 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9998;
+  z-index: 20000;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .card {
@@ -65,6 +65,13 @@
 }
 
 @media screen and (min-width: 1024px) {
+  .container-ver-producto {
+  
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  border: 2px solid red;
+}
   .card {
    border: 1px solid beige;
    background-color: white;

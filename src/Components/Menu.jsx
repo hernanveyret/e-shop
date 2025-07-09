@@ -18,7 +18,7 @@ const Menu = ({ openMenu, setOpenMenu, sharedApp}) => {
           >Compartir App por QR</button></li>
           <li><button
             onClick={() => { setOpenMenu((prev) => !prev)}}
-          >Instalar App</button></li>
+          >Mis pedidos</button></li>
           <li><button
             onClick={() => { setOpenMenu((prev) => !prev)}}
           >CVU/CBU</button></li>

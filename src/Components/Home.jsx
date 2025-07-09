@@ -20,7 +20,8 @@ const Home = ({
   setVerProducto,
   setIsVerProducto,
   agregarProductoAlCarrito,
-  costoEnvio
+  costoEnvio,
+  checkProductoEnCarito
 }) => {
   const [categoriaActual, setCategoriaActual] = useState('Todo');
 
@@ -138,10 +139,28 @@ const Home = ({
           }
               </div>
               <div className="nav-btn">
-                <button 
-                  className="btn-nav-productos" 
-                  type="button"
-                  onClick={() => { agregarProductoAlCarrito(pro.id)}}
+                {/* Boton para agregar el producto al carrito */}
+                { 
+                  checkProductoEnCarito(pro.id) ? 
+                  <button 
+                    className="btn-nav-productos" 
+                    style={{backgroundColor:' #32CD32'}}
+                    type="button"
+                    onClick={() => {agregarProductoAlCarrito(pro.id) }}
+                  >
+                  <svg xmlns="http://www.w3.org/2000/svg" 
+                    height="24px" 
+                    viewBox="0 -960 960 960" 
+                    width="24px" 
+                    fill="#000000">
+                      <path d="M382-276 192-466l20-20 170 170 366-366 20 20-386 386Z"/>
+                  </svg>
+                  </button>
+                  : 
+                  <button 
+                    className="btn-nav-productos" 
+                    type="button"
+                    onClick={() => {agregarProductoAlCarrito(pro.id) }}
                   >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -152,8 +171,10 @@ const Home = ({
                   >
                     <path d="M466-466H252v-28h214v-214h28v214h214v28H494v214h-28v-214Z" />
                   </svg>
-                </button>
-
+                  </button>
+                }
+                
+                { /*  Boton para agregar o sacar un producto de favoritos */}
                 <button
                   className="btn-nav-productos"
                   type="button"

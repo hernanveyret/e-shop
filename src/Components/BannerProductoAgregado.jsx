@@ -9,7 +9,6 @@ const BannerProductoAgregado = ({ setOnRepetido }) => {
 
     return () => clearTimeout(timer);
   }, [setOnRepetido]);
-  console.log('hola')
   return (
     <div className="modal">
       <div className="card-modal animates">

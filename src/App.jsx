@@ -40,8 +40,9 @@ function App() {
 
   const miRefScroll = useRef(null);
 
+  // copia al portapapeles la url
    const sharedApp = () => {
-    navigator.clipboard.writeText('https://s-shop-eight.vercel.app/') // copia el texto en el portapapeles del dispositivo
+    navigator.clipboard.writeText('https://s-shop-eight.vercel.app/') 
     .then(() => {
       setSharedLink(true)
       setTimeout(() => {
@@ -53,7 +54,7 @@ function App() {
     })
   }
 
-
+// Muestra un producto si llega en la url
 useEffect(() => {
   const path = window.location.pathname;
   const id = path.slice(1);  
@@ -66,6 +67,7 @@ useEffect(() => {
 }, [productos]); //  cuando se cargan los productos, se ejecuta
 
 
+// Carga los datos a los estados correspondientes
   useEffect(() => {    
   const unsubscribeProductos = getData(setProductos);
   const unsubscribeCategorias = getDataCategorias(setCategorias);
@@ -139,6 +141,10 @@ useEffect(() => {
     setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1}])
     setOnClose(true)
     }    
+  }
+  // ve si el producto ya esta en el carrito asi pinta el boton +
+  const checkProductoEnCarito = (id) => {
+    return productosEnCarrito.some(pro => pro.id === id);    
   }
 
   return (
@@ -217,6 +223,7 @@ useEffect(() => {
        {
           isCarrito ? 
             <button 
+            type='button'
             className="btn btn-menu"
             onClick={() => { 
             setIsCarrito(false);
@@ -224,9 +231,11 @@ useEffect(() => {
             }}
           >
             < img src="./img/carritoOn.webp" alt="Icono shop" />
+            <p>{cantTotal}</p>
           </button>
           : 
           <button 
+          type='button'
             className="btn btn-menu"
             onClick={() => { 
             setIsCarrito(true);
@@ -234,9 +243,9 @@ useEffect(() => {
             }}
           >
             < img src="./img/carritoOf.webp" alt="Icono shop" />
+            <p>{cantTotal}</p>
           </button>
         }
-        <p>{cantTotal}</p>
         </div>
       </nav>
        <main>
@@ -259,7 +268,7 @@ useEffect(() => {
           setIsVerProducto={setIsVerProducto}
           agregarProductoAlCarrito={agregarProductoAlCarrito}
           costoEnvio={costoEnvio}
-
+          checkProductoEnCarito={checkProductoEnCarito}
       />
       }
       {
