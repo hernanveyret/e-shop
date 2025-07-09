@@ -147,6 +147,15 @@ useEffect(() => {
     return productosEnCarrito.some(pro => pro.id === id);    
   }
 
+  // Enviar mensaje por whatsApp
+  const handleEnviarWhatsApp = () => {  
+  //const mensaje = crearMensajeWhatsApp(carrito, nombre, direccion, telefono);
+  const mensaje = 'Hola, quiero hacer una consulta!'
+  const numeroVendedor = "1134025499"; // con código país, sin +
+  const url = `https://wa.me/${numeroVendedor}?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, "_blank");
+};
+
   return (
     <div className="container-app">
       { 
@@ -309,7 +318,10 @@ useEffect(() => {
           <path d="M446.67-160v-513l-240 240L160-480l320-320 320 320-46.67 47-240-240v513h-66.66Z"/>
         </svg>
       </button>
-      <button className="btn-whatsapp">
+      <button 
+        onClick={handleEnviarWhatsApp}
+        className="btn-whatsapp"
+      >
         <img src="./img/whatsapplogo.webp" alt='logo' />
       </button>
     </div>
