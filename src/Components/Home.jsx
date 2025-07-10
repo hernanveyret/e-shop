@@ -96,7 +96,9 @@ const Home = ({
 
         {productosSeleccionados.length > 0 ? (
           productosSeleccionados.map((pro) => (
-            <div className="card-producto" key={pro.id}>
+            <div className="card-producto" 
+                style={{ backgroundColor: checkProductoEnCarito(pro.id) ? '#d1ebd1' : '' }}
+              key={pro.id}>
               <div className="img-container">
                 <img src={pro.urlImg} alt={pro.titulo} />
                 <button className="btn-compartir"
