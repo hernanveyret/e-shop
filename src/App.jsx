@@ -11,6 +11,7 @@ import BannerAddProducto from './Components/BannerAddProducto.jsx';
 import BannerProductoAgregado from './Components/BannerProductoAgregado.jsx'
 import Menu from './Components/Menu.jsx';
 import LinkCopiado from './LinkCopiado.jsx';
+import EnviarPedido from './Components/EnviarPedido.jsx';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
   const [ onRepetido, setOnRepetido ] = useState(false);
   const [ openMenu, setOpenMenu] = useState(false);
   const [ sharedLink, setSharedLink ] = useState(false);
+  const [ onEnviarPedido, setOnEnviarPedido ] = useState(false);
   const [ on, setOn ] = useState(false)
 
   const miRefScroll = useRef(null);
@@ -117,6 +119,9 @@ useEffect(() => {
   setCantTotal(totalProductos);
 }, [productosEnCarrito]);
 
+useEffect (() => {
+  console.log('productos en carrito: ', productosEnCarrito)
+},[productosEnCarrito]);
 
   //Compartir id del producto en la url
   const handleCompartir = (producto) => {
@@ -158,6 +163,13 @@ useEffect(() => {
 
   return (
     <div className="container-app">
+      { onEnviarPedido &&
+        <EnviarPedido 
+        productosEnCarrito={productosEnCarrito}
+        setOnEnviarPedido={setOnEnviarPedido}
+        costoEnvio={costoEnvio}
+        />
+      }
       { 
         sharedLink && 
           <LinkCopiado />
@@ -291,6 +303,7 @@ useEffect(() => {
           costoEnvio={costoEnvio}
           cantTotal={cantTotal}
           setCantTotal={setCantTotal}
+          setOnEnviarPedido={setOnEnviarPedido}
           />
       }
        </main>  
