@@ -3,7 +3,7 @@ import './enviarPedido.css';
 import { useForm } from 'react-hook-form'
 
 const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio}) => {
-  const [ estado, setEstado ] = useState([])
+  
 
   const {
     register,
@@ -29,15 +29,21 @@ const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio}) => {
     })
      pedido += `Cant. Productos: ${totalProductos}\n`;
      pedido += `Total a pagar: ${importeTotal}\n`;
-    setEstado(...estado, pedido)
+     pedido += `*Nombre: ${watch('nombre')}*\n`;
+     pedido += `Direccion: ${watch('direccion')}\n`;
+     
+    
+    handleEnviarWhatsApp(pedido)
   }
   
+  const handleEnviarWhatsApp = (pedido) => {  
+  //const mensaje = crearMensajeWhatsApp(carrito, nombre, direccion, telefono);
   
-
-  useEffect(() => {
-    console.log(estado)
-  },[estado]);
-
+  const numeroVendedor = "541134025499"; // con código país, sin +
+  const url = `https://wa.me/${numeroVendedor}?text=${encodeURIComponent(pedido)}`;
+  window.open(url, "_blank");
+};
+  
   return (
     <div className="container-envio">
   <form 
@@ -60,16 +66,16 @@ const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio}) => {
         }
       })}
       />
-      { errors.nombre?.message && <p style={{color: 'red', fontSize:'14px'}}>{errors.nombre.message}</p>}
+      { errors.nombre?.message && <p style={{color: 'red', fontSize:'14px', marginLeft:'5px'}}>{errors.nombre.message}</p>}
     <input type="text" placeholder="Ingrese domicilio" 
-    {...register('domicilio', {
+    {...register('direccion', {
         required: {
           value: true,
           message: 'Campo obligatorio'
         }
       })}
       />
-      { errors.domicilio?.message && <p style={{color: 'red', fontSize:'14px'}}>{errors.domicilio.message}</p>}
+      { errors.direccion?.message && <p style={{color: 'red', fontSize:'14px', marginLeft:'5px'}}>{errors.direccion.message}</p>}
     <select>
       <option>Medio de pago</option>
       <option value="efectivo">Efectivo</option>
