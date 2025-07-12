@@ -13,7 +13,6 @@ import Menu from './Components/Menu.jsx';
 import LinkCopiado from './LinkCopiado.jsx';
 import EnviarPedido from './Components/EnviarPedido.jsx';
 
-
 function App() {
 
   const favoritosLocal = localStorage.getItem('e-shop-favoritos');
@@ -38,6 +37,7 @@ function App() {
   const [ openMenu, setOpenMenu] = useState(false);
   const [ sharedLink, setSharedLink ] = useState(false);
   const [ onEnviarPedido, setOnEnviarPedido ] = useState(false);
+ 
   const [ on, setOn ] = useState(false)
 
   const miRefScroll = useRef(null);

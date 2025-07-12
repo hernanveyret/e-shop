@@ -1,9 +1,17 @@
 import React,{ useState, useEffect} from 'react';
+import SharedConfirm from './SharedConfirm';
+
 import './enviarPedido.css';
 import { useForm } from 'react-hook-form'
 
 const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio}) => {
-  
+  const [ isShared, setIsShared ] = useState(false)
+  const [ texto, setTexto ] = useState(null)
+  const [ mp, setMp ] = useState(null);
+
+ useEffect(() => {
+  console.log(mp)
+ },[mp])
 
   const {
     register,
@@ -14,9 +22,8 @@ const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio}) => {
 
   const enviar = () => {
     const totalProductos = productosEnCarrito.reduce((ac, prod) => ac + prod.cant, 0);
-  const subTotal = productosEnCarrito.reduce((ac, prod) => ac + (prod.cant * prod.precio), 0);
-  const importeTotal = Number(subTotal) + Number(costoEnvio.envio.envio)
-  console.log(costoEnvio)
+   const subTotal = productosEnCarrito.reduce((ac, prod) => ac + (prod.cant * prod.precio), 0);
+   const importeTotal = Number(subTotal) + Number(costoEnvio.envio.envio)
   
     console.log('productos en carrito: ', productosEnCarrito)
     let pedido = 'Hola, Quiero Hacer un pedido:\n';
@@ -29,23 +36,44 @@ const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio}) => {
     })
      pedido += `Cant. Productos: ${totalProductos}\n`;
      pedido += `Total a pagar: ${importeTotal}\n`;
+     pedido += `Medio de pago: ${mp || ''}\n`;
      pedido += `*Nombre: ${watch('nombre')}*\n`;
-     pedido += `Direccion: ${watch('direccion')}\n`;
-     
+     pedido += `Direccion: ${watch('direccion')}\n`;   
     
     handleEnviarWhatsApp(pedido)
   }
   
-  const handleEnviarWhatsApp = (pedido) => {  
-  //const mensaje = crearMensajeWhatsApp(carrito, nombre, direccion, telefono);
-  
+  const handleEnviarWhatsApp = (pedido) => {    
   const numeroVendedor = "541134025499"; // con código país, sin +
   const url = `https://wa.me/${numeroVendedor}?text=${encodeURIComponent(pedido)}`;
   window.open(url, "_blank");
 };
+
+ //Compartir id del producto en la url
+  const handleCompartir = (text) => {
+    let url = ''
+    if(text === 'Alias'){
+      url = 'hernanveyret.mp'
+    }else {
+      url = '0000003100083084244362'
+    }
+    navigator.clipboard.writeText(url)
+      .then(() => {
+        setTexto(text)
+        setIsShared(true)        
+      })
+      .catch(() => alert("No se pudo copiar"));
+  };
   
   return (
     <div className="container-envio">
+      {
+        isShared &&
+        <SharedConfirm 
+        setIsShared={setIsShared}
+        texto={texto}
+        />
+      }
   <form 
     onSubmit={handleSubmit(enviar)}
   className="formulario-envio">
@@ -76,13 +104,29 @@ const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio}) => {
       })}
       />
       { errors.direccion?.message && <p style={{color: 'red', fontSize:'14px', marginLeft:'5px'}}>{errors.direccion.message}</p>}
-    <select>
-      <option>Medio de pago</option>
+    <select
+      id='pagos'
+      onChange={(e) => {setMp(e.target.value)}}
+      
+    >
+      <option value="">Medio de pago</option>
       <option value="efectivo">Efectivo</option>
       <option value="transferencia">Transferencia</option>
       <option value="otros">Otros</option>
     </select>
-
+    {
+      mp === 'transferencia' && ( 
+      <>
+      <button 
+        type ="button" 
+        className='btn-mp' 
+        onClick={() => { handleCompartir('Alias')}}>Copiar alias</button>
+      <button 
+        type="button"
+        className='btn-mp' 
+        onClick={() => { handleCompartir('CVU/CBU')}}>Copiar CVU/CBU</button>
+      </> )}
+      
     <button type="submit" className="btn-enviar">
       ENVIAR
     </button>

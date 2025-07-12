@@ -95,3 +95,14 @@
   background-color: #3cc0ce;
 }
 
+.btn-mp {
+  padding: .5rem;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  transition: .2s ease-in-out;
+}
+.btn-mp:hover {
+  background-color: grey;
+}
