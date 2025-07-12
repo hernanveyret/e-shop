@@ -4,7 +4,7 @@ import SharedConfirm from './SharedConfirm';
 import './enviarPedido.css';
 import { useForm } from 'react-hook-form'
 
-const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio}) => {
+const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio, setProductosEnCarrito}) => {
   const [ isShared, setIsShared ] = useState(false)
   const [ texto, setTexto ] = useState(null)
   const [ mp, setMp ] = useState(null);
@@ -17,11 +17,12 @@ const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio}) => {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
+    reset
   } = useForm();
 
   const enviar = () => {
-    const totalProductos = productosEnCarrito.reduce((ac, prod) => ac + prod.cant, 0);
+   const totalProductos = productosEnCarrito.reduce((ac, prod) => ac + prod.cant, 0);
    const subTotal = productosEnCarrito.reduce((ac, prod) => ac + (prod.cant * prod.precio), 0);
    const importeTotal = Number(subTotal) + Number(costoEnvio.envio.envio)
   
@@ -41,6 +42,9 @@ const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio}) => {
      pedido += `Direccion: ${watch('direccion')}\n`;   
     
     handleEnviarWhatsApp(pedido)
+    reset();
+    setProductosEnCarrito([]) // Vacia el carrito, falta guardar el pedido en localStorage
+    setOnEnviarPedido(false)
   }
   
   const handleEnviarWhatsApp = (pedido) => {    
@@ -110,12 +114,13 @@ const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio}) => {
       
     >
       <option value="">Medio de pago</option>
-      <option value="efectivo">Efectivo</option>
-      <option value="transferencia">Transferencia</option>
-      <option value="otros">Otros</option>
+      <option value="Efectivo">Efectivo</option>
+      <option value="Transferencia">Transferencia</option>
+      <option value="Otros">Otros</option>
     </select>
+
     {
-      mp === 'transferencia' && ( 
+      mp === 'Transferencia' && ( 
       <>
       <button 
         type ="button" 
@@ -125,7 +130,9 @@ const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio}) => {
         type="button"
         className='btn-mp' 
         onClick={() => { handleCompartir('CVU/CBU')}}>Copiar CVU/CBU</button>
-      </> )}
+      </> 
+      )
+    }
       
     <button type="submit" className="btn-enviar">
       ENVIAR

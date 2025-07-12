@@ -1,11 +1,10 @@
-/* ✅ Para evitar que el 100% + padding cree scroll horizontal */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* ✅ Fondo centrado correctamente en todos los dispositivos */
+
 .container-envio {
   width: 100%;
   height: 100vh;
@@ -20,13 +19,12 @@
   background-color: rgba(128, 128, 128, 0.493);
 }
 
-/* ✅ El formulario ya tiene width fijo (320px), así que se centra bien */
+
 .formulario-envio {
   background: white;
   border-radius: 12px;
   padding: 1.5rem;
   width: 320px;
-  max-width: 90vw; /* <-- evita que se desborde en pantallas chicas */
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   position: relative;
   font-family: sans-serif;
