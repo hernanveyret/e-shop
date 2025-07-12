@@ -17,6 +17,7 @@
   justify-content: center;
   align-items: center;
   z-index: 10020;
+  background-color: rgba(128, 128, 128, 0.493);
 }
 
 /* ✅ El formulario ya tiene width fijo (320px), así que se centra bien */
