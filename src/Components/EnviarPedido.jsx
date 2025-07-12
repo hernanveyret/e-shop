@@ -4,7 +4,13 @@ import SharedConfirm from './SharedConfirm';
 import './enviarPedido.css';
 import { useForm } from 'react-hook-form'
 
-const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio, setProductosEnCarrito}) => {
+const EnviarPedido = ({productosEnCarrito,
+                       setOnEnviarPedido,
+                       costoEnvio, 
+                       setProductosEnCarrito,
+                       setIsHome,
+                       setIsCarrito
+                      }) => {
   const [ isShared, setIsShared ] = useState(false)
   const [ texto, setTexto ] = useState(null)
   const [ mp, setMp ] = useState(null);
@@ -45,6 +51,8 @@ const EnviarPedido = ({productosEnCarrito, setOnEnviarPedido, costoEnvio, setPro
     reset();
     setProductosEnCarrito([]) // Vacia el carrito, falta guardar el pedido en localStorage
     setOnEnviarPedido(false)
+    setIsCarrito(false)
+    setIsHome(true)
   }
   
   const handleEnviarWhatsApp = (pedido) => {    

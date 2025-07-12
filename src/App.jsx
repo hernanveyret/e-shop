@@ -169,6 +169,8 @@ useEffect (() => {
         setOnEnviarPedido={setOnEnviarPedido}
         setProductosEnCarrito={setProductosEnCarrito}
         costoEnvio={costoEnvio}
+        setIsHome={setIsHome}
+        setIsCarrito={setIsCarrito}
         />
       }
       { 
