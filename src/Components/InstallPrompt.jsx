@@ -54,7 +54,7 @@ const InstallPrompt = () => {
 const styles = {
   container: {
     position: 'fixed',
-    top: '50px',
+    top: '60px',
     left: '20px',
     right: '20px',
     backgroundColor: '#32CD32',

@@ -139,7 +139,7 @@ const Carrito = ({ setIsCarrito,
             <button 
               className="btn-pagar"
               onClick={() => { setOnEnviarPedido(true)}}
-              >ENVIAR PEDIDO</button>
+              >CONFIRMAR</button>
           </aside>
         </>
       ) : (

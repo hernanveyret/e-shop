@@ -12,26 +12,31 @@ import BannerProductoAgregado from './Components/BannerProductoAgregado.jsx'
 import Menu from './Components/Menu.jsx';
 import LinkCopiado from './LinkCopiado.jsx';
 import EnviarPedido from './Components/EnviarPedido.jsx';
+import MisPedidos from './Components/MisPedidos.jsx';
 
 function App() {
 
   const favoritosLocal = localStorage.getItem('e-shop-favoritos');
   const productosCarritoLocal = localStorage.getItem('e-shop-carrito')
+  const misPedidos = localStorage.getItem('mispedidos')
   const [ verProducto, setVerProducto ] = useState([])  
 
   const [ productos, setProductos ] = useState([]);
   const [ categorias, setCategorias ] = useState([])
   const [ costoEnvio, setCostoEnvio ] = useState(0)
-  const [ favoritos, setFavoritos ] = useState(favoritosLocal ? JSON.parse(favoritosLocal) : [])
+  const [ favoritos, setFavoritos ] = useState(favoritosLocal ? JSON.parse(favoritosLocal) : [] )
   const [ productosSeleccionados, setProductosSeleccionados] = useState([])
-  const [ productosEnCarrito, setProductosEnCarrito ] = useState(productosCarritoLocal ? JSON.parse(productosCarritoLocal) : [])
-  const [ cantTotal, setCantTotal ] = useState(0)
+  const [ productosEnCarrito, setProductosEnCarrito ] = useState(productosCarritoLocal ? JSON.parse(productosCarritoLocal) : [] )
+  const [ cantTotal, setCantTotal ] = useState(0);
+  const [ misPedidosGuardados, setMisPedidosGuardados] = useState(misPedidos ? JSON.parse(misPedidos): [] )
+
 
   const [ isLoading, setIsLoading ] = useState(true);
   const [ isHome, setIsHome ] = useState(true);
   const [ isCarrito, setIsCarrito ] = useState(false);
   const [ isVerProducto, setIsVerProducto ] = useState(false);
   const [ isSharedConfirm, setIsSharedConfirm ] = useState(false);
+  const [ isMisPedidos, setIsMisPedidos ] = useState(false);
   const [ onClose, setOnClose] = useState(false);
   const [ onRepetido, setOnRepetido ] = useState(false);
   const [ openMenu, setOpenMenu] = useState(false);
@@ -112,16 +117,18 @@ useEffect(() => {
 
   useEffect(() => {
     localStorage.setItem('e-shop-carrito', JSON.stringify(productosEnCarrito))
+    console.log('Productos en el carrito: ',productosEnCarrito)
   },[productosEnCarrito])
+
+  useEffect(() => {
+    console.log('Productos para guardar en mis pedidos: ',misPedidosGuardados)
+    localStorage.setItem('mispedidos', JSON.stringify(misPedidosGuardados))
+  },[misPedidosGuardados])
 
   useEffect(() => {
   const totalProductos = productosEnCarrito.reduce((acc, current) => acc + current.cant, 0);
   setCantTotal(totalProductos);
 }, [productosEnCarrito]);
-
-useEffect (() => {
-  console.log('productos en carrito: ', productosEnCarrito)
-},[productosEnCarrito]);
 
   //Compartir id del producto en la url
   const handleCompartir = (producto) => {
@@ -155,7 +162,7 @@ useEffect (() => {
   // Enviar mensaje por whatsApp
   const handleEnviarWhatsApp = () => {  
   //const mensaje = crearMensajeWhatsApp(carrito, nombre, direccion, telefono);
-  const mensaje = 'Hola, quiero hacer una consulta!'
+  const mensaje = 'Hola, quiero hacer una consulta desde e-shop!'
   const numeroVendedor = "541134025499"; // con código país, sin +
   const url = `https://wa.me/${numeroVendedor}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank");
@@ -171,6 +178,8 @@ useEffect (() => {
         costoEnvio={costoEnvio}
         setIsHome={setIsHome}
         setIsCarrito={setIsCarrito}
+        setMisPedidosGuardados={setMisPedidosGuardados}
+        misPedidosGuardados={misPedidosGuardados}
         />
       }
       { 
@@ -181,6 +190,11 @@ useEffect (() => {
         openMenu={openMenu}
         setOpenMenu={setOpenMenu}
         sharedApp={sharedApp}
+        setIsMisPedidos={setIsMisPedidos}
+        setIsHome={setIsHome}
+        isHome={isHome}
+        isCarrito={isCarrito}
+        setIsCarrito={setIsCarrito}
       /> 
       }
       { onRepetido &&
@@ -192,7 +206,10 @@ useEffect (() => {
                       setOnClose={setOnClose}
                     />
                     }
-      { isSharedConfirm && <SharedConfirm />  }
+      { isSharedConfirm &&
+         <SharedConfirm 
+          texto={'Link'}
+         />  }
       <InstallPrompt /> { /* Pregunta para instalar la app*/}
       {
         isVerProducto &&
@@ -219,7 +236,7 @@ useEffect (() => {
         </div>
       </header>
 
-      <nav className="nav">
+      <nav className="nav">        
         {/* Boton Home*/}
         {
           isHome ? 
@@ -228,6 +245,7 @@ useEffect (() => {
             onClick={() => { 
             setIsCarrito(false);
             setIsHome(true);
+            setIsMisPedidos(false);
             }}
           >
             < img src="./img/shopOn.webp" alt="Icono shop" />
@@ -238,6 +256,7 @@ useEffect (() => {
             onClick={() => { 
             setIsCarrito(false);
             setIsHome(true);
+            setIsMisPedidos(false);
             }}
           >
             < img src="./img/shopOff.webp" alt="Icono shop" />
@@ -253,6 +272,7 @@ useEffect (() => {
             onClick={() => { 
             setIsCarrito(false);
             setIsHome(true);
+            setIsMisPedidos(false);
             }}
           >
             < img src="./img/carritoOn.webp" alt="Icono shop" />
@@ -265,6 +285,7 @@ useEffect (() => {
             onClick={() => { 
             setIsCarrito(true);
             setIsHome(false);
+            setIsMisPedidos(false);
             }}
           >
             < img src="./img/carritoOf.webp" alt="Icono shop" />
@@ -274,6 +295,12 @@ useEffect (() => {
         </div>
       </nav>
        <main>
+        {
+          isMisPedidos && 
+            <MisPedidos 
+              misPedidosGuardados={misPedidosGuardados}
+            />
+        }
         {
         isHome && 
           <Home 

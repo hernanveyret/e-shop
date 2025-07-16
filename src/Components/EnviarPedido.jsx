@@ -5,19 +5,17 @@ import './enviarPedido.css';
 import { useForm } from 'react-hook-form'
 
 const EnviarPedido = ({productosEnCarrito,
+                       setProductosEnCarrito,
                        setOnEnviarPedido,
                        costoEnvio, 
-                       setProductosEnCarrito,
                        setIsHome,
-                       setIsCarrito
+                       setIsCarrito,
+                       setMisPedidosGuardados,
+                       misPedidosGuardados
                       }) => {
   const [ isShared, setIsShared ] = useState(false)
   const [ texto, setTexto ] = useState(null)
   const [ mp, setMp ] = useState(null);
-
- useEffect(() => {
-  console.log(mp)
- },[mp])
 
   const {
     register,
@@ -27,12 +25,32 @@ const EnviarPedido = ({productosEnCarrito,
     reset
   } = useForm();
 
+  const guardarProducto = () => {
+   const totalProductos = productosEnCarrito.reduce((ac, prod) => ac + prod.cant, 0);
+   const subTotal = productosEnCarrito.reduce((ac, prod) => ac + (prod.cant * prod.precio), 0);
+   const importeTotal = Number(subTotal) + Number(costoEnvio.envio.envio);
+
+    let pedidos = []
+   
+    productosEnCarrito.forEach((pro, index) => {
+      pedidos.push(pro)     
+    })
+
+    pedidos.push({
+      cantTotal: totalProductos,
+      subTotal,
+      importeTotal
+    })
+
+  setMisPedidosGuardados([...misPedidosGuardados, pedidos] )    
+    console.log('productos en mis productos:', pedidos)
+  }
+
   const enviar = () => {
    const totalProductos = productosEnCarrito.reduce((ac, prod) => ac + prod.cant, 0);
    const subTotal = productosEnCarrito.reduce((ac, prod) => ac + (prod.cant * prod.precio), 0);
    const importeTotal = Number(subTotal) + Number(costoEnvio.envio.envio)
   
-    console.log('productos en carrito: ', productosEnCarrito)
     let pedido = 'Hola, Quiero Hacer un pedido:\n';
     productosEnCarrito.forEach((pro, index) => {
       pedido += `*Producto: ${index+1}*\n`;
@@ -49,6 +67,7 @@ const EnviarPedido = ({productosEnCarrito,
     
     handleEnviarWhatsApp(pedido)
     reset();
+    guardarProducto(productosEnCarrito)
     setProductosEnCarrito([]) // Vacia el carrito, falta guardar el pedido en localStorage
     setOnEnviarPedido(false)
     setIsCarrito(false)
@@ -102,16 +121,16 @@ const EnviarPedido = ({productosEnCarrito,
       {...register('nombre', {
         required: {
           value: true,
-          message: 'Campo obligatorio'
+          message: '*Campo obligatorio'
         }
       })}
       />
       { errors.nombre?.message && <p style={{color: 'red', fontSize:'14px', marginLeft:'5px'}}>{errors.nombre.message}</p>}
-    <input type="text" placeholder="Ingrese domicilio" 
+    <input type="text" placeholder="Ingrese SU domicilio" 
     {...register('direccion', {
         required: {
           value: true,
-          message: 'Campo obligatorio'
+          message: '*Campo obligatorio'
         }
       })}
       />

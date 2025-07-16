@@ -27,7 +27,7 @@ header img {
   top: 0;
   background-color: white;
   box-shadow: 1px 1px 4px grey;
-  z-index:10000;
+  z-index:300;
 }
 
 .container-categorias {
@@ -176,14 +176,14 @@ main {
 }
 
 .titulo {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: bold;
   color: #222;
   margin-bottom: 4px;
 }
 
 .descripcion {
-  font-size: 12px;
+  font-size: 14px;
   color: #777;
 }
 
@@ -200,8 +200,10 @@ main {
   position: absolute;
   bottom: 10px;
   right: 10px;
-  border: 1px solid rgb(133, 130, 130);
-  
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
 }
 
 .btn-flecha-arriba {

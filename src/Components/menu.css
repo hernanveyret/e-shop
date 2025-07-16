@@ -1,7 +1,7 @@
 .menu-container {
   position: relative;
-  z-index: 10030;
-  top: 35px;
+  z-index: 9999;
+  top: 30px;
   width: 100%;
 }
 

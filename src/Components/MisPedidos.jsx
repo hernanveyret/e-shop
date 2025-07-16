@@ -1,0 +1,65 @@
+import React from 'react';
+import './misPedidos.css';
+
+const MisPedidos = ({ misPedidosGuardados }) => {
+  return (
+    <div className='container-mis-pedidos'>
+      <h2>Mis pedidos</h2>
+      {misPedidosGuardados &&
+        misPedidosGuardados.map((pedido, iPedido) => {
+          const indiceTotal = pedido.length;
+
+          return (
+            <div className='mis-pedidos' key={iPedido}>
+              <h3>Pedido: {iPedido + 1}</h3>
+              <div className="container-info">
+                <div className="productos">
+                  {pedido.map((pe, index) => (
+                    <div className='mis-pedidos-info' key={`${iPedido}-${pe.id || index}`}>
+                      <ul>
+                        <li>{pe.titulo && <p>{pe.titulo}</p>}</li>
+                        <li>{pe.cant && <p>Cant: {pe.cant}</p>}</li>
+                        <li>{pe.precioUnitario && <p>Pre.Unit: $ {pe.precioUnitario}</p>}</li>
+                        <li>{pe.total && <p>Total: $ {pe.total}</p>}</li>
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                <div className="container-total">
+                  <h3>Resumen de compra</h3>
+                  <p className="resumen-linea"><span>Cant. Total:</span> <span>{pedido[indiceTotal - 1].cantTotal}</span></p>
+                  <p className="resumen-linea"><span>Sub Total:</span> <span>$ {pedido[indiceTotal - 1].subTotal}</span></p>
+                  <p className="resumen-linea"><span>Total:</span> <span>$ {pedido[indiceTotal - 1].importeTotal}</span></p>                  
+                <div className="botones-acciones">
+                  <button 
+                    title="Retornar al carrito"
+                    className="btn-mis-pedidos">                 
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                      height="24px" 
+                      viewBox="0 -960 960 960" width="24px" 
+                      fill="#000000">                   
+                        <path d="M280-200v-80h284q63 0 109.5-40T720-420q0-60-46.5-100T564-560H312l104 104-56 56-200-200 200-200 56 56-104 104h252q97 0 166.5 63T800-420q0 94-69.5 157T564-200H280Z"/>                 
+                    </svg>               
+                    </button>               
+                    <button
+                      title="Borrar"
+                      className="btn-mis-pedidos">                 
+                      <svg xmlns="http://www.w3.org/2000/svg" 
+                        height="24px" 
+                        viewBox="0 -960 960 960" 
+                        width="24px" fill="#000000">                   
+                          <path d="M312-172q-25 0-42.5-17.5T252-232v-488h-40v-28h148v-28h240v28h148v28h-40v488q0 26-17 43t-43 17H312Zm368-548H280v488q0 14 9 23t23 9h336q12 0 22-10t10-22v-488ZM402-280h28v-360h-28v360Zm128 0h28v-360h-28v360ZM280-720v520-520Z"/>                 
+                      </svg>               
+                  </button> 
+                </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+    </div>
+  );
+};
+
+export default MisPedidos;
+
