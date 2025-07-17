@@ -30,7 +30,6 @@ function App() {
   const [ cantTotal, setCantTotal ] = useState(0);
   const [ misPedidosGuardados, setMisPedidosGuardados] = useState(misPedidos ? JSON.parse(misPedidos): [] )
 
-
   const [ isLoading, setIsLoading ] = useState(true);
   const [ isHome, setIsHome ] = useState(true);
   const [ isCarrito, setIsCarrito ] = useState(false);
@@ -94,6 +93,14 @@ useEffect(() => {
    //console.log(productos)
   }
 }, [productos, categorias]);
+
+  const formatoPesos = (importe) => {
+    return importe.toLocaleString('es-AR', { 
+      style:'currency',
+      currency: 'ARS',
+      minimumFractionDigits: 0
+    })
+  }
 
   const manejarScrollArriba = () => {
     miRefScroll.current?.scrollIntoView({behavior:'smooth'})
@@ -220,6 +227,7 @@ useEffect(() => {
             addFavorito={addFavorito}
             agregarProductoAlCarrito={agregarProductoAlCarrito}
             checkProductoEnCarito={checkProductoEnCarito}
+            formatoPesos={formatoPesos}
           />
       }
       <header ref={miRefScroll}>
@@ -299,6 +307,7 @@ useEffect(() => {
           isMisPedidos && 
             <MisPedidos 
               misPedidosGuardados={misPedidosGuardados}
+              formatoPesos={formatoPesos}
             />
         }
         {
@@ -321,6 +330,7 @@ useEffect(() => {
           agregarProductoAlCarrito={agregarProductoAlCarrito}
           costoEnvio={costoEnvio}
           checkProductoEnCarito={checkProductoEnCarito}
+          formatoPesos={formatoPesos}
       />
       }
       {
@@ -334,6 +344,7 @@ useEffect(() => {
           cantTotal={cantTotal}
           setCantTotal={setCantTotal}
           setOnEnviarPedido={setOnEnviarPedido}
+          formatoPesos={formatoPesos}
           />
       }
        </main>  

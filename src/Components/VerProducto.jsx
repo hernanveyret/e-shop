@@ -6,7 +6,8 @@ const VerProducto = ({verProducto,
                       favoritos, 
                       addFavorito,
                       agregarProductoAlCarrito,
-                      checkProductoEnCarito
+                      checkProductoEnCarito,
+                      formatoPesos
                       }) => {  
   
   return (
@@ -34,17 +35,17 @@ const VerProducto = ({verProducto,
           {
             verProducto.oferta ? 
             <div className="info-precios">
-            <span style={{display:'flex', gap:'10px'}}><p style={{color:'grey', textDecoration:'line-through'}}>$ {verProducto.precioUnitario}</p><p style={{color: 'red'}}>{verProducto.porcentajeOff}% OFF</p></span>
+            <span style={{display:'flex', gap:'10px'}}><p style={{color:'grey', textDecoration:'line-through'}}>{formatoPesos(verProducto.precioUnitario)}</p><p style={{color: 'red'}}>{verProducto.porcentajeOff}% OFF</p></span>
 
             { verProducto.precio && verProducto.porcentajeOff && (
             <p style={{fontSize:'20px', fontWeight:'bold'}}>
-              $ {verProducto.precio}
+              {formatoPesos(verProducto.precio)}
             </p>
             )}
           </div>
             :
             <div className="info-precios">
-            <p style={{fontSize:'20px', fontWeight:'bold'}}>$ {verProducto.precio}</p>
+            <p style={{fontSize:'20px', fontWeight:'bold'}}>{formatoPesos(verProducto.precio)}</p>
             </div>
           }
            </div>

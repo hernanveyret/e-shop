@@ -8,7 +8,8 @@ const Carrito = ({ setIsCarrito,
                     costoEnvio,
                     setCantTotal,
                     cantTotal,
-                    setOnEnviarPedido                    
+                    setOnEnviarPedido,
+                    formatoPesos                 
                     }) => {
    
   // Suma la cantidad de productos unitarios en el carrito de compras.
@@ -64,8 +65,9 @@ const Carrito = ({ setIsCarrito,
                   <div className="info-carrito">
                     <div>
                       <p className="titulo">{pro.titulo}</p>
+                      {pro.precioUnitario && !pro.porcentajeOff && <p>Pre.Unit: {formatoPesos(Number(pro.precioUnitario))}</p>}
                       {pro.porcentajeOff && <p style={{color:'red', fontSize:'14px'}}>{pro.porcentajeOff}% OFF</p>}
-                      {pro.porcentajeOff ? <span><p style={{color:'gray', textDecoration:'line-through'}}>{pro.precioUnitario}</p><p className="precio">${pro.total}</p> </span>: <p className="precio">${pro.total}</p> }
+                      {pro.porcentajeOff ? <span><p style={{color:'gray', textDecoration:'line-through'}}>{formatoPesos(Number(pro.precioUnitario))}</p><p className="precio">{formatoPesos(pro.total)}</p> </span>: <p className="precio">{formatoPesos(pro.total)}</p> }
                     </div>
                     <div className="btn-nav">                      
                       { /* boto +*/}
@@ -120,10 +122,10 @@ const Carrito = ({ setIsCarrito,
 
           <aside className="contenedor-importe">
             <h3>Resumen de compra</h3>
-            <p><strong>Subtotal:</strong> ${subtotal.toLocaleString()}</p>
-            <p><strong>Envío:</strong> ${costoEnvio.envio.envio.toLocaleString()}</p>
+            <p><strong>Subtotal:</strong> {formatoPesos(subtotal)}</p>
+            <p><strong>Envío:</strong> {formatoPesos(Number(costoEnvio.envio.envio))}</p>
             <p>Total Pro: {cantTotal}</p>
-            <p><strong>Total:</strong> ${total.toLocaleString()}</p>
+            <p><strong>Total:</strong>{formatoPesos(total)}</p>
             <button
              className="btn-vaciar-carrito"
              onClick={() => {setProductosEnCarrito([]) }}

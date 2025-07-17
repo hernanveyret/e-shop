@@ -17,6 +17,7 @@ const EnviarPedido = ({productosEnCarrito,
   const [ texto, setTexto ] = useState(null)
   const [ mp, setMp ] = useState(null);
 
+
   const {
     register,
     handleSubmit,
@@ -29,6 +30,11 @@ const EnviarPedido = ({productosEnCarrito,
    const totalProductos = productosEnCarrito.reduce((ac, prod) => ac + prod.cant, 0);
    const subTotal = productosEnCarrito.reduce((ac, prod) => ac + (prod.cant * prod.precio), 0);
    const importeTotal = Number(subTotal) + Number(costoEnvio.envio.envio);
+   const fecha = new Date().toLocaleDateString('es-AR', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+    });
 
     let pedidos = []
    
@@ -37,7 +43,9 @@ const EnviarPedido = ({productosEnCarrito,
     })
 
     pedidos.push({
+      fecha,
       cantTotal: totalProductos,
+      costoEnvio: costoEnvio.envio.envio,
       subTotal,
       importeTotal
     })

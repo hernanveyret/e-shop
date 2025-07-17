@@ -1,7 +1,7 @@
 import React from 'react';
 import './misPedidos.css';
 
-const MisPedidos = ({ misPedidosGuardados }) => {
+const MisPedidos = ({ misPedidosGuardados, formatoPesos }) => {
   return (
     <div className='container-mis-pedidos'>
       <h2>Mis pedidos</h2>
@@ -11,7 +11,7 @@ const MisPedidos = ({ misPedidosGuardados }) => {
 
           return (
             <div className='mis-pedidos' key={iPedido}>
-              <h3>Pedido: {iPedido + 1}</h3>
+              <h3>Pedido: #{iPedido + 1} - {pedido[indiceTotal-1].fecha}</h3>
               <div className="container-info">
                 <div className="productos">
                   {pedido.map((pe, index) => (
@@ -19,8 +19,8 @@ const MisPedidos = ({ misPedidosGuardados }) => {
                       <ul>
                         <li>{pe.titulo && <p>{pe.titulo}</p>}</li>
                         <li>{pe.cant && <p>Cant: {pe.cant}</p>}</li>
-                        <li>{pe.precioUnitario && <p>Pre.Unit: $ {pe.precioUnitario}</p>}</li>
-                        <li>{pe.total && <p>Total: $ {pe.total}</p>}</li>
+                        <li>{pe.precioUnitario && <p>Pre.Unit: {formatoPesos(Number(pe.precioUnitario))}</p>}</li>
+                        <li>{pe.total && <p>Total: {formatoPesos(pe.total)}</p>}</li>
                       </ul>
                     </div>
                   ))}
@@ -28,8 +28,9 @@ const MisPedidos = ({ misPedidosGuardados }) => {
                 <div className="container-total">
                   <h3>Resumen de compra</h3>
                   <p className="resumen-linea"><span>Cant. Total:</span> <span>{pedido[indiceTotal - 1].cantTotal}</span></p>
-                  <p className="resumen-linea"><span>Sub Total:</span> <span>$ {pedido[indiceTotal - 1].subTotal}</span></p>
-                  <p className="resumen-linea"><span>Total:</span> <span>$ {pedido[indiceTotal - 1].importeTotal}</span></p>                  
+                  <p className="resumen-linea"><span>Envio:</span> <span>{formatoPesos(Number(pedido[indiceTotal - 1].costoEnvio))}</span></p>
+                  <p className="resumen-linea"><span>Sub Total:</span> <span>{formatoPesos(pedido[indiceTotal - 1].subTotal)}</span></p>
+                  <p className="resumen-linea"><span>Total:</span> <span>{formatoPesos(pedido[indiceTotal - 1].importeTotal)}</span></p>                  
                 <div className="botones-acciones">
                   <button 
                     title="Retornar al carrito"
