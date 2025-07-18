@@ -1,17 +1,52 @@
-import React from 'react';
+import React, { useState}  from 'react';
 import './misPedidos.css';
 
-const MisPedidos = ({ misPedidosGuardados, formatoPesos }) => {
+const MisPedidos = ({ misPedidosGuardados, setMisPedidosGuardados,formatoPesos }) => {
+  const [ isDelete, setIsDelete ] = useState(false);
+  const [ iIndex, setIindex ] = useState(null);
+
+  const IsDeletepedido = ({iIndex}) => {
+    return (      
+      <div className="container-delete">
+        <div className='cuadro'>
+          <p>¿Estás seguro de que querés borrar este pedido?</p>
+          <button className="btn-delete"
+            onClick={() => {
+              borrarPedido(iIndex);
+              setIsDelete(false);
+            }}
+          >Si</button>
+          <button className="btn-delete"
+            onClick={() => { setIsDelete(false) }}
+          >No</button>
+        </div>
+      </div>
+    )
+  }
+
+  const  borrarPedido = (indice) => {  
+    console.log(indice)  
+    const filter = misPedidosGuardados.filter((pedido, index) => {
+      if(index !==indice) return pedido
+    })
+    setMisPedidosGuardados(filter)
+  }
+
   return (
     <div className='container-mis-pedidos'>
+      { isDelete && 
+         <IsDeletepedido
+          iIndex={iIndex}
+         />
+      }
       <h2>Mis pedidos</h2>
-      {misPedidosGuardados &&
+      { misPedidosGuardados.length > 0 ?
         misPedidosGuardados.map((pedido, iPedido) => {
           const indiceTotal = pedido.length;
 
           return (
             <div className='mis-pedidos' key={iPedido}>
-              <h3>Pedido: #{iPedido + 1} - {pedido[indiceTotal-1].fecha}</h3>
+              <h3 className='titulo-h3'>Pedido: #{iPedido + 1} - <span style={{fontSize:'16px', fontWeight:'400'}}>{pedido[indiceTotal-1].fecha}</span></h3>
               <div className="container-info">
                 <div className="productos">
                   {pedido.map((pe, index) => (
@@ -33,6 +68,7 @@ const MisPedidos = ({ misPedidosGuardados, formatoPesos }) => {
                   <p className="resumen-linea"><span>Total:</span> <span>{formatoPesos(pedido[indiceTotal - 1].importeTotal)}</span></p>                  
                 <div className="botones-acciones">
                   <button 
+                    onClick={() => { console.log(iPedido)}}
                     title="Retornar al carrito"
                     className="btn-mis-pedidos">                 
                     <svg xmlns="http://www.w3.org/2000/svg" 
@@ -43,6 +79,10 @@ const MisPedidos = ({ misPedidosGuardados, formatoPesos }) => {
                     </svg>               
                     </button>               
                     <button
+                      onClick={() => { 
+                        setIindex(iPedido) 
+                        setIsDelete(true);
+                      }}
                       title="Borrar"
                       className="btn-mis-pedidos">                 
                       <svg xmlns="http://www.w3.org/2000/svg" 
@@ -57,9 +97,14 @@ const MisPedidos = ({ misPedidosGuardados, formatoPesos }) => {
               </div>
             </div>
           );
-        })}
-    </div>
-  );
+        }
+      )
+       :
+       <h4 style={{color: 'grey', textAlign:'center'}}>No tenes pedidos guardados.</h4>
+      }      
+      </div>
+    );
+    
 };
 
 export default MisPedidos;

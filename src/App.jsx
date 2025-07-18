@@ -124,7 +124,6 @@ useEffect(() => {
 
   useEffect(() => {
     localStorage.setItem('e-shop-carrito', JSON.stringify(productosEnCarrito))
-    console.log('Productos en el carrito: ',productosEnCarrito)
   },[productosEnCarrito])
 
   useEffect(() => {
@@ -307,6 +306,7 @@ useEffect(() => {
           isMisPedidos && 
             <MisPedidos 
               misPedidosGuardados={misPedidosGuardados}
+              setMisPedidosGuardados={setMisPedidosGuardados}
               formatoPesos={formatoPesos}
             />
         }

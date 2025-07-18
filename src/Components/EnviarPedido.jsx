@@ -50,8 +50,7 @@ const EnviarPedido = ({productosEnCarrito,
       importeTotal
     })
 
-  setMisPedidosGuardados([...misPedidosGuardados, pedidos] )    
-    console.log('productos en mis productos:', pedidos)
+  setMisPedidosGuardados([...misPedidosGuardados, pedidos] )
   }
 
   const enviar = () => {
