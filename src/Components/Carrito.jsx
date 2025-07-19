@@ -71,7 +71,8 @@ const Carrito = ({ setIsCarrito,
                     </div>
                     <div className="btn-nav">                      
                       { /* boto +*/}
-                      <button 
+                      <button
+                      type="button"
                       onClick={() => { sumarProductoUnitario(pro.id)}}
                       className="btn-carrito"
                       >
@@ -87,6 +88,7 @@ const Carrito = ({ setIsCarrito,
                           pro.cant === 1 ?
                            // boton tacho de basura
                             <button
+                              type="button"
                               onClick={() => { eliminarProductoUnitario(pro.id)}}
                               className="btn-carrito"
                             >
