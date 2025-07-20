@@ -127,17 +127,39 @@ const Home = ({
                 {
             pro.oferta ? 
             <div className="info-precios">
-            <span style={{display:'flex', gap:'10px'}}><p style={{color:'grey', textDecoration:'line-through'}}>{formatoPesos(Number(pro.precioUnitario))}</p><p style={{color: 'red', fontSize:'14px'}}>{pro.porcentajeOff}% OFF</p></span>
+            <span 
+             className="precio-off"
+              style={
+                {display:'flex',
+                 gap:'10px'}
+                 }>
+                <p 
+                  style={
+                    {color:'grey',
+                     textDecoration:'line-through'
+                    }}>
+                      {formatoPesos(Number(pro.precioUnitario))}
+                </p>
+                <p style={
+                  {color: 'red',
+                   fontSize:'14px'
+                  }
+                   }>
+                    {pro.porcentajeOff}
+                    % OFF
+                </p>
+                 { pro.precio && pro.porcentajeOff && (
+                <p style={{fontSize:'16px', fontWeight:'600'}}>
+                   {formatoPesos(pro.precio)}
+                </p>
+                 )}
+            </span>
 
-            { pro.precio && pro.porcentajeOff && (
-            <p style={{fontSize:'18px', fontWeight:'bold'}}>
-              {formatoPesos(pro.precio)}
-            </p>
-            )}
+           
           </div>
             :
             <div className="info-precios">
-            <p style={{fontSize:'20px', fontWeight:'bold'}}>{formatoPesos(pro.precio)}</p>
+            <p style={{fontSize:'16px', fontWeight:'600'}}>{formatoPesos(pro.precio)}</p>
             </div>
           }
               </div>

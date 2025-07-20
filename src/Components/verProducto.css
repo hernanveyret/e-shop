@@ -64,6 +64,12 @@
   width:  100%;
 }
 
+.ver-productos-precios {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
 @media screen and (min-width: 1024px) {
   .container-ver-producto {  
   display: flex;

@@ -30,22 +30,43 @@ const VerProducto = ({verProducto,
           <img src={verProducto.urlImg} alt={verProducto.titulo} />
         </div>
         <div className="info">
-          <p style={{fontWeight:'bold'}}>{verProducto.titulo}</p>
-          <p>{verProducto.descripcion}</p>
+          <p style={{fontWeight:'600'}}>{verProducto.titulo}</p>
+          <p  style={{fontSize:'14px',fontWeight:'400'}}>{verProducto.descripcion}</p>
           {
             verProducto.oferta ? 
             <div className="info-precios">
-            <span style={{display:'flex', gap:'10px'}}><p style={{color:'grey', textDecoration:'line-through'}}>{formatoPesos(verProducto.precioUnitario)}</p><p style={{color: 'red'}}>{verProducto.porcentajeOff}% OFF</p></span>
+            <span 
+              className="ver-productos-precios"
+              style={
+                {display:'flex',
+                 gap:'10px'
+                }}>
+              <p 
+                style={
+                  {color:'grey',
+                   textDecoration:'line-through'
+                  }}>
+                {formatoPesos(Number(verProducto.precioUnitario))}
+                </p>
+                <p 
+                  style={
+                    {color: 'red'
+                    }}>
+                      {verProducto.porcentajeOff}
+                      % OFF
+                </p>
+              { verProducto.precio && verProducto.porcentajeOff && (
+                <p style={{fontSize:'16px', fontWeight:'600'}}>
+                  {formatoPesos(verProducto.precio)}
+                </p>
+               )}
+            </span>
 
-            { verProducto.precio && verProducto.porcentajeOff && (
-            <p style={{fontSize:'20px', fontWeight:'bold'}}>
-              {formatoPesos(verProducto.precio)}
-            </p>
-            )}
+            
           </div>
             :
             <div className="info-precios">
-            <p style={{fontSize:'20px', fontWeight:'bold'}}>{formatoPesos(verProducto.precio)}</p>
+            <p style={{fontSize:'18px', fontWeight:'600'}}>{formatoPesos(verProducto.precio)}</p>
             </div>
           }
            </div>
