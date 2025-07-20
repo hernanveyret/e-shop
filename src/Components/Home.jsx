@@ -136,13 +136,13 @@ const Home = ({
                 <p 
                   style={
                     {color:'grey',
-                     textDecoration:'line-through'
+                     textDecoration:'line-through',
                     }}>
                       {formatoPesos(Number(pro.precioUnitario))}
                 </p>
                 <p style={
                   {color: 'red',
-                   fontSize:'14px'
+                   fontSize:'13px'
                   }
                    }>
                     {pro.porcentajeOff}
