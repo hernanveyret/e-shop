@@ -9,6 +9,7 @@ const Menu = ({ openMenu,
                 setIsCarrito, 
                 setIsSharedConfirm, 
                 setTextoCompartir,
+                setOnQr
               }) => {
 
  
@@ -47,7 +48,8 @@ const Menu = ({ openMenu,
           <li>
             <button
             onClick={() => { 
-              setOpenMenu((prev) => !prev);              
+              setOpenMenu((prev) => !prev);
+              setOnQr(true)           
             }}
             >Compartir App por QR
             </button>

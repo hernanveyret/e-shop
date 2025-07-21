@@ -13,6 +13,7 @@ import Menu from './Components/Menu.jsx';
 import LinkCopiado from './LinkCopiado.jsx';
 import EnviarPedido from './Components/EnviarPedido.jsx';
 import MisPedidos from './Components/MisPedidos.jsx';
+import VerQr from './Components/VerQr.jsx';
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
   const [ openMenu, setOpenMenu] = useState(false);
   const [ sharedLink, setSharedLink ] = useState(false);
   const [ onEnviarPedido, setOnEnviarPedido ] = useState(false);
+  const [ onQr, setOnQr ] = useState(false)
 
   const [ textoCompartir, setTextoCompartir ] = useState(null)
  
@@ -178,6 +180,12 @@ useEffect(() => {
 
   return (
     <div className="container-app">
+      {
+        onQr && 
+        <VerQr 
+        setOnQr={setOnQr}
+        />
+      }
       { onEnviarPedido &&
         <EnviarPedido 
         productosEnCarrito={productosEnCarrito}
@@ -205,6 +213,7 @@ useEffect(() => {
         setIsCarrito={setIsCarrito}
         setIsSharedConfirm={setIsSharedConfirm}
         setTextoCompartir={setTextoCompartir}
+        setOnQr={setOnQr}
       /> 
       }
       { onRepetido &&
