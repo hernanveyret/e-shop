@@ -84,6 +84,7 @@ header img {
 .btn-menu-header {
   position: absolute;
   right: 1rem;
+  cursor: pointer;
 }
 .btn-menu {
   width: 25px;

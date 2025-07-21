@@ -41,6 +41,8 @@ function App() {
   const [ openMenu, setOpenMenu] = useState(false);
   const [ sharedLink, setSharedLink ] = useState(false);
   const [ onEnviarPedido, setOnEnviarPedido ] = useState(false);
+
+  const [ textoCompartir, setTextoCompartir ] = useState(null)
  
   const [ on, setOn ] = useState(false)
 
@@ -127,7 +129,6 @@ useEffect(() => {
   },[productosEnCarrito])
 
   useEffect(() => {
-    console.log('Productos para guardar en mis pedidos: ',misPedidosGuardados)
     localStorage.setItem('mispedidos', JSON.stringify(misPedidosGuardados))
   },[misPedidosGuardados])
 
@@ -141,6 +142,7 @@ useEffect(() => {
     const url = `${window.location.origin}/${producto}`;
     navigator.clipboard.writeText(url)
       .then(() => {
+        setTextoCompartir('Link')
         setIsSharedConfirm(true)
         setTimeout(() => {
        setIsSharedConfirm(false)
@@ -201,6 +203,8 @@ useEffect(() => {
         isHome={isHome}
         isCarrito={isCarrito}
         setIsCarrito={setIsCarrito}
+        setIsSharedConfirm={setIsSharedConfirm}
+        setTextoCompartir={setTextoCompartir}
       /> 
       }
       { onRepetido &&
@@ -214,7 +218,8 @@ useEffect(() => {
                     }
       { isSharedConfirm &&
          <SharedConfirm 
-          texto={'Link'}
+          texto={textoCompartir}
+          setIsSharedConfirm={setIsSharedConfirm}
          />  }
       <InstallPrompt /> { /* Pregunta para instalar la app*/}
       {
@@ -231,7 +236,7 @@ useEffect(() => {
       }
       <header ref={miRefScroll}>
         <img src="./logo.png" alt="Imagen logo " /> e-shop
-        <div className="btn-menu-header"
+      <div className="btn-menu-header"
           onClick={() => { setOpenMenu(!openMenu)}}
         >
           <svg xmlns="http://www.w3.org/2000/svg" 
@@ -300,6 +305,7 @@ useEffect(() => {
           </button>
         }
         </div>
+          
       </nav>
        <main>
         {
@@ -308,6 +314,8 @@ useEffect(() => {
               misPedidosGuardados={misPedidosGuardados}
               setMisPedidosGuardados={setMisPedidosGuardados}
               formatoPesos={formatoPesos}
+              productos={productos}
+              setProductosEnCarrito={setProductosEnCarrito}
             />
         }
         {

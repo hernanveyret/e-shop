@@ -61,22 +61,50 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  
+  width: 100%;
 }
 
 .info-carrito .titulo {
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 18px;
   margin-bottom: 0.3rem;
 }
 
-.info-carrito .precio {
-  color: #2d6a4f;
-  margin-top: 0.5rem;
-  font-weight: bold;
-  font-size: 1.1rem;
+.contenedor-precios {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
 }
 
-/* Controles de cantidad */
+.span {
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-end; 
+}
+
+.tachado {
+  color: gray;
+  text-decoration: line-through;
+  font-size: 14px;
+  margin: 0;
+}
+
+.precio {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0;
+}
+
+.precio-unit {
+  font-size: 14.5px;
+  font-weight: 400;
+  color: #555;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
 .btn-nav {
   width: 200px;
   display: flex;

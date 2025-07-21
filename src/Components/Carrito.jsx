@@ -63,11 +63,27 @@ const Carrito = ({ setIsCarrito,
                     <img src={pro.urlImg} alt={pro.titulo} />
                   </div>
                   <div className="info-carrito">
-                    <div>
                       <p className="titulo">{pro.titulo}</p>
-                      {pro.precioUnitario && !pro.porcentajeOff && <p>Pre.Unit: {formatoPesos(Number(pro.precioUnitario))}</p>}
-                      {pro.porcentajeOff && <p style={{color:'red', fontSize:'14px'}}>{pro.porcentajeOff}% OFF</p>}
-                      {pro.porcentajeOff ? <span><p style={{color:'gray', textDecoration:'line-through'}}>{formatoPesos(Number(pro.precioUnitario))}</p><p className="precio">{formatoPesos(pro.total)}</p> </span>: <p className="precio">{formatoPesos(pro.total)}</p> }
+                    <div className='contenedor-precios'>
+                      { pro.precioUnitario && !pro.porcentajeOff && <p className='precio-unit'>Pre.Unit: {formatoPesos(Number(pro.precioUnitario))}</p>}
+                      
+                        { pro.porcentajeOff && <p style={{color:'red', fontSize:'14px'}}>{pro.porcentajeOff}% OFF</p> }
+                        { pro.porcentajeOff 
+                          ?
+                          <span className='span'>
+                            <p className="tachado">
+                              {formatoPesos(Number(pro.precioUnitario))}
+                            </p>
+                            <p className="precio">
+                              {formatoPesos(pro.total)}
+                            </p> 
+                          </span>
+                          : 
+                            <p className="precio">
+                              {formatoPesos(pro.total)}
+                            </p> 
+                        }
+                      
                     </div>
                     <div className="btn-nav">                      
                       { /* boto +*/}

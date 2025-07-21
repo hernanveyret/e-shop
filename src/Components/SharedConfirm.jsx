@@ -1,8 +1,8 @@
 import React from 'react';
 import './sharedConfirm.css'
 
-const SharedConfirm = ({ texto, setIsShared }) => {
-  console.log(texto)
+const SharedConfirm = ({ texto, setIsShared, setIsSharedConfirm }) => {
+  
   return (
     <section className="container-shared">
       <div className="container-shared-text">      
@@ -10,7 +10,14 @@ const SharedConfirm = ({ texto, setIsShared }) => {
           <button 
             type="button"
             className="btn-carrito"
-          onClick={() => setIsShared(false)}> ✕</button>
+            onClick={() => {
+              if (typeof setIsSharedConfirm === 'function') {
+                setIsSharedConfirm(false);
+              } else if (typeof setIsShared === 'function') {
+                setIsShared(false);
+              }
+            }}
+            > ✕</button>
       </div>
     </section>
   )

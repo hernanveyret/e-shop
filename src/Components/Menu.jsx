@@ -1,7 +1,35 @@
 import React, { useState } from 'react';
 import './menu.css';
 
-const Menu = ({ openMenu, setOpenMenu, sharedApp, setIsMisPedidos, setIsHome, setIsCarrito}) => {
+const Menu = ({ openMenu, 
+                setOpenMenu, 
+                sharedApp, 
+                setIsMisPedidos, 
+                setIsHome, 
+                setIsCarrito, 
+                setIsSharedConfirm, 
+                setTextoCompartir,
+              }) => {
+
+ 
+  //Compartir alias o cvu del producto en la url
+  const handleCompartir = (text) => {
+    let url = ''
+    if(text === 'Alias'){
+      setTextoCompartir('Alias')
+      url = 'hernanveyret.mp'
+    }else {
+      setTextoCompartir('CVU/CBU')
+      url = '0000003100083084244362'
+    }
+    navigator.clipboard.writeText(url)
+      .then(() => {
+        //setTexto(text)
+        setIsSharedConfirm(true)      
+      })
+      .catch(() => alert("No se pudo copiar"));
+  };
+
   return (
     <div className="menu-container">
      
@@ -18,7 +46,9 @@ const Menu = ({ openMenu, setOpenMenu, sharedApp, setIsMisPedidos, setIsHome, se
           </li>
           <li>
             <button
-            onClick={() => { setOpenMenu((prev) => !prev)}}
+            onClick={() => { 
+              setOpenMenu((prev) => !prev);              
+            }}
             >Compartir App por QR
             </button>
           </li>
@@ -35,10 +65,16 @@ const Menu = ({ openMenu, setOpenMenu, sharedApp, setIsMisPedidos, setIsHome, se
             </button>
           </li>
           <li><button
-            onClick={() => { setOpenMenu((prev) => !prev)}}
+            onClick={() => { 
+              setOpenMenu((prev) => !prev);
+              handleCompartir('cvu/cbu')
+            }}
           >CVU/CBU</button></li>
           <li><button
-            onClick={() => { setOpenMenu((prev) => !prev)}}
+            onClick={() => { 
+              setOpenMenu((prev) => !prev);
+              handleCompartir('Alias')
+            }}
           >Alias</button></li>
         </ul>
       </div>
