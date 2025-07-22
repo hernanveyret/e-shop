@@ -103,7 +103,7 @@ const Home = ({
       <section className="container-productos">
         {isLoading && <Loader />}
 
-        {productosSeleccionados.length > 0 ? (
+        { productosSeleccionados.length > 0 ? (
           productosSeleccionados.map((pro) => (
             pro.activate &&
             <div className="card-producto" 
@@ -249,4 +249,3 @@ const Home = ({
 };
 
 export default Home;
-
