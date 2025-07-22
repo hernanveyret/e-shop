@@ -258,7 +258,7 @@ main {
     font-size: 16px;
   }
 
-.img-container {
+  .img-container {
   width: 30%;
   aspect-ratio: 1 / 1; 
   overflow: hidden;  
@@ -275,7 +275,6 @@ main {
   object-position: center;
   display: block;
 }
-
   .info-container {
     width: 65%; 
     padding: 10px;

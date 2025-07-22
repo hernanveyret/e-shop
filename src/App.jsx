@@ -96,6 +96,14 @@ useEffect(() => {
     setIsLoading(false);
    //console.log(productos)
   }
+  console.log('productos en carrito: ',productosEnCarrito)
+  let filtro = []
+  productosEnCarrito.forEach(pro => {
+        if(productos.some(item => item.id === pro.id)){
+          filtro.push(pro)
+        }
+        setProductosEnCarrito(filtro)      
+  })
 }, [productos, categorias]);
 
   const formatoPesos = (importe) => {
