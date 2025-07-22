@@ -142,7 +142,8 @@ const Carrito = ({ setIsCarrito,
             <h3>Resumen de compra</h3>
             <p><strong>Subtotal:</strong> {formatoPesos(subtotal)}</p>
             <p><strong>Envío:</strong> {formatoPesos(Number(costoEnvio.envio.envio))}</p>
-            <p>Total Pro: {cantTotal}</p>
+            <p><strong>Total Pro: </strong> {Number(cantTotal)}</p>
+            
             <p><strong>Total:</strong>{formatoPesos(total)}</p>
             <button
              className="btn-vaciar-carrito"

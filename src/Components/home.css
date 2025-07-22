@@ -252,8 +252,8 @@ main {
   }
 
   .card-producto {
-    width: 45%;         /* antes: 30% */
-    height: 130px;      /* antes: 90px */
+    width: 45%;        
+    height: 130px;     
     padding: 6px;
     font-size: 16px;
   }
@@ -277,7 +277,7 @@ main {
 }
 
   .info-container {
-    width: 65%;         /* ajustado al cambio de la imagen */
+    width: 65%; 
     padding: 10px;
   }
 

@@ -37,7 +37,6 @@ const Home = ({
   useEffect(() => {
     const filtro = []
     if (categoriaActual === 'Favoritos') {
-      console.log('Click en favoritos')
       //Filtra si un producto fue desactivado del carrito
       favoritos.forEach(pro => {
         if(productos.some(item => item.id === pro.id)){
