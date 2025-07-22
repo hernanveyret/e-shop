@@ -99,6 +99,7 @@ useEffect(() => {
 }, [productos, categorias]);
 
   const formatoPesos = (importe) => {
+    
     return importe.toLocaleString('es-AR', { 
       style:'currency',
       currency: 'ARS',
@@ -135,7 +136,7 @@ useEffect(() => {
   },[misPedidosGuardados])
 
   useEffect(() => {
-  const totalProductos = productosEnCarrito.reduce((acc, current) => acc + current.cant, 0);
+  const totalProductos = productosEnCarrito.reduce((acc, current) => Number(acc) + Number(current.cant), 0);
   setCantTotal(totalProductos);
 }, [productosEnCarrito]);
 

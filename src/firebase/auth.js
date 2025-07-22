@@ -1,27 +1,39 @@
 import { auth, db } from './config.js'
 import { collection,
          onSnapshot, 
-         doc
+         doc,
+         query, 
+         where
         } from "firebase/firestore";
 
 // Escuchar cambios en tiempo real y descargarlos
+
+
 export const getData = (callback) => {
   try {
-    const unsubscribe = onSnapshot(collection(db,'productos'), snapshot => {
-      const usuarios = snapshot.docs.map(doc => ({
+    const productosRef = collection(db, 'productos');
+
+    // 🔍 Filtrar solo productos activos
+    const q = query(productosRef, where('activate', '==', true));
+
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const productos = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
         precio: doc.data().precioUnitario - (doc.data().precioUnitario * doc.data().porcentajeOff / 100),
         total: doc.data().precioUnitario - (doc.data().precioUnitario * doc.data().porcentajeOff / 100)
-    }))
-    
-    callback(usuarios);
-  })
-  return unsubscribe;
+      }));
+
+      callback(productos);
+    });
+
+    return unsubscribe;
   } catch (error) {
+    console.error('Error al obtener productos:', error);
     callback([]);
   }
 };
+
 
 //Escuchar en tiempo real y ver las categorias
 export const getDataCategorias = (callback) => {

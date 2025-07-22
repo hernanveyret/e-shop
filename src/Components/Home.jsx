@@ -35,8 +35,16 @@ const Home = ({
 
   // Cuando cambian los favoritos y estás en Favoritos
   useEffect(() => {
+    const filtro = []
     if (categoriaActual === 'Favoritos') {
-      setProductosSeleccionados(favoritos);
+      console.log('Click en favoritos')
+      //Filtra si un producto fue desactivado del carrito
+      favoritos.forEach(pro => {
+        if(productos.some(item => item.id === pro.id)){
+          filtro.push(pro)
+        }        
+      })
+      setProductosSeleccionados(filtro);
     }
   }, [favoritos, categoriaActual]);
 
@@ -97,8 +105,9 @@ const Home = ({
 
         {productosSeleccionados.length > 0 ? (
           productosSeleccionados.map((pro) => (
+            pro.activate &&
             <div className="card-producto" 
-                style={{ backgroundColor: checkProductoEnCarito(pro.id) ? '#d1ebd1' : '' }}
+              style={{ backgroundColor: checkProductoEnCarito(pro.id) ? '#d1ebd1' : '' }}
               key={pro.id}>
               <div className="img-container">
                 <img src={pro.urlImg} alt={pro.titulo} />
@@ -125,8 +134,8 @@ const Home = ({
                 <p className="descripcion">{pro.descripcion}</p>
                 
                 {
-            pro.oferta ? 
-            <div className="info-precios">
+                pro.oferta ? 
+                <div className="info-precios">
             <span 
              className="precio-off"
               style={
@@ -145,12 +154,12 @@ const Home = ({
                    fontSize:'13px'
                   }
                    }>
-                    {pro.porcentajeOff}
+                    {Number(pro.porcentajeOff)}
                     % OFF
                 </p>
                  { pro.precio && pro.porcentajeOff && (
                 <p style={{fontSize:'16px', fontWeight:'600'}}>
-                   {formatoPesos(pro.precio)}
+                   {formatoPesos(Number(pro.precio))}
                 </p>
                  )}
             </span>
@@ -159,7 +168,7 @@ const Home = ({
           </div>
             :
             <div className="info-precios">
-            <p style={{fontSize:'16px', fontWeight:'600'}}>{formatoPesos(pro.precio)}</p>
+            <p style={{fontSize:'16px', fontWeight:'600'}}>{formatoPesos(Number(pro.precio))}</p>
             </div>
           }
               </div>
