@@ -26,7 +26,10 @@ const Menu = ({ openMenu,
     navigator.clipboard.writeText(url)
       .then(() => {
         //setTexto(text)
-        setIsSharedConfirm(true)      
+         setIsSharedConfirm(true)
+        setTimeout(() => {
+       setIsSharedConfirm(false)
+      }, 3000);     
       })
       .catch(() => alert("No se pudo copiar"));
   };

@@ -195,6 +195,7 @@ useEffect(() => {
         setOnQr={setOnQr}
         />
       }
+
       { onEnviarPedido &&
         <EnviarPedido 
         productosEnCarrito={productosEnCarrito}

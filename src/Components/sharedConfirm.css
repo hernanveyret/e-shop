@@ -18,10 +18,7 @@
   background-color: #A5D6A7;
   box-shadow: 3px 3px 5px black;
   border-radius: .75rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  text-align: center;
   animation: fadeIn 0.3s ease-in-out;
 }
 
