@@ -194,15 +194,13 @@ const Home = ({
                     type="button"
                     onClick={() => {agregarProductoAlCarrito(pro.id) }}
                   >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="24px"
-                    viewBox="0 -960 960 960"
-                    width="24px"
-                    fill="black"
-                  >
-                    <path d="M466-466H252v-28h214v-214h28v214h214v28H494v214h-28v-214Z" />
-                  </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                      height="24px" 
+                      viewBox="0 -960 960 960" 
+                      width="24px" 
+                      fill="#000000">
+                        <path d="M460-460H240v-40h220v-220h40v220h220v40H500v220h-40v-220Z"/>
+                    </svg>
                   </button>
                 }
                 

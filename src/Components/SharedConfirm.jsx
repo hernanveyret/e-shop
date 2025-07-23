@@ -17,7 +17,7 @@ const SharedConfirm = ({ texto, setIsShared, setIsSharedConfirm }) => {
                 setIsShared(false);
               }
             }}
-            > ✕</button>
+            >✕</button>
       </div>
     </section>
   )
