@@ -238,7 +238,6 @@ useEffect(() => {
       { isSharedConfirm &&
          <SharedConfirm 
           texto={textoCompartir}
-          setIsSharedConfirm={setIsSharedConfirm}
          />  }
       <InstallPrompt /> { /* Pregunta para instalar la app*/}
       {

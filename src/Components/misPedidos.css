@@ -108,7 +108,7 @@
 }
 
 .cuadro {
-  width: 80%;
+  width: 40%;
   height: auto;
   padding: 1rem;
   background-color:#A5D6A7;
@@ -159,5 +159,8 @@
 
   .mis-pedidos-info li {
     font-size: 0.9rem;
+  }
+  .cuadro {
+    width: 80%;
   }
 }
