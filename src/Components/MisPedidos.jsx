@@ -5,17 +5,14 @@ const MisPedidos = ({ misPedidosGuardados,
                       setMisPedidosGuardados, 
                       formatoPesos, 
                       productos,
-                      setProductosEnCarrito
+                      setProductosEnCarrito,
+                      setIsReturnPedido
                     }) => {
   const [ isDelete, setIsDelete ] = useState(false);
   const [ iIndex, setIindex ] = useState(null);
 
-  useEffect(() => {
-    console.log('pedidos guardados', misPedidosGuardados)
-  },[misPedidosGuardados])
-
   //Retornar productos al carrito de mis pedidos guardados
-  const retornarProductos = (indice) => {
+  const retornarProductos = (indice) => {    
     const filtro = []
     misPedidosGuardados[indice].forEach(pro => {     
      productos.forEach(p => {
@@ -25,9 +22,16 @@ const MisPedidos = ({ misPedidosGuardados,
      })
           
     })
-    console.log(filtro)
     setProductosEnCarrito(filtro)
+    timerBanner();
   }
+
+  const timerBanner = () => {
+    setIsReturnPedido(true);
+    setTimeout(() => {
+      setIsReturnPedido(false)
+    },3000);
+  };
 
   const IsDeletepedido = ({iIndex}) => {
     return (      

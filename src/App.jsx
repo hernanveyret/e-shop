@@ -14,6 +14,7 @@ import LinkCopiado from './LinkCopiado.jsx';
 import EnviarPedido from './Components/EnviarPedido.jsx';
 import MisPedidos from './Components/MisPedidos.jsx';
 import VerQr from './Components/VerQr.jsx';
+import ConfirmReturnProduct from './Components/ConfirmReturnProduct.jsx';
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
   const [ sharedLink, setSharedLink ] = useState(false);
   const [ onEnviarPedido, setOnEnviarPedido ] = useState(false);
   const [ onQr, setOnQr ] = useState(false)
+  const [ isReturnPedido, setIsReturnPedido ] = useState(false);
 
   const [ textoCompartir, setTextoCompartir ] = useState(null)
  
@@ -189,6 +191,7 @@ useEffect(() => {
 
   return (
     <div className="container-app">
+      { isReturnPedido &&<ConfirmReturnProduct /> }
       {
         onQr && 
         <VerQr 
@@ -334,6 +337,7 @@ useEffect(() => {
               formatoPesos={formatoPesos}
               productos={productos}
               setProductosEnCarrito={setProductosEnCarrito}
+              setIsReturnPedido={setIsReturnPedido}
             />
         }
         {
