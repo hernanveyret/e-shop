@@ -108,22 +108,33 @@
 }
 
 .cuadro {
-  width: auto;
+  width: 80%;
   height: auto;
   padding: 1rem;
-  background-color: white;
+  background-color:#A5D6A7;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
   gap: 10px;
   border-radius: 10px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
+.delete-texto {
+  text-align: center;
+}
+.container-delete-btn {  
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
 .btn-delete {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   border: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 .btn-delete:hover {
   background-color: #c5c0c0;

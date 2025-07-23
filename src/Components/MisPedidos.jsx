@@ -32,8 +32,11 @@ const MisPedidos = ({ misPedidosGuardados,
   const IsDeletepedido = ({iIndex}) => {
     return (      
       <div className="container-delete">
-        <div className='cuadro'>
-          <p>¿Estás seguro de que querés borrar este pedido?</p>
+        <div className="cuadro">
+        <div className='delete-texto'>
+          <p>¿Estás seguro de querer borrar este pedido?</p>
+        </div>
+        <div className="container-delete-btn">
           <button className="btn-delete"
             onClick={() => {
               borrarPedido(iIndex);
@@ -43,6 +46,7 @@ const MisPedidos = ({ misPedidosGuardados,
           <button className="btn-delete"
             onClick={() => { setIsDelete(false) }}
           >No</button>
+        </div>
         </div>
       </div>
     )
