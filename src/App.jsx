@@ -102,7 +102,7 @@ useEffect(() => {
         if(productos.some(item => item.id === pro.id)){
           filtro.push(pro)
         }
-        setProductosEnCarrito(filtro)      
+        setProductosEnCarrito(filtro )      
   })
 }, [productos, categorias]);
 
