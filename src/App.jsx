@@ -78,7 +78,6 @@ useEffect(() => {
   }
 }, [productos]); //  cuando se cargan los productos, se ejecuta
 
-
 // Carga los datos a los estados correspondientes
   useEffect(() => {    
   const unsubscribeProductos = getData(setProductos);
@@ -108,8 +107,6 @@ useEffect(() => {
     }
   }
 }, [productos, categorias]);
-
-
 
   const formatoPesos = (importe) => {
     

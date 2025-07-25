@@ -98,7 +98,10 @@ const EnviarPedido = ({productosEnCarrito,
     navigator.clipboard.writeText(url)
       .then(() => {
         setTexto(text)
-        setIsShared(true)        
+        setIsShared(true);
+        setTimeout(() => {
+          setIsShared(false)
+        },3000)    
       })
       .catch(() => alert("No se pudo copiar"));
   };
@@ -108,7 +111,6 @@ const EnviarPedido = ({productosEnCarrito,
       {
         isShared &&
         <SharedConfirm 
-        setIsShared={setIsShared}
         texto={texto}
         />
       }
