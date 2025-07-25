@@ -6,25 +6,35 @@ const MisPedidos = ({ misPedidosGuardados,
                       formatoPesos, 
                       productos,
                       setProductosEnCarrito,
+                      productosEnCarrito,
                       setIsReturnPedido
                     }) => {
   const [ isDelete, setIsDelete ] = useState(false);
   const [ iIndex, setIindex ] = useState(null);
 
   //Retornar productos al carrito de mis pedidos guardados
-  const retornarProductos = (indice) => {    
-    const filtro = []
-    misPedidosGuardados[indice].forEach(pro => {     
-     productos.forEach(p => {
-      if(p.id === pro.id){
-        filtro.push(pro)
+ const retornarProductos = (indice) => {
+  const nuevos = [...productosEnCarrito]; // Copia del carrito actual
+
+  misPedidosGuardados[indice].forEach(pro => {
+    const existe = productos.find(p => p.id === pro.id); // Verifica si existe en productos
+
+    if (existe) {
+      const indexEnCarrito = nuevos.findIndex(p => p.id === pro.id);
+
+      if (indexEnCarrito !== -1) {
+        // Si ya esta en el carrito se suma la cantidad
+        nuevos[indexEnCarrito].cant += pro.cant || 1;
+      } else {
+        // Si no esta solo se agrega
+        nuevos.push({ ...pro });
       }
-     })
-          
-    })
-    setProductosEnCarrito(filtro)
-    timerBanner();
-  }
+    }
+  });
+
+  setProductosEnCarrito(nuevos);
+  timerBanner();
+};
 
   const timerBanner = () => {
     setIsReturnPedido(true);

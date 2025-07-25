@@ -337,6 +337,7 @@ useEffect(() => {
               formatoPesos={formatoPesos}
               productos={productos}
               setProductosEnCarrito={setProductosEnCarrito}
+              productosEnCarrito={productosEnCarrito}
               setIsReturnPedido={setIsReturnPedido}
             />
         }
