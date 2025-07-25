@@ -48,8 +48,7 @@ const EnviarPedido = ({productosEnCarrito,
       costoEnvio: costoEnvio.envio.envio,
       subTotal,
       importeTotal
-    })
-
+    });
   setMisPedidosGuardados([...misPedidosGuardados, pedidos] )
   }
 
@@ -67,7 +66,8 @@ const EnviarPedido = ({productosEnCarrito,
       pedido += `*-------------------*\n`
     })
      pedido += `Cant. Productos: ${totalProductos}\n`;
-     pedido += `Total a pagar: ${importeTotal}\n`;
+     pedido += `Costo envio: $${costoEnvio.envio.envio}\n`;
+     pedido += `Total a pagar: $${importeTotal}\n`;
      pedido += `Medio de pago: ${mp || ''}\n`;
      pedido += `*Nombre: ${watch('nombre')}*\n`;
      pedido += `Direccion: ${watch('direccion')}\n`;   
@@ -75,7 +75,7 @@ const EnviarPedido = ({productosEnCarrito,
     handleEnviarWhatsApp(pedido)
     reset();
     guardarProducto(productosEnCarrito)
-    setProductosEnCarrito([]) // Vacia el carrito, falta guardar el pedido en localStorage
+    setProductosEnCarrito([])
     setOnEnviarPedido(false)
     setIsCarrito(false)
     setIsHome(true)
@@ -146,8 +146,7 @@ const EnviarPedido = ({productosEnCarrito,
       { errors.direccion?.message && <p style={{color: 'red', fontSize:'14px', marginLeft:'5px'}}>{errors.direccion.message}</p>}
     <select
       id='pagos'
-      onChange={(e) => {setMp(e.target.value)}}
-      
+      onChange={(e) => {setMp(e.target.value)}}      
     >
       <option value="">Medio de pago</option>
       <option value="Efectivo">Efectivo</option>
