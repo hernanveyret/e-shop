@@ -257,7 +257,16 @@ useEffect(() => {
       }
       <header ref={miRefScroll}>
         <img src="./logo.png" alt="Imagen logo " /> e-shop
-      
+      <div className="btn-menu-header"
+          onClick={() => { setOpenMenu(!openMenu)}}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" 
+          height="24px" 
+          viewBox="0 -960 960 960"
+          width="24px" 
+          fill="#000000"><path d="M160-269.23v-40h640v40H160ZM160-460v-40h640v40H160Zm0-190.77v-40h640v40H160Z"/>
+          </svg>
+        </div>
       </header>
 
       <nav className="nav">        
@@ -316,17 +325,6 @@ useEffect(() => {
             <p>{cantTotal}</p>
           </button>
         }
-        </div>
-
-        <div className="btn-menu-header"
-          onClick={() => { setOpenMenu(!openMenu)}}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" 
-          height="24px" 
-          viewBox="0 -960 960 960"
-          width="24px" 
-          fill="#000000"><path d="M160-269.23v-40h640v40H160ZM160-460v-40h640v40H160Zm0-190.77v-40h640v40H160Z"/>
-          </svg>
         </div>
           
       </nav>
