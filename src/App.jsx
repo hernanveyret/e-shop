@@ -93,20 +93,23 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-  // Cuando ambas listas se cargan, sale del loading
-  if (productos.length > 1 && categorias.length > 1 ) {
+  if (productos.length > 1 && categorias.length > 1) {
     setIsLoading(false);
-   //console.log(productos)
+
+    if (productosEnCarrito.length > 0) {
+      const filtro = productosEnCarrito.filter(pro =>
+        productos.some(item => item.id === pro.id)
+      );
+
+      const esIgual = JSON.stringify(filtro) === JSON.stringify(productosEnCarrito);
+      if (!esIgual) {
+        setProductosEnCarrito(filtro);
+      }
+    }
   }
-  console.log('productos en carrito: ',productosEnCarrito)
-  let filtro = []
-  productosEnCarrito.forEach(pro => {
-        if(productos.some(item => item.id === pro.id)){
-          filtro.push(pro)
-        }
-        setProductosEnCarrito(filtro )      
-  })
 }, [productos, categorias]);
+
+
 
   const formatoPesos = (importe) => {
     
