@@ -11,7 +11,10 @@ const EnviarPedido = ({productosEnCarrito,
                        setIsHome,
                        setIsCarrito,
                        setMisPedidosGuardados,
-                       misPedidosGuardados
+                       misPedidosGuardados,
+                       banco,
+                       isRetiro,
+                       setIsRetiro
                       }) => {
   const [ isShared, setIsShared ] = useState(false)
   const [ texto, setTexto ] = useState(null)
@@ -29,7 +32,7 @@ const EnviarPedido = ({productosEnCarrito,
   const guardarProducto = () => {
    const totalProductos = productosEnCarrito.reduce((ac, prod) => ac + prod.cant, 0);
    const subTotal = productosEnCarrito.reduce((ac, prod) => ac + (prod.cant * prod.precio), 0);
-   const importeTotal = Number(subTotal) + Number(costoEnvio.envio.envio);
+   const importeTotal = !isRetiro ? Number(subTotal) + Number(costoEnvio.envio.envio) : Number(subTotal);
    const fecha = new Date().toLocaleDateString('es-AR', {
     year: 'numeric',
     month: '2-digit',
@@ -45,9 +48,10 @@ const EnviarPedido = ({productosEnCarrito,
     pedidos.push({
       fecha,
       cantTotal: totalProductos,
-      costoEnvio: costoEnvio.envio.envio,
+      costoEnvio: !isRetiro ? costoEnvio.envio.envio : false,
       subTotal,
-      importeTotal
+      importeTotal,
+      isRetiro,
     });
   setMisPedidosGuardados([...misPedidosGuardados, pedidos] )
   }
@@ -55,7 +59,7 @@ const EnviarPedido = ({productosEnCarrito,
   const enviar = () => {
    const totalProductos = productosEnCarrito.reduce((ac, prod) => ac + prod.cant, 0);
    const subTotal = productosEnCarrito.reduce((ac, prod) => ac + (prod.cant * prod.precio), 0);
-   const importeTotal = Number(subTotal) + Number(costoEnvio.envio.envio)
+   const importeTotal = !isRetiro ? Number(subTotal) + Number(costoEnvio.envio.envio) : Number(subTotal);
   
     let pedido = 'Hola, Quiero Hacer un pedido:\n';
     productosEnCarrito.forEach((pro, index) => {
@@ -66,7 +70,7 @@ const EnviarPedido = ({productosEnCarrito,
       pedido += `*-------------------*\n`
     })
      pedido += `Cant. Productos: ${totalProductos}\n`;
-     pedido += `Costo envio: $${costoEnvio.envio.envio}\n`;
+     pedido +=  isRetiro ? 'Retira en el Local\n' : `Costo envio: $${costoEnvio.envio.envio}\n`;
      pedido += `Total a pagar: $${importeTotal}\n`;
      pedido += `Medio de pago: ${mp || ''}\n`;
      pedido += `*Nombre: ${watch('nombre')}*\n`;
@@ -82,7 +86,7 @@ const EnviarPedido = ({productosEnCarrito,
   }
   
   const handleEnviarWhatsApp = (pedido) => {    
-  const numeroVendedor = "541134025499"; // con código país, sin +
+  const numeroVendedor = "134025499"; // con código país, sin +
   const url = `https://wa.me/${numeroVendedor}?text=${encodeURIComponent(pedido)}`;
   window.open(url, "_blank");
 };
@@ -91,9 +95,9 @@ const EnviarPedido = ({productosEnCarrito,
   const handleCompartir = (text) => {
     let url = ''
     if(text === 'Alias'){
-      url = 'hernanveyret.mp'
+      url = banco[0].alias
     }else {
-      url = '0000003100083084244362'
+      url = banco[0].cvu //CVU/CBU
     }
     navigator.clipboard.writeText(url)
       .then(() => {

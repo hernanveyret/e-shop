@@ -28,7 +28,7 @@
 /* Card del producto */
 .card-carrito {
   display: flex;
-  align-items: flex-start; /* <-- Alinea imagen y contenido arriba */
+  align-items: stretch; /* 🔹 Igualar altura de hijos */
   justify-content: flex-start;
   width: 90%;
   max-width: 600px;
@@ -46,34 +46,32 @@
   transform: translateY(-2px);
 }
 
-/* Imagen del producto */
+/* Imagen del carrito */
 .img-carrito {
-  width: 90px;
-  height: 90px;
-  flex-shrink: 0;
+  flex: 0 0 30%; 
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  
   overflow: hidden;
-  background-color: #f8f8f8;
 }
 
 .img-carrito img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 90%;   
+  height: auto;
+  object-fit: contain;
   border-radius: 10px;
-  border: 1px solid #ddd;
-  display: block;
 }
+
 
 /* Info del producto */
 .info-carrito {
-  margin-left: 1rem;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
+  padding-left: 1rem;
   gap: 0.5rem;
 }
 
@@ -245,7 +243,7 @@
     flex-direction: row;
     width: 95%;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: stretch; 
   }
 
   .contenedor-importe {
@@ -277,3 +275,4 @@
     align-items: center;
   }
 }
+

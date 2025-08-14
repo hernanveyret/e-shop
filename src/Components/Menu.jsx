@@ -9,7 +9,8 @@ const Menu = ({ openMenu,
                 setIsCarrito, 
                 setIsSharedConfirm, 
                 setTextoCompartir,
-                setOnQr
+                setOnQr,
+                banco
               }) => {
 
  
@@ -18,10 +19,10 @@ const Menu = ({ openMenu,
     let url = ''
     if(text === 'Alias'){
       setTextoCompartir('Alias')
-      url = 'hernanveyret.mp'
+      url = banco[0].alias
     }else {
       setTextoCompartir('CVU/CBU')
-      url = '0000003100083084244362'
+      url = banco[0].cvu
     }
     navigator.clipboard.writeText(url)
       .then(() => {

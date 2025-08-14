@@ -7,21 +7,43 @@ const MisPedidos = ({ misPedidosGuardados,
                       productos,
                       setProductosEnCarrito,
                       productosEnCarrito,
-                      setIsReturnPedido
+                      setIsReturnPedido,
+                      isExiste,
+                      setIsExiste,
+                      setIsRetiro,
+                      isRetiro
                     }) => {
   const [ isDelete, setIsDelete ] = useState(false);
   const [ iIndex, setIindex ] = useState(null);
 
   //Retornar productos al carrito de mis pedidos guardados
- const retornarProductos = (indice) => {
-  const nuevos = [...productosEnCarrito]; // Copia del carrito actual
+const retornarProductos = (indice) => {
 
+// Recorremos solo hasta el penúltimo elemento
+let filtro = [];
+
+for (let i = 0; i < misPedidosGuardados[indice].length - 1; i++) {
+  let p = misPedidosGuardados[indice][i];
+
+  productos.forEach(pro => {
+    if (pro.id === p.id) {
+      filtro.push(p);
+    }
+  });
+
+  // Si no se encontró coincidencia en productos, agregamos {}
+  if (!productos.some(pro => pro.id === p.id)) {
+    filtro.push({});
+  }
+}
+
+const algo = filtro.some(pro => Object.keys(pro).length === 0);
+setIsExiste(algo)
+  const nuevos = [...productosEnCarrito]; // Copia del carrito actual
   misPedidosGuardados[indice].forEach(pro => {
     const existe = productos.find(p => p.id === pro.id); // Verifica si existe en productos
-
     if (existe) {
       const indexEnCarrito = nuevos.findIndex(p => p.id === pro.id);
-
       if (indexEnCarrito !== -1) {
         // Si ya esta en el carrito se suma la cantidad
         nuevos[indexEnCarrito].cant += pro.cant || 1;
@@ -31,7 +53,6 @@ const MisPedidos = ({ misPedidosGuardados,
       }
     }
   });
-
   setProductosEnCarrito(nuevos);
   timerBanner();
 };
@@ -40,7 +61,8 @@ const MisPedidos = ({ misPedidosGuardados,
     setIsReturnPedido(true);
     setTimeout(() => {
       setIsReturnPedido(false)
-    },3000);
+      setIsExiste(!isExiste)
+    },4000);
   };
 
   const IsDeletepedido = ({iIndex}) => {
@@ -67,7 +89,6 @@ const MisPedidos = ({ misPedidosGuardados,
   }
 
   const  borrarPedido = (indice) => {  
-    console.log(indice)  
     const filter = misPedidosGuardados.filter((pedido, index) => {
       if(index !==indice) return pedido
     })
@@ -105,8 +126,14 @@ const MisPedidos = ({ misPedidosGuardados,
                 <div className="container-total">
                   <h3>Resumen de compra</h3>
                   <p className="resumen-linea"><span>Cant. Total:</span> <span>{pedido[indiceTotal - 1].cantTotal}</span></p>
-                  <p className="resumen-linea"><span>Envio:</span> <span>{formatoPesos(Number(pedido[indiceTotal - 1].costoEnvio))}</span></p>
                   <p className="resumen-linea"><span>Sub Total:</span> <span>{formatoPesos(pedido[indiceTotal - 1].subTotal)}</span></p>
+                  {
+                     pedido[indiceTotal - 1].costoEnvio === false ? 
+                    <p className="resumen-linea"><span>Retiro en el local</span></p>
+                    :
+                    <p className="resumen-linea"><span>Envio:</span> <span>{formatoPesos(Number(pedido[indiceTotal - 1].costoEnvio))}</span></p>
+                  }
+                  
                   <p className="resumen-linea"><span>Total:</span> <span>{formatoPesos(pedido[indiceTotal - 1].importeTotal)}</span></p>                  
                 <div className="botones-acciones">
                     { /* Retornar */}
