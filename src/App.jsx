@@ -97,7 +97,7 @@ useEffect(() => {
 }, []);
 
 useEffect(() => {
-    if (productos.length === 0) return;
+  if (productos.length === 0) return;
 
   if (productos.length >= 0 ) {
     setIsLoading(false);
@@ -127,17 +127,20 @@ useEffect(() => {
     miRefScroll.current?.scrollIntoView({behavior:'smooth'})
   }
 
-  const addFavorito = (e) => {
-    const checkFavorito = favoritos.find(check => check.id === e);
-    if (!checkFavorito) {
-      const filter = productos.find(fav => fav.id === e)
-      setFavoritos([...favoritos, filter]);
-    }else {
-      // si ya esta el producto en favoritos lo elimina
-      const filterCopy = favoritos.filter(fav => fav.id !== e)
-      setFavoritos(filterCopy)
+const addFavorito = (id) => {
+  const checkFavorito = favoritos.find(check => check.id === id);
+  if (!checkFavorito) {
+    const filter = productos.find(fav => fav.id === id);
+    if (filter) { // Solo agrega si el producto existe
+      setFavoritos(prev => [...prev, filter]);
+    } else {
+      console.log('Producto no encontrado con id:', id);
     }
+  } else {
+    const filterCopy = favoritos.filter(fav => fav.id !== id);
+    setFavoritos(filterCopy);
   }
+};
 
   useEffect(() => {
     localStorage.setItem('e-shop-favoritos',JSON.stringify(favoritos));
@@ -171,16 +174,29 @@ useEffect(() => {
   };
   
   const agregarProductoAlCarrito = (id) => {
-    const isProductInCart = productosEnCarrito.some(pro => pro.id === id);
-    if(isProductInCart){
-      setOnRepetido(true);
-    }else{
-      const filter = productos.find(pro => pro.id === id);
-    //console.log('filter: ', filter);
-    setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1}])
-    setOnClose(true)
+    let isId = `${id}select`
+    const valueSelect = document.getElementById(isId);
+    if( !valueSelect || valueSelect.value !== 'Talles'){
+      valueSelect && valueSelect.classList.remove('errorTalle');
+      const isProductInCart = productosEnCarrito.some(pro => pro.id === id);
+      if(isProductInCart){
+        setOnRepetido(true);
+      }else{
+        const filter = productos.find(pro => pro.id === id);
+      //console.log('filter: ', filter);
+      setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1, talleSeleccionado: valueSelect && valueSelect.value}])
+      setOnClose(true)
+      }    
+    }else if(valueSelect.value === 'Talles'){
+      valueSelect.classList.add('errorTalle');
+      return
     }    
   }
+
+  useEffect(() => {
+    console.log(productosEnCarrito)
+  },[productosEnCarrito])
+
   // ve si el producto ya esta en el carrito asi pinta el boton +
   const checkProductoEnCarito = (id) => {
     return productosEnCarrito.some(pro => pro.id === id);    
@@ -189,7 +205,7 @@ useEffect(() => {
   // Enviar mensaje por whatsApp
   const handleEnviarWhatsApp = () => {  
   //const mensaje = crearMensajeWhatsApp(carrito, nombre, direccion, telefono);
-  const mensaje = 'Hola, quiero hacer una consulta desde Mis Tres Princesas'
+  const mensaje = 'Hola, quiero hacer una consulta desde e-shop'
   const numeroVendedor = "1134025499"; // con código país, sin +
   const url = `https://wa.me/${numeroVendedor}?text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank");

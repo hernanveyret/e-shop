@@ -25,14 +25,12 @@ const Home = ({
   formatoPesos
 }) => {
   const [categoriaActual, setCategoriaActual] = useState('Todo');
-
   // Cuando se cargan productos y la categoría es Todo
   useEffect(() => {
     if (categoriaActual === 'Todo') {
       setProductosSeleccionados(productos);
     }
   }, [productos, categoriaActual]);
-
   // Cuando cambian los favoritos y estás en Favoritos
   useEffect(() => {
     const filtro = []
@@ -61,6 +59,45 @@ const Home = ({
       setProductosSeleccionados(filtro);
     }
   };
+
+    const crearOptionTalles = (talles, id) => {
+    if (Array.isArray(talles)) {
+      let option = talles;
+      return (
+        <>
+          <select 
+            id={`${id}select`}
+            className='select-talles'
+            onClick={(event) => event.stopPropagation()} // Detiene la propagación
+          > 
+            <option defaultValue="">Talles</option>
+            {option.map((talle, indice) => (
+              <option key={indice} value={talle}>{talle}</option>
+            ))}
+          </select>
+        </>
+      );
+    } else {
+      let option = [];
+      for (let i = talles.desde; i <= talles.hasta; i++) {
+        option.push(Number(i));
+      }
+      return (
+        <>
+          <select            
+            id={`${id}select`}
+            className='select-talles'
+            onClick={(event) => event.stopPropagation()} // Detiene la propagación
+          >
+            <option defaultValue="">Talles</option>
+            {option.map((talle, indice) => (
+              <option key={indice} value={talle}>{talle}</option>
+            ))}
+          </select>
+        </>
+      );
+    }
+    };
 
   return (
     <div className="container-home">
@@ -122,6 +159,7 @@ const Home = ({
                 </button>
               </div>
               <div className="info-container"
+              type="button"
                 onClick={() => { 
                   setVerProducto(() => {
                     return productos.find(p => p.id === pro.id);                
@@ -131,6 +169,24 @@ const Home = ({
               >
                 <p className="titulo">{pro.titulo}</p>
                 <p className="descripcion">{pro.descripcion}</p>
+                { pro.marca && 
+                  <p style={{fontSize:'14px'}}>Marca: <span style={{color:'grey', fontSize:'14px'}}>{pro.marca}</span></p>
+                }
+                {
+                  pro.color &&
+                  <p style={{fontSize:'14px'}}>Color: <span style={{color:'grey', fontSize:'14px'}}>{pro.color}</span></p>
+                }
+                {
+                  pro.tallesLetras.length > 0 || pro.tallesNumericosDesde && pro.tallesNumericosHasta ? 
+                  pro.tallesLetras.length >= 1 ? (                    
+                    crearOptionTalles(pro.tallesLetras, pro.id)
+                  )
+                  : (
+                  crearOptionTalles({ desde: pro.tallesNumericosDesde, hasta: pro.tallesNumericosHasta}, pro.id )
+                  )
+                  :
+                  ''
+                }
                 
                 {
                 pro.oferta ? 

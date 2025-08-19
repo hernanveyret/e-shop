@@ -131,6 +131,33 @@ header img {
 .btn-nav-productos:hover {
   background-color: #aaa7a7;
 }
+.select-talles {
+  width: 50%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  appearance: none; /* Quita el estilo predeterminado del select */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.select-talles:focus {
+  outline: none;
+  border-color: #A5D6A7;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.select-talles option {
+  padding: 8px;
+  background-color: #fff;
+  color: #333;
+}
 main {
   flex-grow: 1;
 }
@@ -143,7 +170,7 @@ main {
   transition: box-shadow 0.2s ease;
   cursor: pointer;
   display: flex;
-  margin-bottom: 5px; 
+  margin-bottom: 5px;
 }
 
 .card-producto:hover {
@@ -157,7 +184,7 @@ main {
   justify-content: center;
   align-items: center;
   position: relative;
-  background: #f5f5f5; /* Fondo para espacios vacíos */
+  background-color: white;
   border-radius: 16px; /* Mover el border-radius aquí */
 }
 
@@ -172,32 +199,7 @@ main {
   object-position: center;
   border-radius: 16px;
 }
-/*
-.img-container {
-  width: 30%;
-  aspect-ratio: 1 / 1; 
-  overflow: hidden;  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-  esto no va
-.img-container img {
-  border-radius: 16px;
-  width: 90%;
-  height: 85%;
-  
-}
-.img-container img {
-  border-radius: 16px;
-  width: 85%;
-  height: 85%;
-  object-fit: cover;  
-  object-position: center;
-  display: block;
-}
-*/
+
 .info-container {
   padding: 10px;
   width: 60%;
@@ -206,7 +208,8 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
+  align-items: flex-start;  
+  
 }
 
 .precio {
@@ -322,7 +325,7 @@ main {
   justify-content: center;
   align-items: center;
   position: relative;
-  background: #f5f5f5; /* Fondo para espacios vacíos */
+  background-color: white;
   border-radius: 16px; /* Mover el border-radius aquí */
 }
 
@@ -383,4 +386,7 @@ main {
   .nav-btn {
     gap: 10px;
   }
+}
+.errorTalle {
+  border-color: red;
 }

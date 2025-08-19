@@ -29,6 +29,10 @@ const EnviarPedido = ({productosEnCarrito,
     reset
   } = useForm();
 
+  useEffect(() => {
+    console.log(productosEnCarrito)
+  },[productosEnCarrito])
+
   const guardarProducto = () => {
    const totalProductos = productosEnCarrito.reduce((ac, prod) => ac + prod.cant, 0);
    const subTotal = productosEnCarrito.reduce((ac, prod) => ac + (prod.cant * prod.precio), 0);
@@ -65,6 +69,9 @@ const EnviarPedido = ({productosEnCarrito,
     productosEnCarrito.forEach((pro, index) => {
       pedido += `*Producto: ${index+1}*\n`;
       pedido += `${pro.titulo}\n`
+      pedido += `${pro.marca && pro.marca}\n`
+      pedido += `${pro.color && pro.color}\n`
+      pedido += `${pro.talleSeleccionado && pro.talleSeleccionado}\n`
       pedido += `Cant: ${pro.cant}\n`
       pedido += `$ ${pro.precio}\n`
       pedido += `*-------------------*\n`
@@ -86,7 +93,7 @@ const EnviarPedido = ({productosEnCarrito,
   }
   
   const handleEnviarWhatsApp = (pedido) => {    
-  const numeroVendedor = "134025499"; // con código país, sin +
+  const numeroVendedor = "1134025499"; // con código país, sin +
   const url = `https://wa.me/${numeroVendedor}?text=${encodeURIComponent(pedido)}`;
   window.open(url, "_blank");
 };

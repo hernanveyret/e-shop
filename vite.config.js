@@ -13,7 +13,7 @@ export default defineConfig({
         description: 'Carrito de compras online',
         theme_color: '#ffffff',
         background_color: '#ffffff',
-        display:'standalone',
+        display: 'standalone',
         icons: [
           {
             src: 'icons/icon-192x192.png',
@@ -28,5 +28,11 @@ export default defineConfig({
         ]
       }
     })
-  ]
+  ],
+  server: {
+    host: true, // para que escuche en todas las interfaces
+    allowedHosts: [
+      '.ngrok-free.app' // permite cualquier subdominio de ngrok
+    ]
+  }
 })
