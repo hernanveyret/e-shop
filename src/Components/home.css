@@ -162,7 +162,7 @@ main {
   flex-grow: 1;
 }
 .card-producto {
-  width: 100%;  
+  width: 100%;
   border: 1px solid #e6e6e6;
   border-radius: 8px;
   overflow: hidden;
@@ -185,17 +185,17 @@ main {
   align-items: center;
   position: relative;
   background-color: white;
-  border-radius: 16px; /* Mover el border-radius aquí */
+  border-radius: 16px; 
 }
 
 .img-container img {
   width: auto;
   height: auto;
-  max-width: 90%; /* Límite máximo = tamaño del contenedor */
-  max-height: 90%; /* Límite máximo = tamaño del contenedor */
-  min-width: 50%; /* Evita que imágenes muy pequeñas se vean mal */
-  min-height: 50%; /* Evita que imágenes muy pequeñas se vean mal */
-  object-fit: contain; /* Mantiene relación de aspecto SIN recortar */
+  max-width: 90%; 
+  max-height: 90%;
+  min-width: 50%; 
+  min-height: 50%;
+  object-fit: contain;
   object-position: center;
   border-radius: 16px;
 }
@@ -209,7 +209,6 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;  
-  
 }
 
 .precio {
@@ -295,8 +294,9 @@ main {
   max-height: 100%;
   object-fit: contain;
 }
+
 @media screen and (min-width: 1024px) {
-    .container-categorias {
+  .container-categorias {
     justify-content: center;
     align-items: center;
   }
@@ -308,8 +308,9 @@ main {
   }
 
   .card-producto {
-    width: 30%;        
-    height: 160px;     
+    width: 30%;
+    min-height: 100px;   
+    max-height: 180px;     
     padding: 6px;
     font-size: 16px;
     display: flex;
@@ -317,8 +318,7 @@ main {
     align-items: center;
   }
   .img-container {
-  width: 30%;
-  
+  width: 30%;  
   aspect-ratio: 1 / 1; /* Contenedor cuadrado fijo */
   overflow: hidden;
   display: flex;
@@ -327,46 +327,29 @@ main {
   position: relative;
   background-color: white;
   border-radius: 16px; /* Mover el border-radius aquí */
+  gap:5px;
 }
 
 .img-container img {
   width: auto;
   height: auto;
-  max-width: 90%; /* Límite máximo = tamaño del contenedor */
-  max-height: 90%; /* Límite máximo = tamaño del contenedor */
-  min-width: 50%; /* Evita que imágenes muy pequeñas se vean mal */
-  min-height: 50%; /* Evita que imágenes muy pequeñas se vean mal */
-  object-fit: contain; /* Mantiene relación de aspecto SIN recortar */
+  max-width: 90%; 
+  max-height: 90%;
+  min-width: 50%; 
+  min-height: 50%;
+  object-fit: contain;
   object-position: center;
   border-radius: 16px;
 }
-/*
-  .img-container {
-  width: 40%;
-  aspect-ratio: 1 / 1; 
-  overflow: hidden;  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  border: 1px solid red;
-}
-.img-container img {
-  border-radius: 16px;
-  width: 85%;
-  height: 85%;
-  object-fit: cover;  
-  object-position: center;
-  display: block;
-}
-  */
+
   .info-container {
     width: 65%; 
     padding: 10px;
+    gap: 5px;
   }
 
   .titulo {
-    font-size: 16px;    /* más grande */
+    font-size: 16px; 
   }
 
   .descripcion {
@@ -389,4 +372,5 @@ main {
 }
 .errorTalle {
   border-color: red;
+  box-shadow: 0 0 4px red;
 }

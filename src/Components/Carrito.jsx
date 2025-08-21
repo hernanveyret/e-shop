@@ -70,7 +70,6 @@ const Carrito = ({ setIsCarrito,
                       { pro.talleSeleccionado && <p style={{color:'gray', fontSize:'14px'}}>Talle: {pro.talleSeleccionado}</p> }
                   <div className='contenedor-precios'>
                     { pro.precioUnitario && !pro.porcentajeOff && <p className='precio-unit'>Pre.Unit: {formatoPesos(Number(pro.precioUnitario))}</p>}
-                    
                     { pro.porcentajeOff && <p style={{color:'red', fontSize:'14px'}}>{pro.porcentajeOff}% OFF</p> }
                     { pro.porcentajeOff 
                       ?
@@ -86,8 +85,7 @@ const Carrito = ({ setIsCarrito,
                         <p className="precio">
                           {formatoPesos(pro.total)}
                         </p> 
-                    }
-                    
+                    }                    
                   </div>
                   <div className="btn-nav">                      
                     { /* boto +*/}
@@ -144,11 +142,9 @@ const Carrito = ({ setIsCarrito,
 
           <aside className="contenedor-importe">
   <h3>Resumen de compra</h3>
-
   <p>
     <strong>Subtotal:</strong> {formatoPesos(subtotal)}
   </p>
-
   {/* Retiro en persona */}
   <p>
     <strong>

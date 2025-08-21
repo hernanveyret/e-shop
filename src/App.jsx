@@ -173,9 +173,22 @@ const addFavorito = (id) => {
       .catch(() => alert("No se pudo copiar"));
   };
   
+  /*
   const agregarProductoAlCarrito = (id) => {
-    let isId = `${id}select`
-    const valueSelect = document.getElementById(isId);
+    let isId = String(`${id}select`) // obtiene el id del select
+    const valueSelect = document.getElementById(isId); // target al select correspondiete al id
+    const claseId = document.querySelector(".select-ver-talles") // target correspondiente a la clase
+
+    if(claseId){
+      if(claseId.value === 'Talles'){
+        return
+      }else{
+        
+
+      }
+
+    }
+
     if( !valueSelect || valueSelect.value !== 'Talles'){
       valueSelect && valueSelect.classList.remove('errorTalle');
       const isProductInCart = productosEnCarrito.some(pro => pro.id === id);
@@ -183,19 +196,52 @@ const addFavorito = (id) => {
         setOnRepetido(true);
       }else{
         const filter = productos.find(pro => pro.id === id);
-      //console.log('filter: ', filter);
-      setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1, talleSeleccionado: valueSelect && valueSelect.value}])
-      setOnClose(true)
+        //console.log('filter: ', filter);
+        setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1, talleSeleccionado: valueSelect && valueSelect.value}])
+        setOnClose(true)
       }    
     }else if(valueSelect.value === 'Talles'){
+      
+      valueSelect.classList.add('errorTalle');
+      return
+    }    
+  }
+  */
+
+  const agregarProductoAlCarrito = (id) => {
+    let isId = String(`${id}select`) // obtiene el id del select
+    const valueSelect = document.getElementById(isId); // target al select correspondiete al id
+    const claseId = document.querySelector(".select-ver-talles") // target correspondiente a la clase
+
+    if(claseId){
+      if(claseId.value === 'Talles'){
+        claseId.classList.add('errorTalle')
+        return
+      }else{
+        agregar(valueSelect, claseId, id);
+      }
+
+    }else if( !valueSelect || valueSelect.value !== 'Talles'){
+      agregar(valueSelect, claseId, id);
+    }else if(valueSelect.value === 'Talles'){      
       valueSelect.classList.add('errorTalle');
       return
     }    
   }
 
-  useEffect(() => {
-    console.log(productosEnCarrito)
-  },[productosEnCarrito])
+  const agregar = (valueSelect, claseId, id) => {
+    valueSelect && valueSelect.classList.remove('errorTalle');
+    claseId && valueSelect.classList.remove('errorTalle');
+    const isProductInCart = productosEnCarrito.some(pro => pro.id === id);
+    if(isProductInCart){
+        setOnRepetido(true);
+      }else{
+        const filter = productos.find(pro => pro.id === id);
+        //console.log('filter: ', filter);
+        setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1, talleSeleccionado: valueSelect && valueSelect.value}])
+        setOnClose(true)
+      }  
+  }
 
   // ve si el producto ya esta en el carrito asi pinta el boton +
   const checkProductoEnCarito = (id) => {
@@ -461,5 +507,4 @@ const addFavorito = (id) => {
     </div>
   )
 }
-
 export default App

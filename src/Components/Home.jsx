@@ -68,7 +68,16 @@ const Home = ({
           <select 
             id={`${id}select`}
             className='select-talles'
-            onClick={(event) => event.stopPropagation()} // Detiene la propagación
+            onClick={(event) => { 
+              event.stopPropagation();
+              if(event.target.value !== 'Talles'){
+                let idSelect = `${id}select`
+                let selectId = document.getElementById(idSelect);
+                if (selectId.classList.contains("errorTalle")) {
+                    selectId.classList.remove('errorTalle');
+                  } 
+              }  
+            }} // Detiene la propagación
           > 
             <option defaultValue="">Talles</option>
             {option.map((talle, indice) => (
@@ -87,7 +96,16 @@ const Home = ({
           <select            
             id={`${id}select`}
             className='select-talles'
-            onClick={(event) => event.stopPropagation()} // Detiene la propagación
+            onClick={(event) => { 
+              event.stopPropagation();
+              if(event.target.value !== 'Talles'){
+                let idSelect = `${id}select`
+                let selectId = document.getElementById(idSelect);
+                if (selectId.classList.contains("errorTalle")) {
+                    selectId.classList.remove('errorTalle');
+                  } 
+              }  
+            }} // Detiene la propagación
           >
             <option defaultValue="">Talles</option>
             {option.map((talle, indice) => (

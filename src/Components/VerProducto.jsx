@@ -13,11 +13,12 @@ const VerProducto = ({verProducto,
   const crearOptionTalles = (talles, id) => {
     if (Array.isArray(talles)) {
       let option = talles;
+      let claseId = `${id}select`
       return (
         <>
           <select 
-            id={`${id}select`}
-            className='select-talles'
+            id={`${id}select`}            
+            className={`select-talles select-ver-talles ${claseId}`}
             onClick={(event) => event.stopPropagation()} // Detiene la propagación
           > 
             <option defaultValue="">Talles</option>
@@ -29,6 +30,7 @@ const VerProducto = ({verProducto,
       );
     } else {
       let option = [];
+      let claseId = `${id}select`
       for (let i = talles.desde; i <= talles.hasta; i++) {
         option.push(Number(i));
       }
@@ -36,7 +38,7 @@ const VerProducto = ({verProducto,
         <>
           <select 
             id={`${id}select`}
-            className='select-talles'
+            className={`select-talles select-ver-talles ${claseId}`}
             onClick={(event) => event.stopPropagation()} // Detiene la propagación
           >
             <option defaultValue="">Talles</option>
@@ -73,7 +75,10 @@ const VerProducto = ({verProducto,
           <p  style={{fontSize:'14px',fontWeight:'400'}}>{verProducto.descripcion}</p>
 
          { verProducto.marca && 
-              <p style={{fontSize:'14px'}}>Marca: <span style={{color:'grey', fontSize:'16px'}}>{verProducto.marca}</span></p>
+              <p style={{fontSize:'14px'}}>Marca: <span style={{color:'grey', fontSize:'16px'}}>{verProducto.marca[0].toUpperCase()+verProducto.marca.slice(1)}</span></p>
+          }
+          { verProducto.color &&
+              <p style={{fontSize:'14px'}}>Color: <span style={{color:'grey', fontSize:'16px'}}>{verProducto.color[0].toUpperCase()+verProducto.color.slice(1)}</span></p>
           }
           {
             verProducto.tallesLetras.length > 0 || verProducto.tallesNumericosDesde && verProducto.tallesNumericosHasta ? 
