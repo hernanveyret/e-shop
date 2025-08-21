@@ -374,3 +374,8 @@ main {
   border-color: red;
   box-shadow: 0 0 4px red;
 }
+
+.categoriaSeleccionada {
+  border: 3px solid #28a745;
+  box-shadow: 0 0 8px rgba(40, 167, 69, 0.6);
+}

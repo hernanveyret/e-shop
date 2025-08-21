@@ -25,12 +25,14 @@ const Home = ({
   formatoPesos
 }) => {
   const [categoriaActual, setCategoriaActual] = useState('Todo');
+  const [catSelectAnterior, setCatSelectAnterior ] = useState(null)
   // Cuando se cargan productos y la categoría es Todo
   useEffect(() => {
     if (categoriaActual === 'Todo') {
       setProductosSeleccionados(productos);
     }
   }, [productos, categoriaActual]);
+
   // Cuando cambian los favoritos y estás en Favoritos
   useEffect(() => {
     const filtro = []
@@ -45,9 +47,12 @@ const Home = ({
     }
   }, [favoritos, categoriaActual]);
 
-  const categoriaSelect = (cat) => {
+  const categoriaSelect = (cat, id) => {
+    catSelectAnterior && catSelectAnterior.classList.remove('categoriaSeleccionada')
+    const catSelect = document.getElementById(id);
+    setCatSelectAnterior(catSelect)
+    catSelect.classList.add('categoriaSeleccionada');    
     setCategoriaActual(cat);
-
     if (cat === 'Favoritos') {
       setProductosSeleccionados(favoritos);
     } else if (cat === 'Todo') {
@@ -121,10 +126,10 @@ const Home = ({
     <div className="container-home">
       <section className="container-categorias">
         <button
-          onClick={() => categoriaSelect('Todo')}
+          onClick={() => categoriaSelect('Todo', "0todo" )}
           className="container-cat btn"
         >
-          <div className="container-img-cat">
+          <div className="container-img-cat" id="0todo">
             <img src="./img/todo.webp" alt="Imagen" />
           </div>
           <p className="name-categoria">Todo</p>
@@ -132,9 +137,9 @@ const Home = ({
 
         <button
           className="container-cat btn"
-          onClick={() => categoriaSelect('Favoritos')}
+          onClick={() => categoriaSelect('Favoritos', "1favoritos")}
         >
-          <div className="container-img-cat">
+          <div className="container-img-cat" id="1favoritos">
             <img src="./img/favoritos.webp" alt="Imagen" />
           </div>
           <p className="name-categoria">Favoritos</p>
@@ -145,7 +150,8 @@ const Home = ({
             <button className="container-cat btn" key={cat.id}>
               <div
                 className="container-img-cat"
-                onClick={() => categoriaSelect(cat.categoria)}
+                id={cat.public_id}
+                onClick={() => categoriaSelect(cat.categoria, cat.public_id)}
               >
                 <img src={cat.urlImg} alt="Imagen" />
               </div>
