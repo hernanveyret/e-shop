@@ -69,11 +69,11 @@ const EnviarPedido = ({productosEnCarrito,
     productosEnCarrito.forEach((pro, index) => {
       pedido += `*Producto: ${index+1}*\n`;
       pedido += `${pro.titulo}\n`
-      pedido += `${pro.marca && pro.marca}\n`
-      pedido += `${pro.color && pro.color}\n`
-      pedido += `${pro.talleSeleccionado && pro.talleSeleccionado}\n`
+      pedido += `${pro.marca && 'Marca: '+pro.marca}\n`
+      pedido += `${pro.color && 'Color: '+pro.color}\n`
+      pedido += `${pro.talleSeleccionado && 'Talle: '+pro.talleSeleccionado}\n`
       pedido += `Cant: ${pro.cant}\n`
-      pedido += `$ ${pro.precio}\n`
+      pedido += `$ ${pro.total && pro.total}\n`
       pedido += `*-------------------*\n`
     })
      pedido += `Cant. Productos: ${totalProductos}\n`;

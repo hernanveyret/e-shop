@@ -234,6 +234,7 @@ const addFavorito = (id) => {
     claseId && valueSelect.classList.remove('errorTalle');
     //const isProductInCart = productosEnCarrito.some(pro => pro.id === id);
     const isProductInCart = productosEnCarrito.find(pro => pro.id === id && pro.talleSeleccionado === valueSelect.value);
+    
     if(isProductInCart){
         setOnRepetido(true);
       }else{
