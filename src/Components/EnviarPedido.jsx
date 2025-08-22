@@ -29,10 +29,6 @@ const EnviarPedido = ({productosEnCarrito,
     reset
   } = useForm();
 
-  useEffect(() => {
-    console.log(productosEnCarrito)
-  },[productosEnCarrito])
-
   const guardarProducto = () => {
    const totalProductos = productosEnCarrito.reduce((ac, prod) => ac + prod.cant, 0);
    const subTotal = productosEnCarrito.reduce((ac, prod) => ac + (prod.cant * prod.precio), 0);
