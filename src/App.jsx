@@ -232,13 +232,14 @@ const addFavorito = (id) => {
   const agregar = (valueSelect, claseId, id) => {
     valueSelect && valueSelect.classList.remove('errorTalle');
     claseId && valueSelect.classList.remove('errorTalle');
-    const isProductInCart = productosEnCarrito.some(pro => pro.id === id);
+    //const isProductInCart = productosEnCarrito.some(pro => pro.id === id);
+    const isProductInCart = productosEnCarrito.find(pro => pro.id === id && pro.talleSeleccionado === valueSelect.value);
     if(isProductInCart){
         setOnRepetido(true);
       }else{
         const filter = productos.find(pro => pro.id === id);
         //console.log('filter: ', filter);
-        setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1, talleSeleccionado: valueSelect && valueSelect.value}])
+        setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1, talleSeleccionado: valueSelect && valueSelect.value, ids: valueSelect.value+id}])
         setOnClose(true)
       }  
   }

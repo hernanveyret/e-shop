@@ -14,9 +14,9 @@ const Carrito = ({ setIsCarrito,
                     setIsRetiro        
                     }) => {   
   // Suma la cantidad de productos unitarios en el carrito de compras.
- const sumarProductoUnitario = (id) => {
+ const sumarProductoUnitario = (ids) => {
   const sumaCantidad = productosEnCarrito.map(e => {
-    if( e.id === id ) {
+    if( e.ids === ids ) {
       return {
         ...e,
         cant: e.cant + 1,
@@ -29,9 +29,9 @@ const Carrito = ({ setIsCarrito,
  }
 
   // Suma la cantidad de productos unitarios en el carrito de compras.
- const restarProductoUnitario = (id) => {
+ const restarProductoUnitario = (ids) => {
   const restarCantidad = productosEnCarrito.map(e => {
-    if( e.id === id ) {
+    if( e.ids === ids ) {
       return {
         ...e,
         cant: e.cant - 1,
@@ -43,8 +43,8 @@ const Carrito = ({ setIsCarrito,
   setProductosEnCarrito(restarCantidad)
  }
 
- const eliminarProductoUnitario = (id) => {
-  const filter = productosEnCarrito.filter(pro => pro.id !== id);
+ const eliminarProductoUnitario = (ids) => {
+  const filter = productosEnCarrito.filter(pro => pro.ids !== ids);
   setProductosEnCarrito(filter)
  }
 
@@ -58,7 +58,7 @@ const Carrito = ({ setIsCarrito,
         <>
           <div className="carrito-izquierda">
             {productosEnCarrito.map((pro) => (
-              <section className="contenedor-productos-carrito" key={pro.id}>
+              <section className="contenedor-productos-carrito" key={pro.ids}>
                 <div className="card-carrito">
                   <div className="img-carrito">
                     <img src={pro.urlImg} alt={pro.titulo} />
@@ -91,7 +91,7 @@ const Carrito = ({ setIsCarrito,
                     { /* boto +*/}
                     <button
                     type="button"
-                    onClick={() => { sumarProductoUnitario(pro.id)}}
+                    onClick={() => { sumarProductoUnitario(pro.ids)}}
                     className="btn-carrito"
                     >
                     <svg xmlns="http://www.w3.org/2000/svg" 
@@ -108,7 +108,7 @@ const Carrito = ({ setIsCarrito,
                          // boton tacho de basura
                           <button
                             type="button"
-                            onClick={() => { eliminarProductoUnitario(pro.id)}}
+                            onClick={() => { eliminarProductoUnitario(pro.ids)}}
                             className="btn-carrito"
                           >
                             <svg xmlns="http://www.w3.org/2000/svg" 
@@ -121,7 +121,7 @@ const Carrito = ({ setIsCarrito,
                         :
                           // boton restar cantidad de producto unitario
                         <button
-                          onClick={() => { restarProductoUnitario(pro.id)}}
+                          onClick={() => { restarProductoUnitario(pro.ids)}}
                           className="btn-carrito"                            
                         >
                           <svg xmlns="http://www.w3.org/2000/svg" 
