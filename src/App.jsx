@@ -204,7 +204,7 @@ const addFavorito = (id) => {
         setOnRepetido(true);
       }else{
         const filter = productos.find(pro => pro.id === id);
-        console.log('filter: ', filter);
+        //console.log('filter: ', filter);
         setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1, talleSeleccionado: valueSelect && valueSelect.value, ids: valueSelect && valueSelect.value+id}])
         setOnClose(true)
       }  
