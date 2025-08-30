@@ -172,42 +172,7 @@ const addFavorito = (id) => {
       })
       .catch(() => alert("No se pudo copiar"));
   };
-  
-  /*
-  const agregarProductoAlCarrito = (id) => {
-    let isId = String(`${id}select`) // obtiene el id del select
-    const valueSelect = document.getElementById(isId); // target al select correspondiete al id
-    const claseId = document.querySelector(".select-ver-talles") // target correspondiente a la clase
-
-    if(claseId){
-      if(claseId.value === 'Talles'){
-        return
-      }else{
-        
-
-      }
-
-    }
-
-    if( !valueSelect || valueSelect.value !== 'Talles'){
-      valueSelect && valueSelect.classList.remove('errorTalle');
-      const isProductInCart = productosEnCarrito.some(pro => pro.id === id);
-      if(isProductInCart){
-        setOnRepetido(true);
-      }else{
-        const filter = productos.find(pro => pro.id === id);
-        //console.log('filter: ', filter);
-        setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1, talleSeleccionado: valueSelect && valueSelect.value}])
-        setOnClose(true)
-      }    
-    }else if(valueSelect.value === 'Talles'){
-      
-      valueSelect.classList.add('errorTalle');
-      return
-    }    
-  }
-  */
-
+ 
   const agregarProductoAlCarrito = (id) => {
     let isId = String(`${id}select`) // obtiene el id del select
     const valueSelect = document.getElementById(isId); // target al select correspondiete al id
@@ -234,13 +199,13 @@ const addFavorito = (id) => {
     claseId && valueSelect.classList.remove('errorTalle');
     //const isProductInCart = productosEnCarrito.some(pro => pro.id === id);
     const isProductInCart = productosEnCarrito.find(pro => pro.id === id && pro.talleSeleccionado === valueSelect.value);
-    
+
     if(isProductInCart){
         setOnRepetido(true);
       }else{
         const filter = productos.find(pro => pro.id === id);
-        //console.log('filter: ', filter);
-        setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1, talleSeleccionado: valueSelect && valueSelect.value, ids: valueSelect.value+id}])
+        console.log('filter: ', filter);
+        setProductosEnCarrito([...productosEnCarrito, {...filter, cant:1, talleSeleccionado: valueSelect && valueSelect.value, ids: valueSelect && valueSelect.value+id}])
         setOnClose(true)
       }  
   }

@@ -33,6 +33,10 @@ const Home = ({
     }
   }, [productos, categoriaActual]);
 
+  useEffect(() => {
+    console.log(favoritos)
+  },[favoritos])
+
   // Cuando cambian los favoritos y estás en Favoritos
   useEffect(() => {
     const filtro = []
